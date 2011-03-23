@@ -1,5 +1,5 @@
 //
-//  Circle.h
+//  HODCircle.h
 //  Cocos2dLesson1
 //
 //  Created by Max Wittek on 3/7/11.
@@ -9,14 +9,14 @@
 #import "cocos2d.h"
 #import "HitObjectDisplay.h.mm"
 
-@interface Circle : HitObjectDisplay {
+@interface HODCircle : HitObjectDisplay {
 	CGSize size;
 	CCSprite * button;
 	CCSprite * ring;
 }
 
-- (CCRenderTexture*) createCircleTexture: (int)red :(int)green :(int)blue;
-- (CCRenderTexture*) createCircleTexture: (int)red :(int)green :(int)blue :(BOOL)doNumber;
+- (CCRenderTexture*) createHODCircleTexture: (int)red :(int)green :(int)blue;
+- (CCRenderTexture*) createHODHODCircleTexture: (int)red :(int)green :(int)blue :(BOOL)doNumber;
 - (void) justDisplay;
 
 

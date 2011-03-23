@@ -8,7 +8,7 @@
 
 #import "HODSlider.h"
 #import "osu-import.h.mm"
-#import "Circle.h"
+#import "HODCircle.h"
 #import <vector>
 
 @implementation HODSlider
@@ -65,7 +65,7 @@
 	curve.position = ccp(480, 320);
 	ccColor3B colorCopy = curve.color;
 	
-	Circle * circ = [[Circle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
+	HODCircle * circ = [[HODCircle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
 	circ.position = ccp(480, 320);
 	[circ justDisplay];
 	
@@ -112,7 +112,7 @@
 	ccColor3B colorCopy = curve.color;
 	
 	NSLog(@"abotu to make circle");
-	Circle * circ = [[Circle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
+	HODCircle * circ = [[HODCircle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
 	circ.position = ccp(0, 0);
 	[circ justDisplay];
 	
@@ -172,7 +172,7 @@
 		[curve setBlendFunc: (ccBlendFunc){GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA}]; 
 		
 				
-		// Stuff cribbed from Circle
+		// Stuff cribbed from HODCircle
 		size = CGSizeMake(120, 120);
 		
 		ring = [CCSprite spriteWithFile:@"button.ring.png"];

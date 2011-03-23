@@ -8,7 +8,7 @@
 
 #import "cocos2d.h"
 #import "HitObjectDisplay.h.mm"
-#import "Circle.h"
+#import "HODCircle.h"
 #import "FRCurve.h"
 #import "FRLines.h"
 

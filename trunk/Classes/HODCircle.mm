@@ -1,18 +1,18 @@
 //
-//  Circle.m
+//  HODCircle.m
 //  Cocos2dLesson1
 //
 //  Created by Max Wittek on 3/7/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "Circle.h"
+#import "HODCircle.h"
 #import "osu-import.h.mm"
 
-@implementation Circle
+@implementation HODCircle
 @synthesize ring;
 
-static NSMutableArray *circleTextures = nil;
+static NSMutableArray *HODCircleTextures = nil;
 
 // on "init" you need to initialize your instance
 
@@ -24,7 +24,7 @@ static NSMutableArray *circleTextures = nil;
 		size = CGSizeMake(120, 120);
 		
 		CCRenderTexture * buttonTex;
-		buttonTex = [[self createCircleTexture:r :g :b] retain];
+		buttonTex = [[self createHODCircleTexture:r :g :b] retain];
 
 		
 		ring = [CCSprite spriteWithFile:@"button.ring.png"];		 
@@ -44,20 +44,20 @@ static NSMutableArray *circleTextures = nil;
 		
 		[buttonTex release];
 		
-		// TODO: gotta eventually release everything in circleTextures
+		// TODO: gotta eventually release everything in HODCircleTextures
 	}
 	return self;
 }
 
-- (CCRenderTexture*) createCircleTexture: (int)red_ :(int)green_ :(int)blue_ {
-	return [self createCircleTexture: red_ :green_ :blue_ :true];
+- (CCRenderTexture*) createHODCircleTexture: (int)red_ :(int)green_ :(int)blue_ {
+	return [self createHODCircleTexture: red_ :green_ :blue_ :true];
 }
 
 
-// I should make a circle texture bank. (colorgroup -> (number -> texture) ) and 0 for no-number
+// I should make a HODCircle texture bank. (colorgroup -> (number -> texture) ) and 0 for no-number
 
 // TODO: potential memory leak here???
-- (CCRenderTexture*) createCircleTexture: (int)red_ :(int)green_ :(int)blue_ :(BOOL)doNumber
+- (CCRenderTexture*) createHODHODCircleTexture: (int)red_ :(int)green_ :(int)blue_ :(BOOL)doNumber
 {
 	/* NOTE: Should be Retina Display-ified */
 	CCRenderTexture * target = 

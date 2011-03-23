@@ -10,7 +10,7 @@
 #import <MediaPlayer/MediaPlayer.h> 
 #import "CCTouchDispatcher.h"
 #import "HelloWorldScene.h"
-#import "Circle.h"
+#import "HODCircle.h"
 #import "osu-import.h.mm"
 #import "HODSlider.h"
 #import "HitObjectDisplay.h.mm"
@@ -33,7 +33,7 @@ Beatmap * beatmap;
 
 MPMusicPlayerController * musicPlayer;
 
-std::list<Circle*> circles;
+std::list<HODCircle*> circles;
 
 int zOrder = INT_MAX;
 
@@ -43,14 +43,14 @@ CGPoint end_;
 
 HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if(hitObject->objectType & 1) { // bitmask for normal
-		return [[[Circle alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 0.7] retain];
+		return [[[HODCircle alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 0.7] retain];
 	}
 	else if(hitObject->objectType & 2) {
 		return [[[HODSlider alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 1] retain];
 	}
 	else {
 		// this is just a "unknown type" circle, we haven't done spinner yet
-		return [[[Circle alloc] initWithHitObject:hitObject red:150 green:0 blue:0] retain];
+		return [[[HODCircle alloc] initWithHitObject:hitObject red:150 green:0 blue:0] retain];
 	}
 	return 0;
 }
@@ -199,7 +199,7 @@ BOOL otherDirection = NO;
 			cout << o->x << " " << o->y << endl;
 			cout << "making a HitObject at time " << o->startTimeMs << endl;
 			
-			//HitObjectDisplay * hod = [[Circle alloc] initWithHitObject:o red:0 green:180 blue:0];
+			//HitObjectDisplay * hod = [[HODCircle alloc] initWithHitObject:o red:0 green:180 blue:0];
 			 
 			HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 			[self addChild:hod z:zOrder--];

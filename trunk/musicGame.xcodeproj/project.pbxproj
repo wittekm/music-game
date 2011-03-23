@@ -47,7 +47,7 @@
 		507FCF6F13330452005D2A6F /* FRLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FCF6C13330452005D2A6F /* FRLines.m */; };
 		507FCF7713330477005D2A6F /* CCTextureCache+More.m in Sources */ = {isa = PBXBuildFile; fileRef = 507FCF7413330477005D2A6F /* CCTextureCache+More.m */; };
 		50882F7813253A6F00C6289B /* seeker.png in Resources */ = {isa = PBXBuildFile; fileRef = 50882F7713253A6F00C6289B /* seeker.png */; };
-		50882F91132541F400C6289B /* Circle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50882F90132541F400C6289B /* Circle.mm */; };
+		50882F91132541F400C6289B /* HODCircle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50882F90132541F400C6289B /* HODCircle.mm */; };
 		50882FAB13254F9A00C6289B /* button.button.png in Resources */ = {isa = PBXBuildFile; fileRef = 50882FA713254F9900C6289B /* button.button.png */; };
 		50882FAD13254F9A00C6289B /* button.overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 50882FA913254F9A00C6289B /* button.overlay.png */; };
 		508830AD1325678F00C6289B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 508830AC1325678F00C6289B /* Icon.png */; };
@@ -324,8 +324,8 @@
 		507FCF7513330477005D2A6F /* CCTextureSynthesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureSynthesis.h; sourceTree = "<group>"; };
 		507FCF7613330477005D2A6F /* CCTypes+More.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCTypes+More.h"; sourceTree = "<group>"; };
 		50882F7713253A6F00C6289B /* seeker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seeker.png; sourceTree = "<group>"; };
-		50882F8F132541F400C6289B /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
-		50882F90132541F400C6289B /* Circle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Circle.mm; sourceTree = "<group>"; };
+		50882F8F132541F400C6289B /* HODCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HODCircle.h; sourceTree = "<group>"; };
+		50882F90132541F400C6289B /* HODCircle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HODCircle.mm; sourceTree = "<group>"; };
 		50882FA713254F9900C6289B /* button.button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.button.png; path = hitObjectButton/button.button.png; sourceTree = "<group>"; };
 		50882FA913254F9A00C6289B /* button.overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button.overlay.png; path = hitObjectButton/button.overlay.png; sourceTree = "<group>"; };
 		508830AC1325678F00C6289B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -725,8 +725,8 @@
 		507FD0DD1333C366005D2A6F /* HitObjectDisplays */ = {
 			isa = PBXGroup;
 			children = (
-				50882F8F132541F400C6289B /* Circle.h */,
-				50882F90132541F400C6289B /* Circle.mm */,
+				50882F8F132541F400C6289B /* HODCircle.h */,
+				50882F90132541F400C6289B /* HODCircle.mm */,
 				5004723913314F0300454BF4 /* HODSlider.h */,
 				5004723A13314F0300454BF4 /* HODSlider.mm */,
 				50047178133138D100454BF4 /* HitObjectDisplay.h.mm */,
@@ -1260,7 +1260,7 @@
 				1F3B9A2D0EF2145700286867 /* Cocos2dLesson1AppDelegate.m in Sources */,
 				506EDC31102F528A00A389B3 /* HelloWorldScene.mm in Sources */,
 				E0F80F60120A0182005866B8 /* RootViewController.m in Sources */,
-				50882F91132541F400C6289B /* Circle.mm in Sources */,
+				50882F91132541F400C6289B /* HODCircle.mm in Sources */,
 				508831701325834F00C6289B /* osu-import.h.mm in Sources */,
 				508831711325834F00C6289B /* osu-import.mm in Sources */,
 				5088318A1325845A00C6289B /* Utility.mm in Sources */,

@@ -638,14 +638,13 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				50E364DB133AB90200079F51 /* Scenes */,
 				507FD0DD1333C366005D2A6F /* HitObjectDisplays */,
 				508831881325845A00C6289B /* Utility.h */,
 				508831891325845A00C6289B /* Utility.mm */,
 				5088316E1325834F00C6289B /* osu-import.h.mm */,
 				5088316F1325834F00C6289B /* osu-import.mm */,
 				E0F80F5D120A0182005866B8 /* GameConfig.h */,
-				506EDC2F102F528A00A389B3 /* HelloWorldScene.h */,
-				506EDC30102F528A00A389B3 /* HelloWorldScene.mm */,
 				E0F80F5E120A0182005866B8 /* RootViewController.h */,
 				E0F80F5F120A0182005866B8 /* RootViewController.m */,
 				1F3B9A2C0EF2145700286867 /* Cocos2dLesson1AppDelegate.h */,
@@ -742,6 +741,15 @@
 				50DB85A61337B5C400440FD6 /* Beatmap.xcdatamodel */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		50E364DB133AB90200079F51 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				506EDC2F102F528A00A389B3 /* HelloWorldScene.h */,
+				506EDC30102F528A00A389B3 /* HelloWorldScene.mm */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		50F41306106926B2002A0D5E /* FontLabel */ = {

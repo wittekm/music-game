@@ -163,11 +163,11 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		
 		
 		score = 0;
-		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0];
+		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
 		//scoreLabel.anchorPoint = ccp([scoreLabel contentSize].width,[scoreLabel contentSize].height);
-		scoreLabel.position = ccp(430,200);
+		scoreLabel.position = ccp(430,300);
 		[self addChild: scoreLabel];
-		
+		scoreLabel.color = ccc3(0,0,0);
 		
 		HitObject * o = beatmap->hitObjects.front();
 		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);

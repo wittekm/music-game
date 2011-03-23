@@ -169,11 +169,12 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[self addChild: scoreLabel];
 		scoreLabel.color = ccc3(0,0,0);
 		
+		/*
 		HitObject * o = beatmap->hitObjects.front();
 		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 		[self addChild:hod];
 		[hod appearWithDuration:1.5];
-		 
+		 */
 	}
 	return self;
 }

@@ -16,7 +16,7 @@
 }
 
 - (CCRenderTexture*) createHODCircleTexture: (int)red :(int)green :(int)blue;
-- (CCRenderTexture*) createHODHODCircleTexture: (int)red :(int)green :(int)blue :(BOOL)doNumber;
+- (CCRenderTexture*) createHODCircleTexture: (int)red :(int)green :(int)blue :(BOOL)doNumber;
 - (void) justDisplay;
 
 

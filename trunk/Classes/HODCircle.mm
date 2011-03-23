@@ -57,7 +57,7 @@ static NSMutableArray *HODCircleTextures = nil;
 // I should make a HODCircle texture bank. (colorgroup -> (number -> texture) ) and 0 for no-number
 
 // TODO: potential memory leak here???
-- (CCRenderTexture*) createHODHODCircleTexture: (int)red_ :(int)green_ :(int)blue_ :(BOOL)doNumber
+- (CCRenderTexture*) createHODCircleTexture: (int)red_ :(int)green_ :(int)blue_ :(BOOL)doNumber
 {
 	/* NOTE: Should be Retina Display-ified */
 	CCRenderTexture * target = 

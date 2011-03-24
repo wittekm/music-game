@@ -169,12 +169,11 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[self addChild: scoreLabel];
 		scoreLabel.color = ccc3(0,0,0);
 		
-		/*
 		HitObject * o = beatmap->hitObjects.front();
 		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 		[self addChild:hod];
 		[hod appearWithDuration:1.5];
-		 */
+		 
 	}
 	return self;
 }
@@ -233,7 +232,32 @@ BOOL paused = false;
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	NSArray * touchesArray = [touches allObjects];
 	NSLog(@"%d", [touchesArray  count]);
+	UITouch * touch = [touches anyObject];	
+	CGPoint location = [self convertTouchToNodeSpace: touch];
+	if(!circles.empty()) {
+		HitObject * o = circles.front().hitObject;
+		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
+		int distInt = dist;
+		
+		if(dist < 100){
+			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
+			//points.position = ccp(o->x, o->y);
+			CCSprite *burst = [CCSprite spriteWithFile:@"starburst.png"];	
+			//CCSprite *onehundred = [CCSprite spriteWithFile:@"100.png"];
+			burst.position = ccp(o->x,o->y);
+			//onehundred.position = ccp(o->x, o->y);
+			burst.scale = 0.25;
+			//onehundred.scale = 0.6;
+			//[self addChild:burst];
+			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:90]];
+			//[onehundred runAction:[CCFadeOut actionWithDuration:0.4]];
+			[circles.front() addChild:burst];
+			//[circles.front() addChild:onehundred];
+		}
+		
 	if([touches count] > 1) {
+		
+	
 		if(!paused) {
 			[[CCDirector sharedDirector] stopAnimation];
 			[musicPlayer pause];
@@ -244,7 +268,7 @@ BOOL paused = false;
 			paused = false;
 		}
 	}
-	UITouch *touch = [touches anyObject];
+	}
 }
 
 - (void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {

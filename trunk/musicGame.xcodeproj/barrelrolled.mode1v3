@@ -286,7 +286,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {290, 633}}</string>
+							<string>{{0, 110}, {290, 633}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -305,7 +305,7 @@
 							<real>290</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>527 134 1167 692 0 0 1440 878 </string>
+						<string>207 186 1167 692 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -335,7 +335,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>54BBDC5F133AC62C00A03995</string>
+										<string>54BBDC90133AD08800A03995</string>
 										<key>history</key>
 										<array>
 											<string>5442EEBF13286134009B5324</string>
@@ -344,8 +344,12 @@
 											<string>54CDEC7D13332C7900DD6134</string>
 											<string>54CDEC7F13332C7900DD6134</string>
 											<string>54CDEC8013332C7900DD6134</string>
-											<string>542D7E9313354CF30032F3F6</string>
-											<string>54BBDC4B133AC15F00A03995</string>
+											<string>54BBDC8A133AD08800A03995</string>
+											<string>54BBDC8B133AD08800A03995</string>
+											<string>54BBDC8C133AD08800A03995</string>
+											<string>54BBDC8D133AD08800A03995</string>
+											<string>54BBDC8E133AD08800A03995</string>
+											<string>54BBDC8F133AD08800A03995</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -359,7 +363,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {855, 379}}</string>
 								<key>RubberWindowFrame</key>
-								<string>527 134 1167 692 0 0 1440 878 </string>
+								<string>207 186 1167 692 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -379,7 +383,7 @@
 								<key>Frame</key>
 								<string>{{0, 384}, {855, 267}}</string>
 								<key>RubberWindowFrame</key>
-								<string>527 134 1167 692 0 0 1440 878 </string>
+								<string>207 186 1167 692 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -543,7 +547,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>54BBDC60133AC62C00A03995</string>
+		<string>54BBDC91133AD08800A03995</string>
 		<string>54BBDC21133ABC3800A03995</string>
 		<string>54BBDC23133ABC3800A03995</string>
 		<string>1CD10A99069EF8BA00B06720</string>
@@ -552,7 +556,7 @@
 		<string>/Users/barrelrolled/Documents/Collective/trunk/musicGame.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>527 134 1167 692 0 0 1440 878 </string>
+	<string>207 186 1167 692 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -573,7 +577,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>HelloWorldScene.mm</string>
+								<string>MenuScene.mm</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>

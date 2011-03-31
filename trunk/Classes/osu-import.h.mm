@@ -56,6 +56,8 @@ class Beatmap {
 	
 public:
 	Beatmap(OSUString filename);
+	Beatmap(NSString * beatmapFromSql);
+
 	
 	// [General]
 	OSUString AudioFilename;

@@ -14,6 +14,7 @@
 #import "osu-import.h.mm"
 #import "HODSlider.h"
 #import "HitObjectDisplay.h.mm"
+#import "SqlHandler.h"
 
 #import "FRCurve.h"
 
@@ -45,9 +46,11 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if(hitObject->objectType & 1) { // bitmask for normal
 		return [[[HODCircle alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 0.7] retain];
 	}
+	
 	else if(hitObject->objectType & 2) {
 		return [[[HODSlider alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 1] retain];
 	}
+	
 	else {
 		// this is just a "unknown type" circle, we haven't done spinner yet
 		return [[[HODCircle alloc] initWithHitObject:hitObject red:150 green:0 blue:0] retain];
@@ -84,7 +87,20 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		
 		// Initialize Beatmap (C++)
 		//beatmap = new Beatmap("mflo.osu");
-		beatmap = new Beatmap("gee_norm.osu");
+		//beatmap = new Beatmap("gee_norm.osu");
+		//beatmap = new Beatmap("talamak.osu");
+		
+		// Print out all available beatmaps
+		SqlHandler * handler = [[SqlHandler alloc] init];
+		for(SqlRow * row in [handler beatmaps]) {
+			NSLog(@"%@ - %@", [row artist], [row title]);
+		}
+		
+		// choose toro y moi
+		beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
+		
+		if(!beatmap) exit(0);
+		 
 		
 		[self schedule:@selector(nextFrame:)];
 		
@@ -99,7 +115,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			
 			MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
 			[mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
-										predicateWithValue: @"Gee"
+										predicateWithValue: @"Talamak"
 										forProperty: MPMediaItemPropertyTitle]];
 			
 			[musicPlayer setQueueWithQuery:mfloQuery];
@@ -115,7 +131,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			albumArt.position = ccp(480/2, 320/2);
 			[self addChild:albumArt];
 			
-			[musicPlayer setCurrentPlaybackTime:18]; // skip intro, usually 18
+			//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
+			
 			
 		} @catch(NSException *e) {
 			cout << "no music playing dawg" << endl;
@@ -123,10 +140,13 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 #endif
 		/* cgpoints go from bottom left to top right like a graph */
 		
+		// commented because i dont have scorehud
+		/*
 		CCSprite *scorebg = [CCSprite spriteWithFile:@"scorehud.png"];
 		scorebg.scale = .15;
 		scorebg.position = ccp(435,300);
 		[self addChild:scorebg];
+		 */
 
 		score = 0;
 		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
@@ -135,11 +155,13 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[self addChild: scoreLabel];
 		scoreLabel.color = ccc3(0,0,0);
 		
+		/*
 		HitObject * o = beatmap->hitObjects.front();
 		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 		[self addChild:hod];
 		[hod appearWithDuration:1.5];
-		 
+		*/
+		
 	}
 	return self;
 }
@@ -156,10 +178,17 @@ BOOL otherDirection = NO;
 	double durationS = 0.8; // seconds
 	double timeAllowanceMs = 150;
 	// Make stuff start to appear
+	
+	
+	if(beatmap->hitObjects.empty()) {
+		//exit(0);
+		// wait 3 seconds and then go to another scene
+	}
+	 
+	   
 	while(!beatmap->hitObjects.empty()) {
 		HitObject * o = beatmap->hitObjects.front(); 
 		//cout << o->x << " " << o->y << endl;
-		
 		
 		if(milliseconds > o->startTimeMs) {
 			cout << o->x << " " << o->y << endl;
@@ -168,6 +197,7 @@ BOOL otherDirection = NO;
 			//HitObjectDisplay * hod = [[HODCircle alloc] initWithHitObject:o red:0 green:180 blue:0];
 			 
 			HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
+			NSLog(@"successful HODfactory");
 			[self addChild:hod z:zOrder--];
 			[hod appearWithDuration: durationS];
 			circles.push_back(hod);
@@ -177,19 +207,25 @@ BOOL otherDirection = NO;
 			break;
 	}
 	
+	
+	if(circles.empty()) {
+		zOrder = INT_MAX;
+	} // why not?
+	
 	while(!circles.empty()) {
 		HitObject * o = circles.front().hitObject;
 		if(milliseconds > o->startTimeMs + timeAllowanceMs + (1000.0 * durationS)) {
-			cout << "asdf so yeah im getting rid of shit" << endl;
+			NSLog(@"doing the if in the second while");
 			HitObjectDisplay * c = circles.front();
 			circles.pop_front();
 			[self removeChild:c cleanup:true];
-			[c release];
+			// [c release];
 		}
-		else
+		else {
+			NSLog(@"ended second while");
 			break;
+		}
 	}
-
 	
 }
 
@@ -206,6 +242,9 @@ BOOL paused = false;
 		int distInt = dist;
 		
 		if(dist < 100){
+			/*
+			 // commented because i dont have starburst
+			 
 			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
 			//points.position = ccp(o->x, o->y);
 			CCSprite *burst = [CCSprite spriteWithFile:@"starburst.png"];	
@@ -219,6 +258,7 @@ BOOL paused = false;
 			//[onehundred runAction:[CCFadeOut actionWithDuration:0.4]];
 			[circles.front() addChild:burst];
 			//[circles.front() addChild:onehundred];
+			 */
 		}
 		
 	if([touches count] > 1) {

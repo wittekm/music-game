@@ -7,6 +7,9 @@
 //
 
 #import "HelloWorldScene.h"
+#import <sqlite3.h>
+#import <iostream>
+#import "SqlHandler.h"
 
 @implementation Layer1
 +(id) scene
@@ -23,6 +26,7 @@
 	// return the scene
 	return scene;
 }
+
 
 -(id) init
 {

@@ -67,6 +67,19 @@ static NSMutableArray *HODCircleTextures = nil;
 	CCSprite * underlayTex = [CCSprite spriteWithFile:@"button.underlay.png"];
 	CCSprite * buttonTex = [CCSprite spriteWithFile:@"button.button.png"];
 	CCSprite * overlayTex = [CCSprite spriteWithFile:@"button.overlay.png"];
+	
+	/*
+	ccTexParams texParams = { GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };	
+	[[underlayTex texture] generateMipmap];
+	[[underlayTex texture] setTexParameters:&texParams];
+	
+	[[buttonTex texture] generateMipmap];
+	[[buttonTex texture] setTexParameters:&texParams];
+	
+	[[overlayTex texture] generateMipmap];
+	[[overlayTex texture] setTexParameters:&texParams];
+	 */
+	
 	underlayTex.position = ccp(size.width/2,size.height/2);
 	buttonTex.position = ccp(size.width/2,size.height/2);
 	overlayTex.position = ccp(size.width/2,size.height/2);
@@ -120,7 +133,13 @@ static NSMutableArray *HODCircleTextures = nil;
 }
 
 - (void) dealloc {
+	//[button release];
+	//[ring release];
+	// do NOT release before super dealloc
 	[super dealloc];
+	
+	[[CCTextureCache sharedTextureCache] removeTexture: [button texture] ];
+	
 	//[button release];
 	//[ring release];
 }

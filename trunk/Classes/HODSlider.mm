@@ -32,6 +32,8 @@
 		[curve setPoint: end atIndex: 3];
 	}
 	
+	// i needed this when using lagrange curves
+	/*
 	else if(points.size() == 2) {
 		CGPoint mid = ccp(points.at(0).first, points.at(0).second);
 		CGPoint end = ccp(points.at(1).first, points.at(1).second);
@@ -40,6 +42,7 @@
 		[curve setPoint:ccpLerp(mid, end, 1/2.f) atIndex:3];
 		[curve setPoint: end atIndex: 4];
 	}
+	 */
 	else {
 		
 		for(uint i = 0; i < points.size(); i++) {
@@ -160,8 +163,11 @@
 	
 	if( (self = [super initWithHitObject:hitObject_ red:r green:g blue:b initialScale: s]) ) {
 		
+		
 		// Set up the curve
-		curve = [[FRCurve curveFromType:kFRCurveLagrange order:kFRCurveCubic segments:64] retain]; // MAY NEED RETAIN
+		// USED TO BE LAGRANGE, IS NOW BEZIER
+		// USED TO BE CUBIC NOW QUADRATIC
+		curve = [[FRCurve curveFromType:kFRCurveBezier order:kFRCurveQuadratic segments:64] retain]; // MAY NEED RETAIN
 		// 74 is the default size of the inner part.
 		[curve setWidth: 70.0f * s];
 		//[curve setShowControlPoints:true];
@@ -171,6 +177,7 @@
 		
 		[curve setBlendFunc: (ccBlendFunc){GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA}]; 
 		
+		 
 				
 		// Stuff cribbed from HODCircle
 		size = CGSizeMake(120, 120);
@@ -180,7 +187,7 @@
 		ring.position = ccp(hitObject->x, hitObject->y);
 				
 		// Create the fadein texture and the corresponding CCSprite
-		fadeinTex = [self createFadeinTexture];
+		fadeinTex = [[self createFadeinTexture] retain];
 		slider = [CCSprite spriteWithTexture:[[fadeinTex sprite] texture] ];
 		slider.position = ccp(480/2, 320/2);
 		slider.flipY = true;
@@ -228,10 +235,13 @@
 	[ring release];
 	[curve release]; // dealloc instead?
 	 */
-	[self removeAllChildrenWithCleanup:true];
 	//[curve release];
 	//[ring release];
+	NSLog(@"derp");
+	//[[CCTextureCache sharedTextureCache] removeTexture: [slider texture] ];
+	NSLog(@"underp");
 	[super dealloc];
+
 }
 
 

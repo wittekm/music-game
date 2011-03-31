@@ -68,8 +68,13 @@ HitSlider::HitSlider(int x_, int y_, int startTimeMs_, int objectType_, int soun
 		stringstream(num2) >> num2int;
 		
 		// Put them into iphone space
-		num1int *= (480.-64.)/480.;
-		num2int *= (320.-64.)/320.;
+		num1int *= (480.-128.)/480.;
+		num2int *= (320.-128.)/320.;
+		num1int += 64;
+		num2int += 64;
+		
+		// reverse Y coords
+		num2int = 320 - num2int;
 		
 		sliderPoints.push_back(make_pair(num1int, num2int));
 	}
@@ -93,8 +98,15 @@ HitObject * readHitObject(string line) {
 	//cout << hoVals[0] << " " << hoVals[1] << endl;
 	
 	// Put them into iphone space
-	hoVals[0] *= (480.-64.)/480.;
-	hoVals[1] *= (320.-64.)/320.;
+	hoVals[0] *= (480.-128.)/480.;
+	hoVals[1] *= (320.-128.)/320.;
+	
+	hoVals[0] += 64;
+	hoVals[1] += 64;
+	
+	// reverse Y coords
+	
+	hoVals[1] = 320 - hoVals[1];
 	
 	// normal or normalnewcombo
 	if((hoVals[3] & 1)) 
@@ -161,34 +173,36 @@ std::ostream& operator<<(std::ostream& os, const HitObject& o) {
 	 }
  }
 
-/*
-Beatmap::Beatmap(OSUString filename) {
-	NSString* content = [NSString stringWithContentsOfFile:path
-												  encoding:NSUTF8StringEncoding
-													 error:NULL];
-	
-	ifstream is(filename);
+Beatmap::Beatmap(NSString * beatmapFromSql) {
+	/* This is a bunch of code to get an ifstream from a cstr path to a resource*/
+	const char * cstr = [beatmapFromSql UTF8String];
+	string str = string(cstr);
+	istringstream is(str);
 	
 	string line;
 	int state;
-	string HitObjectsString("[HitObjects]\r");
+	string HitObjectsString("[HitObjects]");
 	
 	while(getline(is, line)) {
-		// skip comments
-		if(line.substr(0,2) == "//" || line == "\r")
+		
+		if(line.substr(0,2) == "//" || line == "\n" || line == "\r") {
+			cout << "continuing" << endl;
 			continue;
+		}
 		
 		// read in a HitObject
-		if(state == 100 && line != "\r") {
-			HitObject h = readHitObject(line);
+		if(state == 100 && line != "\r" && line != "\n") {
+			cout << "reading a hit object" << endl;
+			HitObject * h = readHitObject(line);
 			hitObjects.push_back(h);
 		}
 		
 		// change state
-		if(line == HitObjectsString)
+		if(line.substr(0,12) == HitObjectsString) {
+			cout << "state now 100";
 			state = 100;
+		}
+		cout << line << endl;
 	}
 }
-*/
-
 

@@ -141,12 +141,12 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		/* cgpoints go from bottom left to top right like a graph */
 		
 		// commented because i dont have scorehud
-		/*
+		
 		CCSprite *scorebg = [CCSprite spriteWithFile:@"scorehud.png"];
 		scorebg.scale = .15;
 		scorebg.position = ccp(435,300);
 		[self addChild:scorebg];
-		 */
+		
 
 		score = 0;
 		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
@@ -241,8 +241,25 @@ BOOL paused = false;
 		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
 		int distInt = dist;
 		
-		if(dist < 100){
-			/*
+		if(dist > 100){
+			CCSprite *fail = [CCSprite spriteWithFile:@"fail.png"];
+			fail.position = ccp (o->x, o->y);
+			fail.scale = 0.15;
+			[fail runAction:[CCRotateBy actionWithDuration:0.4 angle: 0]];
+			[circles.front() addChild:fail];
+		}
+			 
+		
+		if(dist > 50 && dist < 100){
+			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-blue.png"];
+			burst.position = ccp (o->x,o->y);
+			burst.scale = 0.25;
+			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle :0]];
+			[circles.front() addChild:burst];
+		}
+		
+		if(dist < 50){
+			
 			 // commented because i dont have starburst
 			 
 			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
@@ -254,11 +271,11 @@ BOOL paused = false;
 			burst.scale = 0.25;
 			//onehundred.scale = 0.6;
 			//[self addChild:burst];
-			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:90]];
+			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:0]];
 			//[onehundred runAction:[CCFadeOut actionWithDuration:0.4]];
 			[circles.front() addChild:burst];
 			//[circles.front() addChild:onehundred];
-			 */
+			 
 		}
 		
 	if([touches count] > 1) {

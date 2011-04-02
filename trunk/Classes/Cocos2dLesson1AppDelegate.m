@@ -10,7 +10,7 @@
 
 #import "Cocos2dLesson1AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldScene.h"
+#import "GameScene.h"
 #import "RootViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -108,14 +108,14 @@
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-
+	//[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444]; // Max changed this! Cuz cocos2d said to i guess
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [Layer1 scene]];		
+	[[CCDirector sharedDirector] runWithScene: [MenuScene scene]];		
 }
 
 

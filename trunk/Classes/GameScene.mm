@@ -9,7 +9,7 @@
 // Import the interfaces
 #import <MediaPlayer/MediaPlayer.h> 
 #import "CCTouchDispatcher.h"
-#import "HelloWorldScene.h"
+#import "GameScene.h"
 #import "HODCircle.h"
 #import "osu-import.h.mm"
 #import "HODSlider.h"
@@ -60,7 +60,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 
 // HelloWorld implementation
 
-@implementation Layer2
+@implementation GameScene
 
 +(id) scene
 {
@@ -68,7 +68,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	Layer2 *layer = [Layer2 node];
+	GameScene *layer = [GameScene node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -244,13 +244,13 @@ BOOL paused = false;
 		if(dist > 100){
 			CCSprite *fail = [CCSprite spriteWithFile:@"fail.png"];
 			fail.position = ccp (o->x, o->y);
-			fail.scale = 0.15;
+			//fail.scale = 0.15;
 			[fail runAction:[CCRotateBy actionWithDuration:0.4 angle: 0]];
 			[circles.front() addChild:fail];
 		}
 			 
 		
-		if(dist > 50 && dist < 100){
+		else if(dist > 50 && dist < 100){
 			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-blue.png"];
 			burst.position = ccp (o->x,o->y);
 			burst.scale = 0.25;
@@ -258,10 +258,7 @@ BOOL paused = false;
 			[circles.front() addChild:burst];
 		}
 		
-		if(dist < 50){
-			
-			 // commented because i dont have starburst
-			 
+		else if(dist < 50){
 			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
 			//points.position = ccp(o->x, o->y);
 			CCSprite *burst = [CCSprite spriteWithFile:@"starburst.png"];	
@@ -280,7 +277,6 @@ BOOL paused = false;
 		
 	if([touches count] > 1) {
 		
-	
 		if(!paused) {
 			[[CCDirector sharedDirector] stopAnimation];
 			[musicPlayer pause];

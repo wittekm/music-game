@@ -10,18 +10,18 @@
 
 
 @interface Scoreboard : NSObject {
-	NSInteger* score;
-	NSInteger* combo;
+	NSInteger score;
+	NSInteger combo;
 	CCSprite* dig5;
 	CCSprite* dig4;
 	CCSprite* dig3;
 	CCSprite* dig2;
 	CCSprite* dig1;
-	CCsprite* dig0;
+	CCSprite* dig0;
 }
 
-@property (retain) NSInteger* score;
-@property (retain) NSInteger* combo;
+@property NSInteger score;
+@property NSInteger combo;
 @property (retain) CCSprite* dig5;
 @property (retain) CCSprite* dig4;
 @property (retain) CCSprite* dig3;

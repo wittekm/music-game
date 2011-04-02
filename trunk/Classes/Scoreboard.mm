@@ -8,6 +8,8 @@
 
 #import "Scoreboard.h"
 
+@implementation Scoreboard
+
 @synthesize score;
 @synthesize combo;
 @synthesize dig5;
@@ -16,9 +18,6 @@
 @synthesize dig2;
 @synthesize dig1;
 @synthesize dig0;
-
-
-@implementation Scoreboard
 
 - (id) init
 {
@@ -72,7 +71,7 @@
 - (void) updateScore
 {
 	//here we'll use clever bitmasking tricks to get each digit individually
-	NSNumber * tempScore = [self score];
+	NSNumber * tempScore = [NSNumber numberWithInt:score];
 }
 - (void) dealloc
 {

@@ -7,10 +7,9 @@
 //
 
 #import "cocos2d.h"
-
 #import "Cocos2dLesson1AppDelegate.h"
 #import "GameConfig.h"
-#import "GameScene.h"
+#import "MenuScene.h"
 #import "RootViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 

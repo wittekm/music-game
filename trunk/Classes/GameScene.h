@@ -9,13 +9,6 @@
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
-@interface MenuScene: CCLayer
-{
-}
--(void) menuCallbackStart:(id) sender;
-
-@end
-
 
 // HelloWorld Layer
 @interface GameScene : CCLayer

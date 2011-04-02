@@ -6,10 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "MenuScene.h"
 #import <sqlite3.h>
 #import <iostream>
 #import "SqlHandler.h"
+#import "GameScene.h"
 
 @implementation MenuScene
 +(id) scene

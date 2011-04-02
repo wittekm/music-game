@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 
-
-@interface MenuScene : NSObject {
+@interface MenuScene : CCLayer {
 
 }
+-(void) menuCallbackStart:(id) sender;
 
 @end

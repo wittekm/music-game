@@ -26,6 +26,7 @@
 using std::cout;
 using std::endl;
 using std::vector;
+using std::list;
 
 CCLabelTTF * scoreLabel;
 int score;
@@ -34,12 +35,9 @@ Beatmap * beatmap;
 
 MPMusicPlayerController * musicPlayer;
 
-std::list<HODCircle*> circles;
+list<HODCircle*> circles;
 
 int zOrder = INT_MAX;
-
-CGPoint start_;
-CGPoint end_;
 
 
 HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
@@ -242,7 +240,7 @@ BOOL paused = false;
 		int distInt = dist;
 		
 		if(dist > 100){
-			CCSprite *fail = [CCSprite spriteWithFile:@"fail.png"];
+			CCSprite *fail = [CCSprite spriteWithFile:@"fail-128.png"];
 			fail.position = ccp (o->x, o->y);
 			//fail.scale = 0.15;
 			[fail runAction:[CCRotateBy actionWithDuration:0.4 angle: 0]];
@@ -251,9 +249,9 @@ BOOL paused = false;
 			 
 		
 		else if(dist > 50 && dist < 100){
-			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-blue.png"];
+			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
 			burst.position = ccp (o->x,o->y);
-			burst.scale = 0.25;
+			//burst.scale = 0.25;
 			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle :0]];
 			[circles.front() addChild:burst];
 		}
@@ -261,11 +259,11 @@ BOOL paused = false;
 		else if(dist < 50){
 			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
 			//points.position = ccp(o->x, o->y);
-			CCSprite *burst = [CCSprite spriteWithFile:@"starburst.png"];	
+			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-128.png"];	
 			//CCSprite *onehundred = [CCSprite spriteWithFile:@"100.png"];
 			burst.position = ccp(o->x,o->y);
 			//onehundred.position = ccp(o->x, o->y);
-			burst.scale = 0.25;
+			//burst.scale = 0.25;
 			//onehundred.scale = 0.6;
 			//[self addChild:burst];
 			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:0]];

@@ -8,11 +8,12 @@
 
 #import "HODCircle.h"
 #import "osu-import.h.mm"
+#import "GameScene.h"
 
 @implementation HODCircle
 @synthesize ring;
 
-static NSMutableArray *HODCircleTextures = nil;
+//static NSMutableArray *HODCircleTextures = nil;
 
 // on "init" you need to initialize your instance
 
@@ -29,6 +30,8 @@ static NSMutableArray *HODCircleTextures = nil;
 		
 		ring = [CCSprite spriteWithFile:@"button.ring.png"];		 
 		ring.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
+		ccColor3B color = {r, g, b};
+		ring.color = color;
 		
 		button = [CCSprite spriteWithTexture: [[buttonTex sprite] texture]];
 		button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
@@ -92,9 +95,17 @@ static NSMutableArray *HODCircleTextures = nil;
 	[overlayTex visit];
 	
 	if(doNumber) {
-		CCLabelTTF * numberDisplay = 
-		[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
-						   fontName:@"Helvetica Neue" fontSize:48];
+		CCLabelTTF * numberDisplay;
+		if(hitObject->number != 0) {
+			numberDisplay = 
+			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
+							   fontName:@"Helvetica Neue" fontSize:48];
+		} else {
+			// Do something special if the number is 0.
+			numberDisplay = 
+			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"<-"] 
+							   fontName:@"Helvetica Neue" fontSize:48];
+		}
 		numberDisplay.position = ccp(size.width/2,size.height/2);
 		[numberDisplay visit];
 	}
@@ -142,6 +153,18 @@ static NSMutableArray *HODCircleTextures = nil;
 	
 	//[button release];
 	//[ring release];
+}
+
+- (BOOL) wasHit:(CGPoint)location atTime:(NSTimeInterval)time {
+	if([super wasHit:location atTime:time]) {
+		// spawn a "300!" or whatever
+		[(GameScene*)[self parent] spawnReaction:300 pos:ccp(hitObject->x, hitObject->y)];
+		[(GameScene*)[self parent] removeHitObjectDisplay:self];
+		
+		return true;
+	} else {
+		return false;
+	}
 }
 
 

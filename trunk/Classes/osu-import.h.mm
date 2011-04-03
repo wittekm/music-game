@@ -33,6 +33,8 @@ struct HitObject {
 	int number;
 	
 	friend std::ostream &operator<<(std::ostream&, const HitObject&);
+	
+	void setRepeat() { number = 0; } // only used for sliders, terribly hacky
 };
 
 struct HitSlider : public HitObject {
@@ -110,65 +112,6 @@ public:
 
 
 
-
-
-// And here, I attempt to make a beatmap Objective-C Compatible.
-@interface ObjBeatmap : NSObject {
-	// [General]
-	NSString * AudioFilename;
-	int AudioLeadIn;
-	int PreviewTime;
-	int Countdown;
-	NSString * SampleSet;
-	NSMutableArray * EditorBookmarks;
-	
-	// [Metadata]
-	NSString * Title, Artist, Creator, Version, Source, Tags;
-	
-	// [Difficulty]
-	int HPDrainRate;
-	int CircleSize;
-	int OverallDifficulty;
-	double SliderMultiplier;
-	int SliderTickRate;
-	
-	// [Events]
-	
-	// [TimingPoints]
-	int offsetMs;
-	double beatLength;
-	int timingSignature;
-	int sampleSetId;
-	BOOL useCustomSamples;
-	
-	// [Colours] (lol colours... up to five of them, btw
-	NSMutableArray * comboColors;
-	
-	// [HitObjects]
-	NSMutableArray * hitObjects;
-}
-
-@property (retain) NSMutableArray * hitObjects;
-
-@end
-
-
-@interface ObjHitObject : NSObject {
-
-	int x;
-	int y;
-	int startTimeMs;
-	int objectType;
-	int soundType;
-}
-
-@property int x;
-@property int y;
-@property int startTimeMs;
-@property int objectType;
-@property int soundType;
-
-@end
 
 
 #endif

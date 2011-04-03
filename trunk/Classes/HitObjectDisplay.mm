@@ -51,4 +51,13 @@
 	[super dealloc];
 }
 
+- (BOOL) wasHit: (CGPoint)location atTime: (NSTimeInterval) time {
+	double dist = sqrt( pow(hitObject->x - location.x, 2) + pow(hitObject->y - location.y, 2));
+	if(dist > (46. * initialScale)) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
 @end

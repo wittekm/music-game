@@ -31,7 +31,7 @@ using std::list;
 CCLabelTTF * scoreLabel;
 int score;
 
-list<HODCircle*> circles;
+list<HitObjectDisplay*> hods;
 
 int zOrder = INT_MAX;
 
@@ -42,7 +42,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	}
 	
 	else if(hitObject->objectType & 2) {
-		return [[[HODSlider alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 1] retain];
+		return [[[HODSlider alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 1.0] retain];
 	}
 	
 	else {
@@ -128,6 +128,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			[self addChild:albumArt];
 			
 			//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
+			//[musicPlayer setCurrentPlaybackTime:60];
 			
 			
 		} @catch(NSException *e) {
@@ -150,14 +151,17 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		scoreLabel.position = ccp(430,305);
 		[self addChild: scoreLabel];
 		scoreLabel.color = ccc3(0,0,0);
+
+#if TARGET_IPHONE_SIMULATOR
 		
-		/*
-		HitObject * o = beatmap->hitObjects.front();
+		while(beatmap->hitObjects.front()->startTimeMs != 61234)
+			beatmap->hitObjects.pop_front();
+		HitObject* o = beatmap->hitObjects.front();
 		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 		[self addChild:hod];
 		[hod appearWithDuration:1.5];
-		*/
 		
+#endif
 	}
 	return self;
 }
@@ -166,8 +170,6 @@ BOOL otherDirection = NO; // wtf does this do
 int comboIndex;
 
 - (void) nextFrame:(ccTime)dt {
-	
-	/***** Music Game Stuff ****/
 	
 	double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
 	milliseconds += 1000; // offset for gee norm
@@ -196,10 +198,9 @@ int comboIndex;
 			ccColor3B col = beatmap->comboColors[comboIndex % 4];
 			
 			HitObjectDisplay * hod = HODFactory(o, col.r, col.g, col.b );
-			NSLog(@"successful HODfactory");
 			[self addChild:hod z:zOrder--];
 			[hod appearWithDuration: durationS];
-			circles.push_back(hod);
+			hods.push_back(hod);
 			beatmap->hitObjects.pop_front();
 		}
 		else
@@ -207,21 +208,19 @@ int comboIndex;
 	}
 	
 	
-	if(circles.empty()) {
+	if(hods.empty()) {
 		zOrder = INT_MAX;
-	} // why not?
+	} // reset z-order to topmost. cuz we can.
 	
-	while(!circles.empty()) {
-		HitObject * o = circles.front().hitObject;
+	while(!hods.empty()) {
+		HitObject * o = hods.front().hitObject;
 		if(milliseconds > o->startTimeMs + timeAllowanceMs + (1000.0 * durationS)) {
-			NSLog(@"doing the if in the second while");
-			HitObjectDisplay * c = circles.front();
-			circles.pop_front();
+			HitObjectDisplay * c = hods.front();
+			hods.pop_front();
 			[self removeChild:c cleanup:true];
 			// [c release];
 		}
 		else {
-			NSLog(@"ended second while");
 			break;
 		}
 	}
@@ -232,12 +231,17 @@ int comboIndex;
 	UITouch * touch = [touches anyObject];	
 	CGPoint location = [self convertTouchToNodeSpace: touch];
 	
-	if([touches count] > 2) {
+	if([touches count] > 1) {
+		/*
+		if(!pausedLabel)
+			pausedLabel = [[CCLabelTTF labelWithString:@"PAUSED" fontName:@"Helvetica" fontSize:48] retain];
+		*/
 		
 		if(!paused) {
-			[[CCDirector sharedDirector] stopAnimation];
 			[musicPlayer pause];
 			paused = true;
+			
+			[[CCDirector sharedDirector] stopAnimation];
 		} else {
 			[[CCDirector sharedDirector] startAnimation];
 			[musicPlayer play];
@@ -246,8 +250,12 @@ int comboIndex;
 	}
 	
 	
-	if(!circles.empty()) {
-		HitObject * o = circles.front().hitObject;
+	if(!hods.empty()) {
+		
+		/*
+		 // commented out because I'm in the process of moving this stuff to the HitObjectDisplay side.
+		 
+		HitObject * o = hods.front().hitObject;
 		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
 		int distInt = dist;
 		
@@ -256,7 +264,7 @@ int comboIndex;
 			fail.position = ccp (o->x, o->y);
 			//fail.scale = 0.15;
 			[fail runAction:[CCRotateBy actionWithDuration:0.4 angle: 0]];
-			[circles.front() addChild:fail];
+			[hods.front() addChild:fail];
 		}
 			 
 		
@@ -265,7 +273,7 @@ int comboIndex;
 			burst.position = ccp (o->x,o->y);
 			//burst.scale = 0.25;
 			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle :0]];
-			[circles.front() addChild:burst];
+			[hods.front() addChild:burst];
 		}
 		
 		else if(dist < 50){
@@ -280,10 +288,32 @@ int comboIndex;
 			//[self addChild:burst];
 			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:0]];
 			//[onehundred runAction:[CCFadeOut actionWithDuration:0.4]];
-			[circles.front() addChild:burst];
-			//[circles.front() addChild:onehundred];
+			[hods.front() addChild:burst];
+			//[hods.front() addChild:onehundred];
 			 
 		}
+		 */
+		
+		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
+		milliseconds += 1000; // offset for gee norm
+
+		// iterate through everying in "hods"
+		list<HitObjectDisplay*>::iterator hodIter = hods.begin();
+		list<HitObjectDisplay*>::iterator hodsEnd = hods.end();
+		for(hodIter; hodIter != hodsEnd; ++hodIter) {
+			HitObjectDisplay * hod = *hodIter;
+			if([hod wasHit: location atTime: milliseconds]) {
+				// wasHit should remove the object if it needed to be removed
+				cout << "hit something!" << endl;;
+				break;
+			}
+		}
+		if(hodIter == hodsEnd) {
+			// Tapped somewhere on the screen that doesn't correspond to a HitObject.
+			// Reset the multiplier back to 1x.
+		}
+		
+		
 	}
 }
 
@@ -301,27 +331,30 @@ int comboIndex;
 }
 
 
-/*
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-	
-	NSLog(@"%f %f", location.x, location.y);
-	
-	if(!circles.empty()) {
-		HitObject * o = circles.front().hitObject;
-		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
-		int distInt = dist;
-	
-		score += 1;
-		[scoreLabel setString:[NSString stringWithFormat:@"%d %d", score, distInt]];
-		NSLog(@"%d %d %f", o->x, o->y, location.x, location.y, dist);
-	}
-	else
-		[scoreLabel setString:[NSString stringWithFormat:@"%d X", score]];
-
-    return YES;
+// this is generally caleld by one of the HitObjectDisplays.
+- (void) removeHitObjectDisplay: (HitObjectDisplay*)hod {
+	hods.remove(hod);
+	[self removeChild:hod cleanup:true];
 }
-*/
+
+- (void) spawnReaction: (int)type pos: (CGPoint)pos {
+	CCSprite *burst;
+	
+	// change this to fail, blue, and red
+	if(type != -1) {
+		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
+	}
+	
+	id removeAction = [CCCallBlock actionWithBlock:^{
+		[self removeChild:burst cleanup:true];
+	}];
+	
+	burst.position = pos;
+	burst.scale = 0.75;
+	[burst runAction: [CCFadeOut actionWithDuration:0.1]];
+	[burst runAction: [CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:50], removeAction, nil] ];
+	[self addChild:burst];
+}
 
 /*
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {

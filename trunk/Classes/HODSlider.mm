@@ -19,36 +19,22 @@
 	pointsList points = hs->sliderPoints;
 	if(points.size() > 50) return;
 	
-	CGPoint start = CGPointMake(hs->x * 1.0, hs->y * 1.0);
+	CGPoint start = ccp(hs->x, hs->y); //CGPointMake(hs->x * 1.0, hs->y * 1.0);
 	[curve setPoint: start atIndex: 0];
-	
-	
-	//I have a crazy belief that curves need at least 4 points.
-	
+		
 	if(points.size() == 1) {
 		CGPoint end = ccp(points.at(0).first, points.at(0).second);
-		[curve setPoint: ccpLerp(start, end, 1/3.f) atIndex:1];
-		[curve setPoint:ccpLerp(start, end, 2/3.f) atIndex:2];
-		[curve setPoint: end atIndex: 3];
+		[curve setPoint: ccpLerp(start, end, 1/2.f) atIndex:1];
+		[curve setPoint: end atIndex: 2];
 	}
 	
-	// i needed this when using lagrange curves
-	/*
-	else if(points.size() == 2) {
-		CGPoint mid = ccp(points.at(0).first, points.at(0).second);
-		CGPoint end = ccp(points.at(1).first, points.at(1).second);
-		[curve setPoint: ccpLerp(start, mid, 1/2.f) atIndex:1];
-		[curve setPoint: mid atIndex: 2];
-		[curve setPoint:ccpLerp(mid, end, 1/2.f) atIndex:3];
-		[curve setPoint: end atIndex: 4];
-	}
-	 */
+	
 	else {
-		
 		for(uint i = 0; i < points.size(); i++) {
 			std::pair<int, int> pointPair = points.at(i);
 			NSLog(@"%d: %d %d ", i+1, pointPair.first, pointPair.second);
-			CGPoint point = CGPointMake((pointPair.first - hs->x) * 1.0, (pointPair.second - hs->y) * 1.0);
+			CGPoint point = ccp(pointPair.first, pointPair.second);
+			//CGPoint point = ccp(pointPair.first - hs->x, pointPair.second - hs->y); //CGPointMake((pointPair.first - hs->x) * 1.0, (pointPair.second - hs->y) * 1.0);
 			//point = [[CCDirector sharedDirector] convertToGL: point];
 			[curve setPoint:point atIndex: i+1];
 		}
@@ -57,52 +43,6 @@
 	[curve invalidate];
 	
 }
-
-/*
-- (CCRenderTexture*) createFadeinTexture
-{
-	CCRenderTexture * target = 
-	[[CCRenderTexture renderTextureWithWidth:480.*2 height:320.*2] retain];
-	target.position = ccp(0,0);
-	
-	curve.position = ccp(480, 320);
-	ccColor3B colorCopy = curve.color;
-	
-	HODCircle * circ = [[HODCircle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
-	circ.position = ccp(480, 320);
-	[circ justDisplay];
-	
-	// Begin tracing onto the RenderTexture
-	[target begin];
-	
-	// create the white outline
-	//[curve setOpacity: 200];
-	[curve setWidth: [curve width] * 1.15];
-	[curve setColor: ccWHITE];
-	[curve visit];
-	
-	// fill inside color
-	//[curve setOpacity: 150];
-	[curve setWidth: [curve width] / 1.15];
-	[curve setColor: colorCopy];
-	[curve visit];
-	
-	// do the begin-button
-	[circ visit];
-	
-	// trace the end-button as well
-	std::pair<int, int> end = ((HitSlider*)hitObject)->sliderPoints.back();
-	circ.position = ccp(480 + (end.first - hitObject->x), 320 + (end.second - hitObject->y));
-	[circ visit];
-	
-	[target end];
-	
-	[circ release];
-	
-	return target;
-}
-*/
-
 
 - (CCRenderTexture*) createFadeinTexture
 {
@@ -141,12 +81,18 @@
 	// do the begin-button
 	[circ visit];
 	
-	/*
+	
 	// trace the end-button as well
+	// originates at hitObject.x and y....
 	std::pair<int, int>& end = ((HitSlider*)hitObject)->sliderPoints.back();
-	circ.position = ccp(end.first - hitObject->x, end.second - hitObject->y);
-	[circ visit];
-	 */
+	//circ.position = ccp(hitObject->x -end.first, hitObject->y - end.second);
+	//circ.position = ccp(end.first - hitObject->x, end.second - hitObject->y);
+	HitObject * endHO = new HitObject(end.first, end.second, -1, 1, -1);
+	endHO->setRepeat();
+	HODCircle * circTwo = [[HODCircle alloc] initWithHitObject:endHO red:red green:green blue:blue initialScale:initialScale];
+	[circTwo justDisplay];
+	[circTwo visit];
+	 
 	NSLog(@"abotu to end");
 	[target end];
 	
@@ -170,7 +116,7 @@
 		curve = [[FRCurve curveFromType:kFRCurveBezier order:kFRCurveQuadratic segments:64] retain]; // MAY NEED RETAIN
 		// 74 is the default size of the inner part.
 		[curve setWidth: 70.0f * s];
-		//[curve setShowControlPoints:true];
+		[curve setShowControlPoints:true];
 		ccColor3B curveColor = { r, g, b};
 		[curve setColor:curveColor];
 		[self addPoints];
@@ -183,7 +129,7 @@
 		size = CGSizeMake(120, 120);
 		
 		ring = [CCSprite spriteWithFile:@"button.ring.png"];
-		ring.color = ccORANGE;
+		ring.color = curveColor;
 		ring.position = ccp(hitObject->x, hitObject->y);
 				
 		// Create the fadein texture and the corresponding CCSprite

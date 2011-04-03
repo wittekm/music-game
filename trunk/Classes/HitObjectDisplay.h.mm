@@ -24,6 +24,7 @@
 - (void) appearWithDuration: (double)duration;
 - (void) setOpacity: (GLubyte) opacity;
 
+- (BOOL) wasHit: (CGPoint)location atTime: (NSTimeInterval)time;
 
 // stuff pertaining to touch processing
 

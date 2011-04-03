@@ -31,10 +31,6 @@ using std::list;
 CCLabelTTF * scoreLabel;
 int score;
 
-Beatmap * beatmap;
-
-MPMusicPlayerController * musicPlayer;
-
 list<HODCircle*> circles;
 
 int zOrder = INT_MAX;
@@ -97,12 +93,14 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		// choose toro y moi
 		beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
 		
-		if(!beatmap) exit(0);
-		 
+		if(!beatmap) exit(0); // TODO: make an errmsg
 		
 		[self schedule:@selector(nextFrame:)];
 		
 		self.isTouchEnabled = YES;
+		
+		paused = false;
+
 		
 // this shit don't work in the simulator
 #if !(TARGET_IPHONE_SIMULATOR)
@@ -164,7 +162,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	return self;
 }
 
-BOOL otherDirection = NO;
+BOOL otherDirection = NO; // wtf does this do
+int comboIndex;
 
 - (void) nextFrame:(ccTime)dt {
 	
@@ -192,9 +191,11 @@ BOOL otherDirection = NO;
 			cout << o->x << " " << o->y << endl;
 			cout << "making a HitObject at time " << o->startTimeMs << endl;
 			
-			//HitObjectDisplay * hod = [[HODCircle alloc] initWithHitObject:o red:0 green:180 blue:0];
-			 
-			HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
+			// give a different color to each combo group
+			if(o->number == 1) comboIndex++;
+			ccColor3B col = beatmap->comboColors[comboIndex % 4];
+			
+			HitObjectDisplay * hod = HODFactory(o, col.r, col.g, col.b );
 			NSLog(@"successful HODfactory");
 			[self addChild:hod z:zOrder--];
 			[hod appearWithDuration: durationS];
@@ -227,13 +228,24 @@ BOOL otherDirection = NO;
 	
 }
 
-BOOL paused = false;
-
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSArray * touchesArray = [touches allObjects];
-	NSLog(@"%d", [touchesArray  count]);
 	UITouch * touch = [touches anyObject];	
 	CGPoint location = [self convertTouchToNodeSpace: touch];
+	
+	if([touches count] > 2) {
+		
+		if(!paused) {
+			[[CCDirector sharedDirector] stopAnimation];
+			[musicPlayer pause];
+			paused = true;
+		} else {
+			[[CCDirector sharedDirector] startAnimation];
+			[musicPlayer play];
+			paused = false;
+		}
+	}
+	
+	
 	if(!circles.empty()) {
 		HitObject * o = circles.front().hitObject;
 		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
@@ -272,19 +284,6 @@ BOOL paused = false;
 			//[circles.front() addChild:onehundred];
 			 
 		}
-		
-	if([touches count] > 1) {
-		
-		if(!paused) {
-			[[CCDirector sharedDirector] stopAnimation];
-			[musicPlayer pause];
-			paused = true;
-		} else {
-			[[CCDirector sharedDirector] startAnimation];
-			[musicPlayer play];
-			paused = false;
-		}
-	}
 	}
 }
 

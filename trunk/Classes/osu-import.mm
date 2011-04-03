@@ -204,5 +204,16 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 		}
 		cout << line << endl;
 	}
+	
+	
+	// Eventually read in colors correctly. Until then? This works.
+	ccColor3B red = {140, 0, 0};
+	ccColor3B green = {0, 120, 0};
+	ccColor3B blue = {0, 0, 120};
+	ccColor3B yellow = {160, 160, 0};
+	comboColors.push_back(red);
+	comboColors.push_back(green);
+	comboColors.push_back(blue);
+	comboColors.push_back(yellow);
 }
 

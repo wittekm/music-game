@@ -17,6 +17,7 @@
 #include <list>
 #include <sstream>
 #include "Utility.h"
+#import "cocos2d.h" // for ccolor3b
 
 typedef char * OSUString; // up for changing later
 
@@ -87,7 +88,7 @@ public:
 	bool useCustomSamples;
 	
 	// [Colours] (lol colours... up to five of them, btw
-	std::vector<RGBColor> comboColors;
+	std::vector<ccColor3B> comboColors;
 	
 	// [HitObjects]
 	std::list<HitObject *> hitObjects;

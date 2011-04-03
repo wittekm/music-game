@@ -9,10 +9,16 @@
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
+#import "osu-import.h.mm"
+
+class MPMusicPlayerController; // fwd decl
 
 // HelloWorld Layer
 @interface GameScene : CCLayer
 {
+	BOOL paused;
+	Beatmap * beatmap;
+	MPMusicPlayerController * musicPlayer;
 }
 
 // returns a Scene that contains the HelloWorld as the only child

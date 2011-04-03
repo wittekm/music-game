@@ -9,6 +9,7 @@
 #import "HODCircle.h"
 #import "osu-import.h.mm"
 #import "GameScene.h"
+#import "Scoreboard.h"
 
 @implementation HODCircle
 @synthesize ring;
@@ -160,16 +161,11 @@
 		// spawn a "300!" or whatever
 		[(GameScene*)[self parent] spawnReaction:300 pos:ccp(hitObject->x, hitObject->y)];
 		[(GameScene*)[self parent] removeHitObjectDisplay:self];
-		
+		[[ [self gsParent] scoreBoard] hitFull];
 		return true;
 	} else {
 		return false;
 	}
-}
-
-
-- (int) disappearTime {
-	return hitObject->startTimeMs + [[self gsParent] timeAllowanceMs] + [[self gsParent] durationMs];
 }
 
 

@@ -13,6 +13,7 @@
 @synthesize score;
 @synthesize combo;
 @synthesize scoreDisplay;
+@synthesize scoreBackground;
 
 - (id) init
 {
@@ -20,14 +21,20 @@
 	{
 		[self setScore:0];
 		[self setCombo:0];
-		[self setScoreDisplay: [CCLabelBMFont  bitmapFontAtlasWithString:@"0" fntFile:@"scoreFont.fnt"]];
-		scoreDisplay.position =  ccp(430,305);
+		[self setScoreDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
+		scoreDisplay.position =  ccp(450,300);
+		[self setScoreBackground:[CCSprite spriteWithFile:@"scorehud.png"]];
+		scoreBackground.position = ccp(435, 300);
+		scoreBackground.scale = 0.15;
+		[self addChild:scoreBackground];
+		[self addChild:scoreDisplay];
 	}
 	return self;
 }
 
 - (void) hitFull
 {
+	NSLog(@"herro");
 	[self setCombo: [self combo] + 1];
 	if ([self combo] > 39){
 		[self setScore: [self score] + 400];
@@ -41,6 +48,7 @@
 	if ([self combo] > 9){
 		[self setScore: [self score] + 100];
 	}
+	[self updateScore];
 }
 
 - (void) hitHalf
@@ -68,7 +76,9 @@
 - (void) updateScore
 {
 	//here we'll use clever bitmasking tricks to get each digit individually
-	NSNumber * tempScore = [NSNumber numberWithInt:score];
+	//nah
+	//[self setScoreDisplay: [[
+	[scoreDisplay setString: [NSString stringWithFormat:@"%d", score]];
 }
 - (void) dealloc
 {

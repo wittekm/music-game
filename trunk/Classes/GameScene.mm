@@ -58,6 +58,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 @synthesize beatmap;
 @synthesize timeAllowanceMs;
 @synthesize durationMs;
+@synthesize scoreBoard;
 
 +(id) scene
 {
@@ -82,8 +83,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if( (self=[super init] )) {
 		// Initialize Timer
 		
-		// Initialize Scoreboard
-		Scoreboard * sb = [[Scoreboard alloc] init];
+		
 		// Initialize Beatmap (C++)
 		//beatmap = new Beatmap("mflo.osu");
 		//beatmap = new Beatmap("gee_norm.osu");
@@ -144,10 +144,9 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		
 		// commented because i dont have scorehud
 		
-		CCSprite *scorebg = [CCSprite spriteWithFile:@"scorehud.png"];
-		scorebg.scale = .15;
-		scorebg.position = ccp(435,300);
-		[self addChild:scorebg];
+		// Initialize Scoreboard
+		Scoreboard * scoreBoard = [[Scoreboard alloc] init];
+		[self addChild:scoreBoard];
 		
 
 /*		score = 0;
@@ -377,7 +376,6 @@ int comboIndex;
 	CGPoint location = [self convertTouchToNodeSpace: touch];
 }
  */
-
 
 
 // on "dealloc" you need to release all your retained objects

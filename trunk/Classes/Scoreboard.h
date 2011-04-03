@@ -9,15 +9,19 @@
 #import <Foundation/Foundation.h>
 
 
-@interface Scoreboard : NSObject {
+@interface Scoreboard : CCLayer {
 	NSInteger score;
 	NSInteger combo;
-	CCLabelBMFont * scoreDisplay;
+	CCLabelTTF * scoreDisplay;
+	CCSprite * scoreBackground;
 }
+
+- (void)hitFull;
 
 @property NSInteger score;
 @property NSInteger combo;
-@property (retain) CCLabelBMFont * scoreDisplay;
+@property (retain) CCLabelTTF * scoreDisplay;
+@property (retain) CCSprite * scoreBackground;
 
 
 @end

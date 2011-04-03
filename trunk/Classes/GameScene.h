@@ -11,6 +11,7 @@
 #import "cocos2d.h"
 #import "osu-import.h.mm"
 #import "HitObjectDisplay.h.mm"
+#import "Scoreboard.h"
 
  // fwd decl
 class MPMusicPlayerController;
@@ -21,6 +22,7 @@ class MPMusicPlayerController;
 	BOOL paused;
 	Beatmap * beatmap;
 	MPMusicPlayerController * musicPlayer;
+	Scoreboard * scoreBoard;
 	CCLabelTTF * pausedLabel;
 	double timeAllowanceMs;
 	double durationMs;
@@ -34,6 +36,7 @@ class MPMusicPlayerController;
 - (void) spawnReaction: (int)type pos: (CGPoint)pos;
 
 @property Beatmap * beatmap;
+@property (retain) Scoreboard * scoreBoard;
 @property double timeAllowanceMs;
 @property double durationMs;
 

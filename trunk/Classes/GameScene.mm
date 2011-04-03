@@ -15,7 +15,7 @@
 #import "HODSlider.h"
 #import "HitObjectDisplay.h.mm"
 #import "SqlHandler.h"
-
+#import "Scoreboard.h"
 #import "FRCurve.h"
 
 #include "TargetConditionals.h"
@@ -79,6 +79,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if( (self=[super init] )) {
 		// Initialize Timer
 		
+		// Initialize Scoreboard
+		Scoreboard * sb = [[Scoreboard alloc] init];
 		// Initialize Beatmap (C++)
 		//beatmap = new Beatmap("mflo.osu");
 		//beatmap = new Beatmap("gee_norm.osu");
@@ -145,12 +147,13 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[self addChild:scorebg];
 		
 
-		score = 0;
+/*		score = 0;
 		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
 		//scoreLabel.anchorPoint = ccp([scoreLabel contentSize].width,[scoreLabel contentSize].height);
 		scoreLabel.position = ccp(430,305);
 		[self addChild: scoreLabel];
 		scoreLabel.color = ccc3(0,0,0);
+ */
 
 #if TARGET_IPHONE_SIMULATOR
 		

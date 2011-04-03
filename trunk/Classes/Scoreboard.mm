@@ -12,19 +12,16 @@
 
 @synthesize score;
 @synthesize combo;
-@synthesize dig5;
-@synthesize dig4;
-@synthesize dig3;
-@synthesize dig2;
-@synthesize dig1;
-@synthesize dig0;
+@synthesize scoreDisplay;
 
 - (id) init
 {
-	if (self = [super init] )
+	if (( self = [super init]) )
 	{
 		[self setScore:0];
 		[self setCombo:0];
+		[self setScoreDisplay: [CCLabelBMFont  bitmapFontAtlasWithString:@"0" fntFile:@"scoreFont.fnt"]];
+		scoreDisplay.position =  ccp(430,305);
 	}
 	return self;
 }

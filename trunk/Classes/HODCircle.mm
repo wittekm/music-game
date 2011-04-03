@@ -168,5 +168,11 @@
 	}
 }
 
+- (int) disappearTime {
+	if(disappearTimeMs == -1)
+		disappearTimeMs = hitObject->startTimeMs + [[self gsParent] timeAllowanceMs] + [[self gsParent] durationMs];
+	return disappearTimeMs;
+}
+
 
 @end

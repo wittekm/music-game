@@ -181,6 +181,7 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 	
 	string line;
 	int state;
+	string TimingPointsString("[TimingPoints]");
 	string HitObjectsString("[HitObjects]");
 	
 	while(getline(is, line)) {
@@ -195,6 +196,19 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 			cout << "reading a hit object" << endl;
 			HitObject * h = readHitObject(line);
 			hitObjects.push_back(h);
+		}
+		
+		// read in the TimingPoints
+		if(line.substr(0,14) == TimingPointsString) {
+			getline(is, line);
+			stringstream lineStream(line);
+			string word;
+			getline(lineStream, word, ','); stringstream(word) >> offsetMs;
+			getline(lineStream, word, ','); stringstream(word) >> beatLength;
+			getline(lineStream, word, ','); stringstream(word) >> timingSignature;
+			getline(lineStream, word, ','); stringstream(word) >> sampleSetId;
+			getline(lineStream, word, ','); stringstream(word) >> useCustomSamples;
+			cout << offsetMs << " " << beatLength << " " << timingSignature << " " << sampleSetId << " " << useCustomSamples << "\n\n\n";
 		}
 		
 		// change state

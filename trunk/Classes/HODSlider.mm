@@ -10,6 +10,7 @@
 #import "osu-import.h.mm"
 #import "HODCircle.h"
 #import <vector>
+#import "GameScene.h"
 
 @implementation HODSlider
 
@@ -120,7 +121,7 @@
 		// Set up the curve
 		// USED TO BE LAGRANGE, IS NOW BEZIER
 		// USED TO BE CUBIC NOW QUADRATIC
-		curve = [[FRCurve curveFromType:kFRCurveBezier order:kFRCurveQuadratic segments:64] retain]; // MAY NEED RETAIN
+		curve = [[FRCurve curveFromType:kFRCurveBezier order:kFRCurveQuadratic segments:50] retain]; // MAY NEED RETAIN
 		// 74 is the default size of the inner part.
 		[curve setWidth: 70.0f * s];
 		[curve setShowControlPoints:true];
@@ -170,7 +171,6 @@
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
 	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];
 	
-	
 }
 
 - (void) dealloc {
@@ -182,6 +182,15 @@
 
 - (BOOL) wasHeld:(CGPoint)location atTime:(NSTimeInterval)time {
 	
+}
+
+- (int) disappearTime {
+	// slider movement: sliderMultiplier * 100 pixels / beatLength
+	//return hitObject->startTimeMs + ;
+	HitSlider* hs = ((HitSlider*)hitObject);
+	double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
+	
+	return hitObject->startTimeMs + hs->repeatCount * (beatLength / ( double(hs->sliderLengthPixels) / 100.));
 }
 
 

@@ -168,4 +168,9 @@
 }
 
 
+- (int) disappearTime {
+	return hitObject->startTimeMs + [[self gsParent] timeAllowanceMs] + [[self gsParent] durationMs];
+}
+
+
 @end

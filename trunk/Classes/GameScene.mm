@@ -55,6 +55,9 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 // HelloWorld implementation
 
 @implementation GameScene
+@synthesize beatmap;
+@synthesize timeAllowanceMs;
+@synthesize durationMs;
 
 +(id) scene
 {
@@ -178,7 +181,8 @@ int comboIndex;
 	milliseconds += 1000; // offset for gee norm
 	
 	double durationS = 0.8; // seconds
-	double timeAllowanceMs = 150;
+	durationMs = durationS * 1000.;
+	timeAllowanceMs = 150;
 	// Make stuff start to appear
 	
 	
@@ -202,7 +206,7 @@ int comboIndex;
 			
 			HitObjectDisplay * hod = HODFactory(o, col.r, col.g, col.b );
 			[self addChild:hod z:zOrder--];
-			[hod appearWithDuration: durationS];
+			[hod appearWithDuration: durationMs / 1000.];
 			hods.push_back(hod);
 			beatmap->hitObjects.pop_front();
 		}
@@ -216,8 +220,8 @@ int comboIndex;
 	} // reset z-order to topmost. cuz we can.
 	
 	while(!hods.empty()) {
-		HitObject * o = hods.front().hitObject;
-		if(milliseconds > o->startTimeMs + timeAllowanceMs + (1000.0 * durationS)) {
+		//HitObject * o = hods.front().hitObject;
+		if(milliseconds > [hods.front() disappearTime]) {
 			HitObjectDisplay * c = hods.front();
 			hods.pop_front();
 			[self removeChild:c cleanup:true];

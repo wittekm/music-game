@@ -22,6 +22,8 @@ class MPMusicPlayerController;
 	Beatmap * beatmap;
 	MPMusicPlayerController * musicPlayer;
 	CCLabelTTF * pausedLabel;
+	double timeAllowanceMs;
+	double durationMs;
 }
 
 // returns a Scene that contains the HelloWorld as the only child
@@ -30,5 +32,9 @@ class MPMusicPlayerController;
 - (void) removeHitObjectDisplay: (HitObjectDisplay*)hod;
 
 - (void) spawnReaction: (int)type pos: (CGPoint)pos;
+
+@property Beatmap * beatmap;
+@property double timeAllowanceMs;
+@property double durationMs;
 
 @end

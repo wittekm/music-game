@@ -59,5 +59,8 @@
 		return true;
 	}
 }
+- (BOOL) wasHeld: (CGPoint)location atTime: (NSTimeInterval)time {
+	return true; // doesn't matter for most of them
+}
 
 @end

@@ -27,6 +27,7 @@ typedef enum {
 	kFRCurveCubic = 2,
 	kFRCurveFour = 3,
 	kFRCurveFive = 4,
+	kFRCurveSix = 5
 } FRCurveOrder;
 
 @interface FRCurve : CCNode<CCRGBAProtocol> {

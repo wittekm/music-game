@@ -19,6 +19,10 @@
 	pointsList points = hs->sliderPoints;
 	if(points.size() > 50) return;
 	
+	if(points.size() > 2)
+		[curve setOrder: (FRCurveOrder)(points.size()-1)];
+	
+	
 	CGPoint start = ccp(hs->x, hs->y); //CGPointMake(hs->x * 1.0, hs->y * 1.0);
 	[curve setPoint: start atIndex: 0];
 		
@@ -32,12 +36,15 @@
 	else {
 		for(uint i = 0; i < points.size(); i++) {
 			std::pair<int, int> pointPair = points.at(i);
-			NSLog(@"%d: %d %d ", i+1, pointPair.first, pointPair.second);
+			NSLog(@"%d / %d: %d %d     ", i+1, points.size(), pointPair.first, pointPair.second);
 			CGPoint point = ccp(pointPair.first, pointPair.second);
 			//CGPoint point = ccp(pointPair.first - hs->x, pointPair.second - hs->y); //CGPointMake((pointPair.first - hs->x) * 1.0, (pointPair.second - hs->y) * 1.0);
 			//point = [[CCDirector sharedDirector] convertToGL: point];
 			[curve setPoint:point atIndex: i+1];
 		}
+		
+
+		NSLog(@"\n\n ORDER: %d", [curve order]);
 	}
 	
 	[curve invalidate];
@@ -150,9 +157,6 @@
 	return self;
 }
 
-- (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"derp derpensteinberg");
-}
 
 
 - (void) appearWithDuration:(double)duration {
@@ -166,28 +170,18 @@
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
 	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];
 	
-	// apparently needed
-	//[fadeinTex runAction:[CCSequence actions:actionFadeIn, nil]];
-	//[[fadeinTex sprite] runAction:[CCSequence actions:actionFadeIn, nil]];
-	
-	//[slider runAction: [CCSequence actions: actionFadeIn, nil]];
-	//[ring runAction: [CCSpawn actions:actionFadeIn, actionScaleHalf, nil]];
 	
 }
 
 - (void) dealloc {
-	/*
-	[fadeinTexture release];
-	[ring release];
-	[curve release]; // dealloc instead?
-	 */
-	//[curve release];
-	//[ring release];
 	NSLog(@"derp");
-	//[[CCTextureCache sharedTextureCache] removeTexture: [slider texture] ];
+	[[CCTextureCache sharedTextureCache] removeTexture: [slider texture] ];
 	NSLog(@"underp");
 	[super dealloc];
+}
 
+- (BOOL) wasHeld:(CGPoint)location atTime:(NSTimeInterval)time {
+	
 }
 
 

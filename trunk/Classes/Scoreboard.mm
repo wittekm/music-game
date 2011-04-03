@@ -34,7 +34,7 @@
 
 - (void) hitFull
 {
-	NSLog(@"herro");
+	NSLog(@"+++++++++++ herro");
 	[self setCombo: [self combo] + 1];
 	if ([self combo] > 39){
 		[self setScore: [self score] + 400];
@@ -82,7 +82,7 @@
 }
 - (void) dealloc
 {
-	[score release];
+	//[score release];
 	[super dealloc];
 }
 

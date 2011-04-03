@@ -145,9 +145,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		// commented because i dont have scorehud
 		
 		// Initialize Scoreboard
-		Scoreboard * scoreBoard = [[Scoreboard alloc] init];
+		scoreBoard = [[Scoreboard alloc] init];
 		[self addChild:scoreBoard];
-		
 
 /*		score = 0;
 		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
@@ -344,6 +343,9 @@ int comboIndex;
 }
 
 - (void) spawnReaction: (int)type pos: (CGPoint)pos {
+	
+	[scoreBoard hitFull];
+	
 	CCSprite *burst;
 	
 	// change this to fail, blue, and red

@@ -17,6 +17,7 @@
 }
 
 - (void)hitFull;
+- (void)updateScore;
 
 @property NSInteger score;
 @property NSInteger combo;

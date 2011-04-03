@@ -18,6 +18,7 @@
 	int green;
 	int blue;
 	double initialScale;
+	int disappearTimeMs;
 }
 
 - (id) initWithHitObject: (HitObject*)hitObject_ red: (int)r green: (int)g blue: (int)b;

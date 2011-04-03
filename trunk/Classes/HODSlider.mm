@@ -187,10 +187,14 @@
 - (int) disappearTime {
 	// slider movement: sliderMultiplier * 100 pixels / beatLength
 	//return hitObject->startTimeMs + ;
-	HitSlider* hs = ((HitSlider*)hitObject);
-	double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
-	
-	return hitObject->startTimeMs + hs->repeatCount * (beatLength / ( double(hs->sliderLengthPixels) / 100.));
+	if(disappearTimeMs == -1) {
+		HitSlider* hs = ((HitSlider*)hitObject);
+		double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
+		
+		disappearTimeMs = hitObject->startTimeMs + (hs->repeatCount+1) * (beatLength / ( double(hs->sliderLengthPixels) / 100.));
+	}
+	NSLog(@":::::::::: startTimeMs: %d     disappearTimeMs: %d", hitObject->startTimeMs, disappearTimeMs);
+	return disappearTimeMs;
 }
 
 

@@ -24,6 +24,7 @@
 		green = g;
 		blue = b;
 		initialScale = s;
+		disappearTimeMs = -1;
 		//self.position = CGPointMake(hitObject->x * 1.0, hitObject->y * 1.0);
 	}
 	return self;

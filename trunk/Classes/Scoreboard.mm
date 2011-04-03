@@ -13,6 +13,7 @@
 @synthesize score;
 @synthesize combo;
 @synthesize scoreDisplay;
+@synthesize comboDisplay;
 @synthesize scoreBackground;
 
 - (id) init
@@ -22,55 +23,29 @@
 		[self setScore:0];
 		[self setCombo:0];
 		[self setScoreDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
-		scoreDisplay.position =  ccp(450,300);
-		[self setScoreBackground:[CCSprite spriteWithFile:@"scorehud.png"]];
-		scoreBackground.position = ccp(435, 300);
-		scoreBackground.scale = 0.15;
+		scoreDisplay.position =  ccp(430,300);
+		[self setComboDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
+		comboDisplay.position = ccp (443,267);
+		[self setScoreBackground:[CCSprite spriteWithFile:@"newScoreHud-small.png"]];
+		scoreBackground.position = ccp(400, 280);
+		scoreBackground.scale = 0.35
+		;
 		[self addChild:scoreBackground];
 		[self addChild:scoreDisplay];
+		[self addChild:comboDisplay];
 	}
 	return self;
 }
 
-- (void) hitFull
-{
-	NSLog(@"+++++++++++ herro");
-	[self setCombo: [self combo] + 1];
-	if ([self combo] > 39){
-		[self setScore: [self score] + 400];
+- (void) hitWith : (int) points{
+	if (points == 0){
+		[self setCombo: 0];
 	}
-	if ([self combo] > 29){
-		[self setScore: [self score] + 300];
+	else{
+		[self setCombo: [self combo] + 1];
 	}
-	if ([self combo] > 19){
-		[self setScore: [self score] + 200];
-	}
-	if ([self combo] > 9){
-		[self setScore: [self score] + 100];
-	}
+	[self setScore: [self score] + [self combo] * points];
 	[self updateScore];
-}
-
-- (void) hitHalf
-{
-	[self setCombo: [self combo] + 1];
-	if ([self combo] > 39){
-		[self setScore: [self score] + 200];
-	}
-	if ([self combo] > 29){
-		[self setScore: [self score] + 150];
-	}
-	if ([self combo] > 19){
-		[self setScore: [self score] + 100];
-	}
-	if ([self combo] > 9){
-		[self setScore: [self score] + 50];
-	}
-}
-
-- (void) hitMiss
-{
-	[self setCombo:0];
 }
 
 - (void) updateScore
@@ -79,6 +54,7 @@
 	//nah
 	//[self setScoreDisplay: [[
 	[scoreDisplay setString: [NSString stringWithFormat:@"%d", score]];
+	[comboDisplay setString: [NSString stringWithFormat:@"%d", combo]];
 }
 - (void) dealloc
 {

@@ -126,10 +126,14 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			// Artwork
 			MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
 			MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
-			UIImage * artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
-			
+			UIImage * artworkImage;
+			artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
 			CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
 			albumArt.position = ccp(480/2, 320/2);
+			if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+				//iPhone 4
+				[albumArt setScale:0.5];
+			}
 			[self addChild:albumArt];
 			
 			//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
@@ -221,6 +225,8 @@ int comboIndex;
 		//HitObject * o = hods.front().hitObject;
 		if(milliseconds > [hods.front() disappearTime]) {
 			HitObjectDisplay * c = hods.front();
+			[self spawnReaction:0 pos:ccp([c hitObject]->x, [c hitObject]->y)];
+			 
 			hods.pop_front();
 			[self removeChild:c cleanup:true];
 			// [c release];
@@ -342,15 +348,21 @@ int comboIndex;
 	[self removeChild:hod cleanup:true];
 }
 
+// type is 300, 100, 0
 - (void) spawnReaction: (int)type pos: (CGPoint)pos {
 	
-	[scoreBoard hitFull];
+	NSLog(@"in spawn reaction, should change score....");
+	[scoreBoard hitWith:type];
 	
 	CCSprite *burst;
 	
 	// change this to fail, blue, and red
-	if(type != -1) {
+	if(type == 300) {
 		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
+	} else if(type == 100) {
+		burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
+	} else if (type == 0) {
+		burst = [CCSprite spriteWithFile:@"fail-128.png"];
 	}
 	
 	id removeAction = [CCCallBlock actionWithBlock:^{

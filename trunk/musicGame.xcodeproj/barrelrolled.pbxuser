@@ -244,9 +244,9 @@
 	};
 	508831881325845A00C6289B /* Utility.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {794, 351}}";
+			sepNavIntBoundsRect = "{{0, 0}, {926, 615}}";
 			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 317}";
+			sepNavVisRange = "{0, 323}";
 		};
 	};
 	508831891325845A00C6289B /* Utility.mm */ = {

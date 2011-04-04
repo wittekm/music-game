@@ -33,12 +33,28 @@
 {
 	if( (self=[super init])) {
 		
-		[CCMenuItemFont setFontSize:30];
-		[CCMenuItemFont setFontName: @"Courier New"];
+		CCSprite * background = [CCSprite spriteWithFile:@"titlebackground.png"];
+		background.position = ccp(480/2, 320/2);
+		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+			//iPhone 4
+			[background setScale:0.5];
+		}
+		[self addChild:background];
+		CCSprite * welcome = [CCSprite spriteWithFile:@"welcome.png"];
+		welcome.position = ccp(480/2, 200);
+		[self addChild: welcome];
+		CCSprite* startdemo = [CCSprite spriteWithFile:@"startdemo.png"];
+		CCSprite* startdemo2 = [CCSprite spriteWithFile:@"startdemo.png"];
+		//startdemo.position = ccp(480/2, 100);
+		//startdemo2.position = ccp(480/2, 100);
+		//[CCMenuItemFont setFontSize:30];
+		//[CCMenuItemFont setFontName: @"Courier New"];
 		
-		CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Press me to start!!" target: self selector:@selector(menuCallbackStart:)];
+		//CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Press me to start!!" target: self selector:@selector(menuCallbackStart:)];
+		CCMenuItemSprite * item2 = [CCMenuItemSprite itemFromNormalSprite:startdemo selectedSprite:startdemo2 target: self selector:@selector(menuCallbackStart:)];
 		CCMenu *menu = [CCMenu menuWithItems:
-						item1, nil];
+						item2, nil];
+		menu.position = ccp(480/2, 100);
 		[self addChild: menu];
 		
 	}

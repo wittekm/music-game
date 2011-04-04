@@ -15,46 +15,45 @@
 @implementation HODSlider
 
 - (void) addPoints {
-	HitSlider * hs = (HitSlider*)hitObject;
+	HitSlider * hs = (HitSlider*)hitObject; // cast shortcut
+	
 	typedef std::vector<std::pair<int, int> > pointsList;
 	pointsList points = hs->sliderPoints;
-	if(points.size() > 50) return;
+	if(points.size() > 32) return; // that's crazy man, come on
 	
+	// order = number of points between start and end.
+	// e.g. start, pt, end = 1 (quadratic); start, pt, pt, end = 2 (cubic)
 	if(points.size() > 2)
 		[curve setOrder: (FRCurveOrder)(points.size()-1)];
 	
-	
-	CGPoint start = ccp(hs->x, hs->y); //CGPointMake(hs->x * 1.0, hs->y * 1.0);
+	// add the hitobject position as the start
+	CGPoint start = ccp(hs->x, hs->y);
 	[curve setPoint: start atIndex: 0];
-		
+	
+	// if this is a straight line, make a control point in the middle
+	// (no order-0 bezier curves...)
 	if(points.size() == 1) {
 		CGPoint end = ccp(points.at(0).first, points.at(0).second);
 		[curve setPoint: ccpLerp(start, end, 1/2.f) atIndex:1];
 		[curve setPoint: end atIndex: 2];
 	}
 	
-	
 	else {
 		for(uint i = 0; i < points.size(); i++) {
 			std::pair<int, int> pointPair = points.at(i);
-			NSLog(@"%d / %d: %d %d     ", i+1, points.size(), pointPair.first, pointPair.second);
 			CGPoint point = ccp(pointPair.first, pointPair.second);
-			//CGPoint point = ccp(pointPair.first - hs->x, pointPair.second - hs->y); //CGPointMake((pointPair.first - hs->x) * 1.0, (pointPair.second - hs->y) * 1.0);
-			//point = [[CCDirector sharedDirector] convertToGL: point];
 			[curve setPoint:point atIndex: i+1];
 		}
-		
-
-		NSLog(@"\n\n ORDER: %d", [curve order]);
+		//NSLog(@"\n\n ORDER: %d", [curve order]);
 	}
 	
+	// tells the curve we're done adding points
 	[curve invalidate];
 	
 }
 
 - (CCRenderTexture*) createFadeinTexture
 {
-	NSLog(@"abotu to make target");
 	CCRenderTexture * target = 
 	[[CCRenderTexture renderTextureWithWidth:480. height:320.] retain];
 	target.position = ccp(480./2.,320./2.);
@@ -62,33 +61,26 @@
 	curve.position = ccp(0, 0);
 	ccColor3B colorCopy = curve.color;
 	
-	NSLog(@"abotu to make circle");
 	HODCircle * circ = [[HODCircle alloc] initWithHitObject:hitObject red:red green:green blue:blue initialScale:initialScale];
 	circ.position = ccp(0, 0);
 	[circ justDisplay];
 	
-	NSLog(@"abotu to begin");
 	// Begin tracing onto the RenderTexture
 	[target begin];
 	
-	NSLog(@"abotu to visit curve 1");
+	
 	// create the white outline
 	//[curve setOpacity: 200];
 	[curve setWidth: [curve width] * 1.15];
 	[curve setColor: ccWHITE];
 	[curve visit];
 	 
-	NSLog(@"abotu to visit curve 2");
+	
 	// fill inside color
 	//[curve setOpacity: 150];
 	[curve setWidth: [curve width] / 1.15];
 	[curve setColor: colorCopy];
 	[curve visit];
-	
-	NSLog(@"abotu to visit circ 1");
-	// do the begin-button
-	[circ visit];
-	
 	
 	// trace the end-button as well
 	// originates at hitObject.x and y....
@@ -100,13 +92,17 @@
 	HODCircle * circTwo = [[HODCircle alloc] initWithHitObject:endHO red:red green:green blue:blue initialScale:initialScale];
 	[circTwo justDisplay];
 	[circTwo visit];
+	
+	// do the begin-button
+	[circ visit];
+	
 	 
-	NSLog(@"abotu to end");
+	//NSLog(@"abotu to end");
 	[target end];
 	
-	NSLog(@"about to release");
+	//NSLog(@"about to release");
 	[circ release];
-	NSLog(@"about to return");
+	//NSLog(@"about to return");
 	
 	return target;
 }
@@ -191,9 +187,16 @@
 		HitSlider* hs = ((HitSlider*)hitObject);
 		double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
 		
-		disappearTimeMs = hitObject->startTimeMs + (hs->repeatCount+1) * (beatLength / ( double(hs->sliderLengthPixels) / 100.));
+		/* thinkin bout slidermultiplier
+		 1.7 = 170 pixels / beatLength
+		 1.7 = 170 pixels 
+		 */
+		
+		double AbsoluteSliderVelocity = (10000. / 100.) * 1.4 / beatLength; // osupixels per second
+		double added = (hs->repeatCount * hs->sliderLengthPixels / AbsoluteSliderVelocity);
+		disappearTimeMs = hitObject->startTimeMs + added + [[self gsParent] durationMs] + [[self gsParent] timeAllowanceMs];
+		NSLog(@":::::::::: %f", added);
 	}
-	NSLog(@":::::::::: startTimeMs: %d     disappearTimeMs: %d", hitObject->startTimeMs, disappearTimeMs);
 	return disappearTimeMs;
 }
 

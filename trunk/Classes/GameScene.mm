@@ -6,6 +6,8 @@
 //  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
 
+#define COCOS2D_DEBUG 1
+
 // Import the interfaces
 #import <MediaPlayer/MediaPlayer.h> 
 #import "CCTouchDispatcher.h"
@@ -180,11 +182,10 @@ int comboIndex;
 - (void) nextFrame:(ccTime)dt {
 	
 	double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
-	milliseconds += 1000; // offset for gee norm
+	milliseconds += 800; // offset for gee norm
 	
-	double durationS = 0.8; // seconds
-	durationMs = durationS * 1000.;
-	timeAllowanceMs = 150;
+	durationMs = 750;
+	timeAllowanceMs = 100;
 	// Make stuff start to appear
 	
 	

@@ -62,7 +62,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 @synthesize durationMs;
 @synthesize scoreBoard;
 
-+(id) scene
++(id) sceneWithBeatmap: (Beatmap*)beatmap_;
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
@@ -72,6 +72,9 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
+	
+	// tell the layer we're using this beatmap, and start animation
+	[layer startSceneWithBeatmap:beatmap_];
 	
 	// return the scene
 	return scene;
@@ -92,14 +95,15 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		//beatmap = new Beatmap("talamak.osu");
 		
 		// Print out all available beatmaps
-		SqlHandler * handler = [[SqlHandler alloc] init];
-		for(SqlRow * row in [handler beatmaps]) {
-			NSLog(@"%@ - %@", [row artist], [row title]);
-		}
+		
+		self.isTouchEnabled = YES;
+		
+		paused = false;
 		
 		// choose toro y moi
-		beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
 		
+		/*
+		beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
 		if(!beatmap) exit(0); // TODO: make an errmsg
 		
 		[self schedule:@selector(nextFrame:)];
@@ -113,7 +117,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 #if !(TARGET_IPHONE_SIMULATOR)
 
 		@try {
-			/* Music stuff */
+			// Music Stuff
 			musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
 			
 			MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
@@ -136,7 +140,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 				//iPhone 4
 				[albumArt setScale:0.5];
 			}
-			[self addChild:albumArt];
+			[self addChild:albumArt z:0];
 			
 			//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
 			//[musicPlayer setCurrentPlaybackTime:60];
@@ -146,38 +150,75 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			cout << "no music playing dawg" << endl;
 		}
 #endif
-		/* cgpoints go from bottom left to top right like a graph */
-		
-		// commented because i dont have scorehud
+		 
+		 */
 		
 		// Initialize Scoreboard
 		scoreBoard = [[Scoreboard alloc] init];
-		[self addChild:scoreBoard];
+		[self addChild:scoreBoard z:1];
 
-/*		score = 0;
-		scoreLabel = [CCLabelTTF labelWithString:@"0" fontName:@"PhonepadTwo" fontSize:24.0];
-		//scoreLabel.anchorPoint = ccp([scoreLabel contentSize].width,[scoreLabel contentSize].height);
-		scoreLabel.position = ccp(430,305);
-		[self addChild: scoreLabel];
-		scoreLabel.color = ccc3(0,0,0);
- */
 
-#if TARGET_IPHONE_SIMULATOR
-		
-		while(beatmap->hitObjects.front()->startTimeMs != 61234)
-			beatmap->hitObjects.pop_front();
-		HitObject* o = beatmap->hitObjects.front();
-		HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
-		[self addChild:hod];
-		[hod appearWithDuration:1.5];
-		
-#endif
 	}
 	return self;
 }
 
-BOOL otherDirection = NO; // wtf does this do
-int comboIndex;
+- (void) startSceneWithBeatmap:(Beatmap*)beatmap_ {
+	
+	beatmap = beatmap_;
+	 if(!beatmap) exit(0); // TODO: make an errmsg
+	 
+	 [self schedule:@selector(nextFrame:)];
+	 
+	 // this shit don't work in the simulator
+#if !(TARGET_IPHONE_SIMULATOR)
+	 
+	 @try {
+		 // Music Stuff
+		 musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+		 
+		 MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
+		 [mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
+		 predicateWithValue: @"Talamak"
+		 forProperty: MPMediaItemPropertyTitle]];
+		 
+		 [musicPlayer setQueueWithQuery:mfloQuery];
+		 [musicPlayer play];
+		 
+		 
+		 // Artwork
+		 MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
+		 MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
+		 UIImage * artworkImage;
+		 artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
+		 CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
+		 albumArt.position = ccp(480/2, 320/2);
+		 if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+		 //iPhone 4
+		 [albumArt setScale:0.5];
+		 }
+		 [self addChild:albumArt z:0];
+		 
+		 //[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
+		 //[musicPlayer setCurrentPlaybackTime:60];
+		 
+	 
+	 } @catch(NSException *e) {
+	 cout << "no music playing dawg" << endl;
+	 }
+#endif
+	
+	// test out slider stuff in the simulator
+#if TARGET_IPHONE_SIMULATOR
+	while(beatmap->hitObjects.front()->startTimeMs != 61234)
+		beatmap->hitObjects.pop_front();
+	HitObject* o = beatmap->hitObjects.front();
+	HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
+	[self addChild:hod];
+	[hod appearWithDuration:1.5];
+#endif
+	 
+}
+
 
 - (void) nextFrame:(ccTime)dt {
 	
@@ -187,7 +228,6 @@ int comboIndex;
 	durationMs = 750;
 	timeAllowanceMs = 100;
 	// Make stuff start to appear
-	
 	
 	if(beatmap->hitObjects.empty()) {
 		//exit(0);

@@ -11,6 +11,7 @@
 #import <iostream>
 #import "SqlHandler.h"
 #import "GameScene.h"
+#import "osu-import.h.mm"
 
 @implementation MenuScene
 +(id) scene
@@ -62,7 +63,14 @@
 }
 -(void) menuCallbackStart: (id) sender
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene scene]]];
+	SqlHandler * handler = [[SqlHandler alloc] init];
+	// lists all the beatmaps
+	for(SqlRow * row in [handler beatmaps]) {
+		NSLog(@"%@ - %@", [row artist], [row title]);
+	}
+	Beatmap * beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
+	
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap:beatmap]]];
 	//[(CCMultiplexLayer*)parent_ switchTo:2];
 }
 

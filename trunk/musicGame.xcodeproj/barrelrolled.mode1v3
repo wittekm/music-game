@@ -216,10 +216,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>54D2702C13492F7E00E0AAA4</string>
+						<string>54554684134A20700001E35D</string>
 						<key>history</key>
 						<array>
-							<string>54D26FBC1349238E00E0AAA4</string>
+							<string>54D27032134957A800E0AAA4</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -256,10 +256,10 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
-						<string>54D2702D13492F7E00E0AAA4</string>
+						<string>54554685134A20700001E35D</string>
 						<key>history</key>
 						<array>
-							<string>54D26FB9134921A100E0AAA4</string>
+							<string>54D27033134957A800E0AAA4</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -416,7 +416,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>54D2702B13492F7E00E0AAA4</string>
+										<string>54554681134A20700001E35D</string>
 										<key>history</key>
 										<array>
 											<string>54CDEC7C13332C7900DD6134</string>
@@ -464,7 +464,7 @@
 											<string>54D2701313492F1500E0AAA4</string>
 											<string>54D2701413492F1500E0AAA4</string>
 											<string>54D2701513492F1500E0AAA4</string>
-											<string>54D2701613492F1500E0AAA4</string>
+											<string>54D27031134957A800E0AAA4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -476,14 +476,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {987, 648}}</string>
+								<string>{{0, 0}, {987, 647}}</string>
 								<key>RubberWindowFrame</key>
 								<string>63 146 1299 732 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>648pt</string>
+							<string>647pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -496,14 +496,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 653}, {987, 38}}</string>
+								<string>{{0, 652}, {987, 39}}</string>
 								<key>RubberWindowFrame</key>
 								<string>63 146 1299 732 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>38pt</string>
+							<string>39pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -522,9 +522,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>54D26FAE134920AE00E0AAA4</string>
+				<string>54554682134A20700001E35D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>54D26FAF134920AE00E0AAA4</string>
+				<string>54554683134A20700001E35D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -662,14 +662,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>54D2702E13492F7E00E0AAA4</string>
-		<string>54D2701F13492F1500E0AAA4</string>
-		<string>54D2702013492F1500E0AAA4</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>5442ED941328461B009B5324</string>
 		<string>54D2701B13492F1500E0AAA4</string>
 		<string>54D2701813492F1500E0AAA4</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/barrelrolled/Documents/Collective/trunk/musicGame.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -689,14 +684,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -752,7 +745,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>5442ED941328461B009B5324</string>
-				<string>54D26FB0134920AE00E0AAA4</string>
+				<string>54554686134A20700001E35D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

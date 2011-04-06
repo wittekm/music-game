@@ -19,6 +19,7 @@
 	CCRenderTexture * fadeinTex;
 	CCSprite * slider;
 	CCSprite * ring;
+	id slidesAction;
 }
 
 

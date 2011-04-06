@@ -86,77 +86,22 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init] )) {
-		// Initialize Timer
-		
-		
-		// Initialize Beatmap (C++)
-		//beatmap = new Beatmap("mflo.osu");
-		//beatmap = new Beatmap("gee_norm.osu");
-		//beatmap = new Beatmap("talamak.osu");
-		
-		// Print out all available beatmaps
 		
 		self.isTouchEnabled = YES;
 		
 		paused = false;
-		
-		// choose toro y moi
-		
-		/*
-		beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
-		if(!beatmap) exit(0); // TODO: make an errmsg
-		
-		[self schedule:@selector(nextFrame:)];
-		
-		self.isTouchEnabled = YES;
-		
-		paused = false;
-
-		
-// this shit don't work in the simulator
-#if !(TARGET_IPHONE_SIMULATOR)
-
-		@try {
-			// Music Stuff
-			musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-			
-			MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
-			[mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
-										predicateWithValue: @"Talamak"
-										forProperty: MPMediaItemPropertyTitle]];
-			
-			[musicPlayer setQueueWithQuery:mfloQuery];
-			[musicPlayer play];
-			
-			
-			// Artwork
-			MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
-			MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
-			UIImage * artworkImage;
-			artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
-			CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
-			albumArt.position = ccp(480/2, 320/2);
-			if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
-				//iPhone 4
-				[albumArt setScale:0.5];
-			}
-			[self addChild:albumArt z:0];
-			
-			//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
-			//[musicPlayer setCurrentPlaybackTime:60];
-			
-			
-		} @catch(NSException *e) {
-			cout << "no music playing dawg" << endl;
-		}
+		beatmap = 0;
+#if !TARGET_IPHONE_SIMULATOR
+		musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
 #endif
-		 
-		 */
 		
 		// Initialize Scoreboard
 		scoreBoard = [[Scoreboard alloc] init];
 		[self addChild:scoreBoard z:1];
-
+		
+		timeAllowanceMs = 100;
+		durationMs = 750;
+		comboIndex = 0;
 
 	}
 	return self;
@@ -170,11 +115,10 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	 [self schedule:@selector(nextFrame:)];
 	 
 	 // this shit don't work in the simulator
-#if !(TARGET_IPHONE_SIMULATOR)
+#if !TARGET_IPHONE_SIMULATOR
 	 
 	 @try {
 		 // Music Stuff
-		 musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
 		 
 		 MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
 		 [mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
@@ -225,9 +169,6 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
 	milliseconds += 800; // offset for gee norm
 	
-	durationMs = 750;
-	timeAllowanceMs = 100;
-	// Make stuff start to appear
 	
 	if(beatmap->hitObjects.empty()) {
 		//exit(0);
@@ -237,7 +178,6 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	   
 	while(!beatmap->hitObjects.empty()) {
 		HitObject * o = beatmap->hitObjects.front(); 
-		//cout << o->x << " " << o->y << endl;
 		
 		if(milliseconds > o->startTimeMs) {
 			cout << o->x << " " << o->y << endl;

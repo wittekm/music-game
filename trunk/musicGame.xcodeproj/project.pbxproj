@@ -65,6 +65,7 @@
 		50E1096313442630007D067E /* musicgame.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 50E1096213442630007D067E /* musicgame.sqlite */; };
 		50E1097513442698007D067E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E1097413442698007D067E /* libsqlite3.0.dylib */; };
 		50E109E113443EAD007D067E /* SqlHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50E109E013443EAD007D067E /* SqlHandler.mm */; };
+		50E3A0DB134B93920070551E /* CCSequenceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E3A0DA134B93920070551E /* CCSequenceHelper.m */; };
 		50F4132A106926B2002A0D5E /* FontLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F41307106926B2002A0D5E /* FontLabel.h */; };
 		50F4132B106926B2002A0D5E /* FontLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41308106926B2002A0D5E /* FontLabel.m */; };
 		50F4132C106926B2002A0D5E /* FontLabelStringDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F41309106926B2002A0D5E /* FontLabelStringDrawing.h */; };
@@ -367,6 +368,8 @@
 		50E1097413442698007D067E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		50E109DF13443EAD007D067E /* SqlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqlHandler.h; sourceTree = "<group>"; };
 		50E109E013443EAD007D067E /* SqlHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SqlHandler.mm; sourceTree = "<group>"; };
+		50E3A0D9134B93920070551E /* CCSequenceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSequenceHelper.h; sourceTree = "<group>"; };
+		50E3A0DA134B93920070551E /* CCSequenceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSequenceHelper.m; sourceTree = "<group>"; };
 		50F41307106926B2002A0D5E /* FontLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontLabel.h; sourceTree = "<group>"; };
 		50F41308106926B2002A0D5E /* FontLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontLabel.m; sourceTree = "<group>"; };
 		50F41309106926B2002A0D5E /* FontLabelStringDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontLabelStringDrawing.h; sourceTree = "<group>"; };
@@ -767,6 +770,8 @@
 		507FCF7213330477005D2A6F /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				50E3A0D9134B93920070551E /* CCSequenceHelper.h */,
+				50E3A0DA134B93920070551E /* CCSequenceHelper.m */,
 				507FCF7313330477005D2A6F /* CCTextureCache+More.h */,
 				507FCF7413330477005D2A6F /* CCTextureCache+More.m */,
 				507FCF7513330477005D2A6F /* CCTextureSynthesis.h */,
@@ -1365,6 +1370,7 @@
 				54BBDC67133AC77200A03995 /* MenuScene.mm in Sources */,
 				50E109E113443EAD007D067E /* SqlHandler.mm in Sources */,
 				5447EE7813455DA300CFEFC8 /* Scoreboard.mm in Sources */,
+				50E3A0DB134B93920070551E /* CCSequenceHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

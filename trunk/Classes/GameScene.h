@@ -23,7 +23,6 @@ class MPMusicPlayerController;
 	Beatmap * beatmap;
 	MPMusicPlayerController * musicPlayer;
 	Scoreboard * scoreBoard;
-	CCLabelTTF * pausedLabel;
 	double timeAllowanceMs;
 	double durationMs;
 	int comboIndex;

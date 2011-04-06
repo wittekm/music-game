@@ -11,6 +11,7 @@
 #import "HODCircle.h"
 #import <vector>
 #import "GameScene.h"
+#import "CCSequenceHelper.h"
 
 @implementation HODSlider
 
@@ -34,8 +35,9 @@
 	// (no order-0 bezier curves...)
 	if(points.size() == 1) {
 		CGPoint end = ccp(points.at(0).first, points.at(0).second);
-		[curve setPoint: ccpLerp(start, end, 1/2.f) atIndex:1];
-		[curve setPoint: end atIndex: 2];
+		[curve setPoint: ccpLerp(start, end, 1/3.f) atIndex:1];
+		[curve setPoint: ccpLerp(start, end, 2/3.f) atIndex:2];
+		[curve setPoint: end atIndex: 3];
 	}
 	
 	else {
@@ -164,8 +166,88 @@
 	id actionFadeIn = [CCFadeIn actionWithDuration:duration];
 	id actionScaleHalf = [CCScaleBy actionWithDuration:duration scale:0.5];
 	
+	/* now do the crazy hitslider action stuff */
+	HitSlider * hs = (HitSlider*)hitObject; // cast shortcut
+	typedef std::vector<std::pair<int, int> > pointsList;
+	pointsList points = hs->sliderPoints;
+	
+	double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
+	double AbsoluteSliderVelocity = (10000. / 100.) * 2.8 / beatLength; // osupixels per second
+	double slideDuration = (hs->sliderLengthPixels / AbsoluteSliderVelocity) / 1000. ; // make it in s not ms
+	
+	/*
+	//NSMutableArray * slidesArray = [[NSMutableArray alloc] initWithCapacity:((HitSlider*)hitObject)->repeatCount];
+	NSMutableArray * slidesArray = [[NSMutableArray alloc] initWithCapacity:1];
+
+	for(int i = 0; i < [slidesArray count]; i++) {
+		ccBezierConfig config;
+
+		if(i % 2 == 0) {
+			if(points.size() == 3)
+				config = (ccBezierConfig){[curve pointAtIndex: 3], [curve pointAtIndex:1], [curve pointAtIndex:2]};
+			else if(points.size() == 2)
+				config = (ccBezierConfig){[curve pointAtIndex: 2], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.), ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 1./3.)};
+			else if(points.size() == 1)
+				config = (ccBezierConfig){[curve pointAtIndex: 1], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 1./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
+
+			// do a forwards slide
+		} else {
+			//backwards slide
+		}
+		
+		[slidesArray addObject: [CCBezierTo actionWithDuration:slideDuration bezier:config] ];
+	}
+	 
+	
+	slidesAction = [CCSequenceHelper actionMutableArray:slidesArray];
+	*/
+	
+	ccBezierConfig configForwards;
+	ccBezierConfig configBackwards;
+
+	CCFiniteTimeAction * slideForwards;
+	CCFiniteTimeAction * slideBackwards;
+
+	
+	if(points.size() == 3 || points.size() == 1) {
+		configForwards  = (ccBezierConfig){[curve pointAtIndex: 3], [curve pointAtIndex:1], [curve pointAtIndex:2]};
+		configBackwards = (ccBezierConfig){[curve pointAtIndex: 0], [curve pointAtIndex:2], [curve pointAtIndex:1]};
+		slideForwards = [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
+		slideBackwards = [CCBezierTo actionWithDuration:slideDuration bezier:configBackwards];
+	}
+	else if(points.size() == 2) {
+		configForwards  = (ccBezierConfig){[curve pointAtIndex: 2], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.), ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 2./3.)};
+		configBackwards = (ccBezierConfig){[curve pointAtIndex: 0], ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 2./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
+		slideForwards = [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
+		slideBackwards = [CCBezierTo actionWithDuration:slideDuration bezier:configBackwards];
+	}
+	else if(points.size() == 1) {
+		/*
+		slideForwards = [CCMoveTo actionWithDuration:slideDuration position:[curve pointAtIndex:3]];
+		slideForwards = [CCMoveTo actionWithDuration:slideDuration position:[curve pointAtIndex:0]];
+		 */
+	}
+	else { 
+		NSLog(@"derp");
+		exit(0);
+	}
+	/*
+	else if(points.size() == 1)
+		config = (ccBezierConfig){[curve pointAtIndex: 1], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 1./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
+	*/
+	
+	id untint = [CCCallBlock actionWithBlock:^{
+		ring.color = (ccColor3B){255,255,255};
+		ring.scale = ring.scale * 1.1;
+	}];
+	
+	id backAndForth = [CCRepeat actionWithAction:[CCSequence actions: slideForwards, slideBackwards, nil] times: 3 ]; 
+	//slidesAction = [CCSpawn actions: untint, backAndForth, nil];
+	
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
-	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];
+	[ring runAction: [CCSequence actions:actionScaleHalf, untint, backAndForth, nil]];
+	
+	
 	
 }
 
@@ -192,7 +274,7 @@
 		 1.7 = 170 pixels 
 		 */
 		
-		double AbsoluteSliderVelocity = (10000. / 100.) * 1.4 / beatLength; // osupixels per second
+		double AbsoluteSliderVelocity = (10000. / 100.) * 2.8 / beatLength; // osupixels per second
 		double added = (hs->repeatCount * hs->sliderLengthPixels / AbsoluteSliderVelocity);
 		disappearTimeMs = hitObject->startTimeMs + added + [[self gsParent] durationMs] + [[self gsParent] timeAllowanceMs];
 		NSLog(@":::::::::: %f", added);

@@ -66,6 +66,7 @@
 		50AF81491347B5730054E8B5 /* starburst-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 50AF81481347B5730054E8B5 /* starburst-128.png */; };
 		50B2DEE71340CE22005CEAD7 /* talamak.osu in Resources */ = {isa = PBXBuildFile; fileRef = 50B2DEE61340CE22005CEAD7 /* talamak.osu */; };
 		50B613401328348C00ADEB5B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B6133F1328348C00ADEB5B /* MediaPlayer.framework */; };
+		50B7235A134D591500B016E5 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B72359134D591500B016E5 /* SMXMLDocument.m */; };
 		50DB85A71337B5C400440FD6 /* Beatmap.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 50DB85A61337B5C400440FD6 /* Beatmap.xcdatamodel */; };
 		50E1096313442630007D067E /* musicgame.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 50E1096213442630007D067E /* musicgame.sqlite */; };
 		50E1097513442698007D067E /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E1097413442698007D067E /* libsqlite3.0.dylib */; };
@@ -374,6 +375,8 @@
 		50AF81481347B5730054E8B5 /* starburst-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starburst-128.png"; sourceTree = "<group>"; };
 		50B2DEE61340CE22005CEAD7 /* talamak.osu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = talamak.osu; sourceTree = "<group>"; };
 		50B6133F1328348C00ADEB5B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		50B72358134D591500B016E5 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMXMLDocument.h; sourceTree = "<group>"; };
+		50B72359134D591500B016E5 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMXMLDocument.m; sourceTree = "<group>"; };
 		50DB85A61337B5C400440FD6 /* Beatmap.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Beatmap.xcdatamodel; sourceTree = "<group>"; };
 		50E1096213442630007D067E /* musicgame.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = musicgame.sqlite; sourceTree = "<group>"; };
 		50E1097413442698007D067E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -702,6 +705,8 @@
 			isa = PBXGroup;
 			children = (
 				50E364DB133AB90200079F51 /* Scenes */,
+				5447EE7613455DA300CFEFC8 /* Scoreboard.h */,
+				5447EE7713455DA300CFEFC8 /* Scoreboard.mm */,
 				507FD0DD1333C366005D2A6F /* HitObjectDisplays */,
 				508831881325845A00C6289B /* Utility.h */,
 				508831891325845A00C6289B /* Utility.mm */,
@@ -716,8 +721,6 @@
 				50E109E013443EAD007D067E /* SqlHandler.mm */,
 				507FCF7213330477005D2A6F /* helpers */,
 				507FCF6613330452005D2A6F /* ShapeNodes */,
-				5447EE7613455DA300CFEFC8 /* Scoreboard.h */,
-				5447EE7713455DA300CFEFC8 /* Scoreboard.mm */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -781,6 +784,8 @@
 		507FCF7213330477005D2A6F /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				50B72358134D591500B016E5 /* SMXMLDocument.h */,
+				50B72359134D591500B016E5 /* SMXMLDocument.m */,
 				50E3A0D9134B93920070551E /* CCSequenceHelper.h */,
 				50E3A0DA134B93920070551E /* CCSequenceHelper.m */,
 				507FCF7313330477005D2A6F /* CCTextureCache+More.h */,
@@ -1393,6 +1398,7 @@
 				5447EE7813455DA300CFEFC8 /* Scoreboard.mm in Sources */,
 				50E3A0DB134B93920070551E /* CCSequenceHelper.m in Sources */,
 				5017DB6E134D3063005B073A /* ResultsScreen.mm in Sources */,
+				50B7235A134D591500B016E5 /* SMXMLDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

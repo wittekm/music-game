@@ -234,8 +234,10 @@ int numPopped = 0;
 	}
 	
 	
+	//if(hods.empty() && beatmap->hitObjects.empty()) {
 	if(numPopped == 10) {
 		//[self fadeout];
+		[self pauseSchedulerAndActions];
 		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
 	}
 }
@@ -265,50 +267,8 @@ int numPopped = 0;
 	
 	if(!hods.empty()) {
 		
-		/*
-		 // commented out because I'm in the process of moving this stuff to the HitObjectDisplay side.
-		 
-		HitObject * o = hods.front().hitObject;
-		double dist = sqrt( pow(o->x - location.x, 2) + pow(o->y - location.y, 2));
-		int distInt = dist;
-		
-		if(dist > 100){
-			CCSprite *fail = [CCSprite spriteWithFile:@"fail-128.png"];
-			fail.position = ccp (o->x, o->y);
-			//fail.scale = 0.15;
-			[fail runAction:[CCRotateBy actionWithDuration:0.4 angle: 0]];
-			[hods.front() addChild:fail];
-		}
-			 
-		
-		else if(dist > 50 && dist < 100){
-			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
-			burst.position = ccp (o->x,o->y);
-			//burst.scale = 0.25;
-			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle :0]];
-			[hods.front() addChild:burst];
-		}
-		
-		else if(dist < 50){
-			//CCLabelTTF *points = [CCLabelTTF labelWithString:@"100!" fontName:@"Helvetica" fontSize:24.0];
-			//points.position = ccp(o->x, o->y);
-			CCSprite *burst = [CCSprite spriteWithFile:@"starburst-128.png"];	
-			//CCSprite *onehundred = [CCSprite spriteWithFile:@"100.png"];
-			burst.position = ccp(o->x,o->y);
-			//onehundred.position = ccp(o->x, o->y);
-			//burst.scale = 0.25;
-			//onehundred.scale = 0.6;
-			//[self addChild:burst];
-			[burst runAction:[CCRotateBy actionWithDuration:0.4 angle:0]];
-			//[onehundred runAction:[CCFadeOut actionWithDuration:0.4]];
-			[hods.front() addChild:burst];
-			//[hods.front() addChild:onehundred];
-			 
-		}
-		 */
-		
 		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
-		milliseconds += 1000; // offset for gee norm
+		milliseconds += 800; // offset for gee norm
 
 		// iterate through everying in "hods"
 		list<HitObjectDisplay*>::iterator hodIter = hods.begin();

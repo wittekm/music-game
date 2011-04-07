@@ -61,6 +61,19 @@
 	[percentage setScale: 1.0];
 	[percentage setPosition:ccp(30, 320-90)];
 	[self addChild: percentage];
+		
+	double pct = double(scoreboard.hit) / (scoreboard.hit + scoreboard.miss);
+	NSLog(@"%f", pct);
+	if( pct < 0.50 ) {
+		CCLabelBMFont * response1 = 
+		[CCLabelBMFont labelWithString:@"TERRIBLE." fntFile:@"pkmn.fnt"];
+		response1.scaleY = 3.0;
+		response1.scaleX = 1.5;
+		[response1 setAnchorPoint:ccp(0,1)];
+		[response1 setPosition:ccp(30, 320-130)];
+		[response1 setColor:ccRED];
+		[self addChild: response1];
+	}
 }
 	 
 	 

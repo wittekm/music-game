@@ -61,6 +61,11 @@
 	[scoreDisplay setString: [NSString stringWithFormat:@"%d", score]];
 	[comboDisplay setString: [NSString stringWithFormat:@"%d", combo]];
 }
+
+- (void) resetCombo {
+	combo = 0;
+}
+
 - (void) dealloc
 {
 	//[score release];

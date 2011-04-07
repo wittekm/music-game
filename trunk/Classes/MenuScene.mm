@@ -12,6 +12,7 @@
 #import "SqlHandler.h"
 #import "GameScene.h"
 #import "osu-import.h.mm"
+#include "SMXMLDocument.h"
 
 @implementation MenuScene
 +(id) scene
@@ -63,6 +64,38 @@
 }
 -(void) menuCallbackStart: (id) sender
 {
+
+	NSMutableDictionary * songList = [[NSMutableDictionary alloc] init];
+	
+	NSURL * tumblr = [NSURL URLWithString:@"beatnikapp.tumblr.com/api/read"];
+	NSURLRequest *request = [NSURLRequest requestWithURL:tumblr];
+	NSError *error;
+	NSURLResponse *response;
+	NSData * result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	
+	
+	//XmlParser * tumblrfeed = [[XmlParser alloc] init];
+	//[tumblrfeed parseXMLFile];
+	
+	NSString * title = nil;
+	NSString * map = nil;
+	SMXMLDocument *document = [SMXMLDocument documentWithData:result error:&error];
+	SMXMLElement *posts = [document.root childNamed:@"posts"];
+	for(SMXMLElement * post in [posts childrenNamed:@"post"]){
+		title = [post valueWithPath:@"regular-title"];
+		map = [post valueWithPath:@"regular-body"];
+		[songList setObject:map forKey:title];
+		title = nil;
+		map = nil;
+	}
+	NSLog(@"y helo thar");
+	for (NSString* key in songList) {
+		NSString* value = [songList objectForKey:key];
+		NSLog(@"key %@", key);
+		NSLog(@"value %@", value);
+		// do stuff
+	}
+		
 	SqlHandler * handler = [[SqlHandler alloc] init];
 	// lists all the beatmaps
 	for(SqlRow * row in [handler beatmaps]) {

@@ -21,6 +21,7 @@
 
 - (void)hitWith: (int) points;
 - (void)updateScore;
+- (void)resetCombo;
 
 @property NSInteger score;
 @property NSInteger combo;

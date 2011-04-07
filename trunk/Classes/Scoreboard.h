@@ -12,6 +12,8 @@
 @interface Scoreboard : CCLayer {
 	NSInteger score;
 	NSInteger combo;
+	NSInteger hit;
+	NSInteger miss;
 	CCLabelTTF * scoreDisplay;
 	CCLabelTTF * comboDisplay;
 	CCSprite * scoreBackground;
@@ -22,6 +24,8 @@
 
 @property NSInteger score;
 @property NSInteger combo;
+@property NSInteger hit;
+@property NSInteger miss;
 @property (retain) CCLabelTTF * scoreDisplay;
 @property (retain) CCSprite * scoreBackground;
 @property (retain) CCLabelTTF * comboDisplay;

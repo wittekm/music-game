@@ -34,7 +34,7 @@ struct HitObject {
 	
 	friend std::ostream &operator<<(std::ostream&, const HitObject&);
 	
-	void setRepeat() { number = 0; } // only used for sliders, terribly hacky
+	void setRepeat(bool rep) { if(rep) { number = 0; } else { number = -1; } } // only used for sliders, terribly hacky
 };
 
 struct HitSlider : public HitObject {

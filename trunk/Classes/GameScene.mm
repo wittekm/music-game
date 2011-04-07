@@ -20,6 +20,8 @@
 #import "Scoreboard.h"
 #import "FRCurve.h"
 
+#import "ResultsScreen.h"
+
 #include "TargetConditionals.h"
 
 
@@ -40,7 +42,7 @@ int zOrder = INT_MAX;
 
 HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if(hitObject->objectType & 1) { // bitmask for normal
-		return [[[HODCircle alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 0.7] retain];
+		return [[[HODCircle alloc] initWithHitObject:hitObject red:r green:g blue:b initialScale: 1.0] retain];
 	}
 	
 	else if(hitObject->objectType & 2) {
@@ -153,7 +155,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	// test out slider stuff in the simulator
 #if TARGET_IPHONE_SIMULATOR
-	while(beatmap->hitObjects.front()->startTimeMs != 61234)
+	while(beatmap->hitObjects.front()->startTimeMs < 61234)
 		beatmap->hitObjects.pop_front();
 	HitObject* o = beatmap->hitObjects.front();
 	HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
@@ -163,6 +165,18 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	 
 }
 
+
+
+
+-(void)fadeout {
+	
+	if(musicPlayer.volume > 0.05) {
+		musicPlayer.volume = musicPlayer.volume - 0.05;
+		[self performSelector: @selector(fadeout) withObject: nil afterDelay: 0.05 ];
+	} else { [musicPlayer pause]; }
+}
+
+int numPopped = 0;
 
 - (void) nextFrame:(ccTime)dt {
 	
@@ -192,6 +206,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			[hod appearWithDuration: durationMs / 1000.];
 			hods.push_back(hod);
 			beatmap->hitObjects.pop_front();
+			
+			numPopped++;
 		}
 		else
 			break;
@@ -217,6 +233,11 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		}
 	}
 	
+	
+	if(numPopped == 10) {
+		//[self fadeout];
+		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
+	}
 }
 
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

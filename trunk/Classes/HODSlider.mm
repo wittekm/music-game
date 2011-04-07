@@ -34,10 +34,12 @@
 	// if this is a straight line, make a control point in the middle
 	// (no order-0 bezier curves...)
 	if(points.size() == 1) {
+		[curve setOrder: kFRCurveCubic];
 		CGPoint end = ccp(points.at(0).first, points.at(0).second);
 		[curve setPoint: ccpLerp(start, end, 1/3.f) atIndex:1];
 		[curve setPoint: ccpLerp(start, end, 2/3.f) atIndex:2];
 		[curve setPoint: end atIndex: 3];
+		NSLog(@"did 3rd point, no seriously dude");
 	}
 	
 	else {
@@ -89,8 +91,10 @@
 	std::pair<int, int>& end = ((HitSlider*)hitObject)->sliderPoints.back();
 	//circ.position = ccp(hitObject->x -end.first, hitObject->y - end.second);
 	//circ.position = ccp(end.first - hitObject->x, end.second - hitObject->y);
+	
 	HitObject * endHO = new HitObject(end.first, end.second, -1, 1, -1);
-	endHO->setRepeat();
+	endHO->setRepeat(((HitSlider*)hitObject)->repeatCount > 1);
+	
 	HODCircle * circTwo = [[HODCircle alloc] initWithHitObject:endHO red:red green:green blue:blue initialScale:initialScale];
 	[circTwo justDisplay];
 	[circTwo visit];
@@ -175,33 +179,6 @@
 	double AbsoluteSliderVelocity = (10000. / 100.) * 2.8 / beatLength; // osupixels per second
 	double slideDuration = (hs->sliderLengthPixels / AbsoluteSliderVelocity) / 1000. ; // make it in s not ms
 	
-	/*
-	//NSMutableArray * slidesArray = [[NSMutableArray alloc] initWithCapacity:((HitSlider*)hitObject)->repeatCount];
-	NSMutableArray * slidesArray = [[NSMutableArray alloc] initWithCapacity:1];
-
-	for(int i = 0; i < [slidesArray count]; i++) {
-		ccBezierConfig config;
-
-		if(i % 2 == 0) {
-			if(points.size() == 3)
-				config = (ccBezierConfig){[curve pointAtIndex: 3], [curve pointAtIndex:1], [curve pointAtIndex:2]};
-			else if(points.size() == 2)
-				config = (ccBezierConfig){[curve pointAtIndex: 2], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.), ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 1./3.)};
-			else if(points.size() == 1)
-				config = (ccBezierConfig){[curve pointAtIndex: 1], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 1./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
-
-			// do a forwards slide
-		} else {
-			//backwards slide
-		}
-		
-		[slidesArray addObject: [CCBezierTo actionWithDuration:slideDuration bezier:config] ];
-	}
-	 
-	
-	slidesAction = [CCSequenceHelper actionMutableArray:slidesArray];
-	*/
-	
 	ccBezierConfig configForwards;
 	ccBezierConfig configBackwards;
 
@@ -209,23 +186,26 @@
 	CCFiniteTimeAction * slideBackwards;
 
 	
-	if(points.size() == 3 || points.size() == 1) {
+	if(points.size() == 3) {
+		NSLog(@"im in this one - 3 or 1");
 		configForwards  = (ccBezierConfig){[curve pointAtIndex: 3], [curve pointAtIndex:1], [curve pointAtIndex:2]};
-		configBackwards = (ccBezierConfig){[curve pointAtIndex: 0], [curve pointAtIndex:2], [curve pointAtIndex:1]};
-		slideForwards = [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
+		configBackwards = (ccBezierConfig){[ring position], [curve pointAtIndex:2], [curve pointAtIndex:1]};
+		//slideForwards =  [CCEaseInOut actionWithAction:[CCBezierTo actionWithDuration:slideDuration bezier:configForwards] rate: 2];
+		slideForwards =  [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
 		slideBackwards = [CCBezierTo actionWithDuration:slideDuration bezier:configBackwards];
 	}
 	else if(points.size() == 2) {
-		configForwards  = (ccBezierConfig){[curve pointAtIndex: 2], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.), ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 2./3.)};
-		configBackwards = (ccBezierConfig){[curve pointAtIndex: 0], ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 2./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
-		slideForwards = [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
+		NSLog(@"im in this one - 2");
+		configForwards  = (ccBezierConfig){[curve pointAtIndex: 2], ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.), ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 1./3.)};
+		configBackwards = (ccBezierConfig){[ring position], ccpLerp([curve pointAtIndex: 1], [curve pointAtIndex:2], 1./3.), ccpLerp([curve pointAtIndex: 0], [curve pointAtIndex:1], 2./3.)};
+		slideForwards =  [CCBezierTo actionWithDuration:slideDuration bezier:configForwards];
 		slideBackwards = [CCBezierTo actionWithDuration:slideDuration bezier:configBackwards];
 	}
 	else if(points.size() == 1) {
-		/*
+		
 		slideForwards = [CCMoveTo actionWithDuration:slideDuration position:[curve pointAtIndex:3]];
-		slideForwards = [CCMoveTo actionWithDuration:slideDuration position:[curve pointAtIndex:0]];
-		 */
+		slideBackwards = [CCMoveTo actionWithDuration:slideDuration position:[curve pointAtIndex:0]];
+		 
 	}
 	else { 
 		NSLog(@"derp");
@@ -241,8 +221,16 @@
 		ring.scale = ring.scale * 1.1;
 	}];
 	
-	id backAndForth = [CCRepeat actionWithAction:[CCSequence actions: slideForwards, slideBackwards, nil] times: 3 ]; 
-	//slidesAction = [CCSpawn actions: untint, backAndForth, nil];
+	id backAndForth;
+	if(hs->repeatCount == 1)
+		backAndForth = [CCSequence actions: slideForwards, nil];
+	else if(hs->repeatCount == 2)
+		backAndForth = [CCSequence actions: slideForwards, slideBackwards, nil];
+	else if(hs->repeatCount == 3)
+		backAndForth = [CCSequence actions: slideForwards, slideBackwards, slideForwards, nil];
+	else if(hs->repeatCount == 4)
+		backAndForth = [CCSequence actions: slideForwards, slideBackwards, slideForwards, slideBackwards, nil];
+
 	
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
 	[ring runAction: [CCSequence actions:actionScaleHalf, untint, backAndForth, nil]];
@@ -256,6 +244,18 @@
 	[[CCTextureCache sharedTextureCache] removeTexture: [slider texture] ];
 	NSLog(@"underp");
 	[super dealloc];
+}
+
+- (BOOL) wasHit:(CGPoint)location atTime:(NSTimeInterval)time {
+	if([super wasHit:location atTime:time]) {
+		// spawn a "300!" or whatever
+		[(GameScene*)[self parent] spawnReaction:300 pos:ccp(hitObject->x, hitObject->y)];
+		//[(GameScene*)[self parent] removeHitObjectDisplay:self];
+		
+		return true;
+	} else {
+		return false;
+	}
 }
 
 - (BOOL) wasHeld:(CGPoint)location atTime:(NSTimeInterval)time {
@@ -281,6 +281,8 @@
 	}
 	return disappearTimeMs;
 }
+
+
 
 
 @end

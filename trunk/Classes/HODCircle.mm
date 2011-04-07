@@ -97,14 +97,20 @@
 	
 	if(doNumber) {
 		CCLabelTTF * numberDisplay;
-		if(hitObject->number != 0) {
-			numberDisplay = 
-			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
-							   fontName:@"Helvetica Neue" fontSize:48];
-		} else {
+		// 0 = repeat
+		if(hitObject->number == 0) { 
 			// Do something special if the number is 0.
 			numberDisplay = 
-			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"<-"] 
+			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"*"] 
+							   fontName:@"Helvetica Neue" fontSize:48];
+		} 
+		else if(hitObject->number == -1) {
+			numberDisplay = 
+			[CCLabelTTF labelWithString:[NSString stringWithFormat:@""] 
+							   fontName:@"Helvetica Neue" fontSize:48];
+		} else {
+			numberDisplay = 
+			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
 							   fontName:@"Helvetica Neue" fontSize:48];
 		}
 		numberDisplay.position = ccp(size.width/2,size.height/2);
@@ -130,11 +136,6 @@
 	
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
 	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];
-}
-
-- (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"testing 123");
-	
 }
 
 - (void) justDisplay {

@@ -15,6 +15,8 @@
 @synthesize scoreDisplay;
 @synthesize comboDisplay;
 @synthesize scoreBackground;
+@synthesize hit;
+@synthesize miss;
 
 - (id) init
 {
@@ -40,13 +42,16 @@
 - (void) hitWith : (int) points{
 	if (points == 0){
 		[self setCombo: 0];
+		miss++;
 	}
 	else{
 		[self setCombo: [self combo] + 1];
+		hit++;
 	}
 	[self setScore: [self score] + [self combo] * points];
 	[self updateScore];
 }
+
 
 - (void) updateScore
 {

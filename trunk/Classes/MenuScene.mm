@@ -20,7 +20,7 @@
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	GameScene *layer = [MenuScene node];
+	MenuScene *layer = [MenuScene node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];

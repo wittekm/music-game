@@ -29,7 +29,7 @@
 		buttonTex = [[self createHODCircleTexture:r :g :b] retain];
 
 		
-		ring = [CCSprite spriteWithFile:@"button.ring.png"];		 
+		ring = [CCSprite spriteWithFile:@"button.ring pix.png"];		 
 		ring.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
 		ccColor3B color = {r, g, b};
 		ring.color = color;
@@ -68,9 +68,9 @@
 	[CCRenderTexture renderTextureWithWidth:size.width height:size.height];
 	target.position = ccp(0,0);
 	
-	CCSprite * underlayTex = [CCSprite spriteWithFile:@"button.underlay.png"];
-	CCSprite * buttonTex = [CCSprite spriteWithFile:@"button.button.png"];
-	CCSprite * overlayTex = [CCSprite spriteWithFile:@"button.overlay.png"];
+	CCSprite * underlayTex = [CCSprite spriteWithFile:@"button.underlay pix.png"];
+	CCSprite * buttonTex = [CCSprite spriteWithFile:@"button.button pix.png"];
+	CCSprite * overlayTex = [CCSprite spriteWithFile:@"button.overlay pix.png"];
 	
 	/*
 	ccTexParams texParams = { GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };	

@@ -130,7 +130,19 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		 [musicPlayer setQueueWithQuery:mfloQuery];
 		 [musicPlayer play];
 		 
+		 //Letterboxes
 		 
+		 CCSprite  * left_curtain = [CCSprite spriteWithFile:@"left_curtain.png"];
+		 CCSprite  * right_curtain = [CCSprite spriteWithFile:@"right_curtain.png"];
+		 left_curtain.position = ccp(40, 320/2);
+		 right_curtain.position = ccp(440, 320/2);
+		 if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+			 //iPhone 4
+			 [left_curtain setScale:0.5];
+			 [right_curtain setScale:0.5];
+		 }
+		 [self addChild:left_curtain];
+		 [self addChild:right_curtain];
 		 // Artwork
 		 MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
 		 MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
@@ -234,12 +246,13 @@ int numPopped = 0;
 	}
 	
 	
-	//if(hods.empty() && beatmap->hitObjects.empty()) {
-	if(numPopped == 10) {
+	if(hods.empty() && beatmap->hitObjects.empty()) {
+	//if(numPopped == 10) {
 		//[self fadeout];
 		[self pauseSchedulerAndActions];
 		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
 	}
+ 
 }
 
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -320,11 +333,11 @@ int numPopped = 0;
 	
 	// change this to fail, blue, and red
 	if(type == 300) {
-		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
+		burst = [CCSprite spriteWithFile:@"starburst-128 pix.png"];
 	} else if(type == 100) {
-		burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
+		burst = [CCSprite spriteWithFile:@"starburst-blue-128 pix.png"];
 	} else if (type == 0) {
-		burst = [CCSprite spriteWithFile:@"fail-128.png"];
+		burst = [CCSprite spriteWithFile:@"fail-128 pix.png"];
 	}
 	
 	id removeAction = [CCCallBlock actionWithBlock:^{
@@ -334,7 +347,7 @@ int numPopped = 0;
 	burst.position = pos;
 	burst.scale = 0.75;
 	[burst runAction: [CCFadeOut actionWithDuration:0.1]];
-	[burst runAction: [CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:50], removeAction, nil] ];
+	[burst runAction: [CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0], removeAction, nil] ];
 	[self addChild:burst];
 }
 

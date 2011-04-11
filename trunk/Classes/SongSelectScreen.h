@@ -18,13 +18,13 @@
 	UITableView * table;
 	CCUIViewWrapper * wrapper;
 	SqlHandler * handler;
-	NSString * currentBeatmap;
+	Beatmap * currentBeatmap;
 }
 
 +(id) sceneWithSongList: (SqlHandler*)songList;
 
 @property (retain) SqlHandler * songList;
-@property (retain) NSString * currentBeatmap;
+@property Beatmap * currentBeatmap;
 @end
 
 @interface SongSelectViewController : UITableViewController {

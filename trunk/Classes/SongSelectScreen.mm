@@ -91,7 +91,7 @@
 -(void) menuCallbackStart: (id) sender
 {
 
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap:(new Beatmap(currentBeatmap))]]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap: currentBeatmap ]]];
 }
 
 @end
@@ -102,7 +102,7 @@
 	SqlHandler * handler = [[SqlHandler alloc] init];
 	SqlRow * row = [[handler beatmaps] objectAtIndex:indexPath.row];
 	//currentBeatmap = [row beatmap];
-	parent.currentBeatmap = [row beatmap];
+	parent.currentBeatmap = [row getBeatmap];
 	
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

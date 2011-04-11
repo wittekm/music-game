@@ -101,7 +101,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		scoreBoard = [[Scoreboard alloc] init];
 		[self addChild:scoreBoard z:1];
 		
-		timeAllowanceMs = 100;
+		timeAllowanceMs = 150;
 		durationMs = 750;
 		comboIndex = 0;
 
@@ -193,7 +193,7 @@ int numPopped = 0;
 - (void) nextFrame:(ccTime)dt {
 	
 	double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
-	milliseconds += 800; // offset for gee norm
+	milliseconds += 850; // offset for gee norm
 	
 	
 	if(beatmap->hitObjects.empty()) {
@@ -281,12 +281,12 @@ int numPopped = 0;
 	if(!hods.empty()) {
 		
 		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
-		milliseconds += 800; // offset for gee norm
+		milliseconds += 850; // offset for gee norm
 
 		// iterate through everying in "hods"
 		list<HitObjectDisplay*>::iterator hodIter = hods.begin();
 		list<HitObjectDisplay*>::iterator hodsEnd = hods.end();
-		for(hodIter; hodIter != hodsEnd; ++hodIter) {
+		for(; hodIter != hodsEnd; ++hodIter) {
 			HitObjectDisplay * hod = *hodIter;
 			if([hod wasHit: location atTime: milliseconds]) {
 				// wasHit should remove the object if it needed to be removed
@@ -304,16 +304,25 @@ int numPopped = 0;
 }
 
 - (void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch* touch = [touches anyObject];
-	NSSet* allTouches = [touches setByAddingObjectsFromSet:[event touchesForView:[touch view]]];
-	NSArray* allTheTouches = [allTouches allObjects];
 	
-	NSLog(@"%d", [allTheTouches count]);
-	
+	if(!hods.empty()) {
+		UITouch* touch = [touches anyObject];
+		CGPoint location = [self convertTouchToNodeSpace: touch];
+
+		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
+		milliseconds += 850; // offset for gee norm
+		
+		HitObjectDisplay * hod = (*hods.begin()); // first HOD
+		[hod wasHeld:location atTime:milliseconds];
+	}
 	/*
 	CGPoint location = [self convertTouchToNodeSpace: touch];
 	[(HODSlider*)[self getChildByTag:0] slider].position = ccp(location.x, location.y);
 	 */
+}
+
+- (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	//NSLog(@"hey i was called ~neato");
 }
 
 
@@ -333,11 +342,11 @@ int numPopped = 0;
 	
 	// change this to fail, blue, and red
 	if(type == 300) {
-		burst = [CCSprite spriteWithFile:@"starburst-128 pix.png"];
+		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
 	} else if(type == 100) {
-		burst = [CCSprite spriteWithFile:@"starburst-blue-128 pix.png"];
+		burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
 	} else if (type == 0) {
-		burst = [CCSprite spriteWithFile:@"fail-128 pix.png"];
+		burst = [CCSprite spriteWithFile:@"fail-128.png"];
 	}
 	
 	id removeAction = [CCCallBlock actionWithBlock:^{
@@ -348,23 +357,8 @@ int numPopped = 0;
 	burst.scale = 0.75;
 	[burst runAction: [CCFadeOut actionWithDuration:0.1]];
 	[burst runAction: [CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0], removeAction, nil] ];
-	[self addChild:burst];
+	[self addChild:burst z: INT_MAX];
 }
-
-/*
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-}
- */
-
-- (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"hey i was called ~neato");
-}
-/*
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-}
- */
 
 
 // on "dealloc" you need to release all your retained objects

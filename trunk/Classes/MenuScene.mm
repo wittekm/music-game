@@ -74,7 +74,7 @@
 	NSURLResponse *response;
 	NSData * result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
-	
+	/*
 	//XmlParser * tumblrfeed = [[XmlParser alloc] init];
 	//[tumblrfeed parseXMLFile];
 	
@@ -88,14 +88,8 @@
 		NSLog(@"map is %@", map);
 		[songList setObject:map forKey:title];
 	}
-/*	NSLog(@"y helo thar");
-	for (NSString* key in songList) {
-		NSString* value = [songList objectForKey:key];
-		NSLog(@"key %@", key);
-		NSLog(@"value %@", value);
-		// do stuff
-	}
-*/		
+	 */
+	
 	SqlHandler * handler = [[SqlHandler alloc] init];
 	// lists all the beatmaps
 	for(SqlRow * row in [handler beatmaps]) {

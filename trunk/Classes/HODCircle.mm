@@ -29,7 +29,7 @@
 		buttonTex = [[self createHODCircleTexture:r :g :b] retain];
 
 		
-		ring = [CCSprite spriteWithFile:@"button.ring pix.png"];		 
+		ring = [CCSprite spriteWithFile:@"button.ring.png"];		 
 		ring.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
 		ccColor3B color = {r, g, b};
 		ring.color = color;
@@ -68,9 +68,9 @@
 	[CCRenderTexture renderTextureWithWidth:size.width height:size.height];
 	target.position = ccp(0,0);
 	
-	CCSprite * underlayTex = [CCSprite spriteWithFile:@"button.underlay pix.png"];
-	CCSprite * buttonTex = [CCSprite spriteWithFile:@"button.button pix.png"];
-	CCSprite * overlayTex = [CCSprite spriteWithFile:@"button.overlay pix.png"];
+	CCSprite * underlayTex = [CCSprite spriteWithFile:@"button.underlay.png"];
+	CCSprite * buttonTex = [CCSprite spriteWithFile:@"button.button.png"];
+	CCSprite * overlayTex = [CCSprite spriteWithFile:@"button.overlay.png"];
 	
 	/*
 	ccTexParams texParams = { GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };	
@@ -96,13 +96,17 @@
 	[overlayTex visit];
 	
 	if(doNumber) {
-		CCLabelTTF * numberDisplay;
+		CCNode * numberDisplay;
 		// 0 = repeat
 		if(hitObject->number == 0) { 
+			/*
 			// Do something special if the number is 0.
 			numberDisplay = 
 			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"*"] 
 							   fontName:@"Helvetica Neue" fontSize:48];
+			 */
+			numberDisplay = 
+			[CCSprite spriteWithFile:@"return.png"];
 		} 
 		else if(hitObject->number == -1) {
 			numberDisplay = 
@@ -132,7 +136,7 @@
 	[ring setScale:initialScale];
 	
 	id actionFadeIn = [CCFadeIn actionWithDuration:duration];
-	id actionScaleHalf = [CCScaleBy actionWithDuration:duration scale: 0.5];
+	id actionScaleHalf = [CCEaseIn actionWithAction:[CCScaleBy actionWithDuration:duration scale: 0.5] rate: 2];
 	
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
 	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];

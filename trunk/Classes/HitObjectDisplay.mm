@@ -65,6 +65,8 @@
 	return true; // doesn't matter for most of them
 }
 
+- (void) wasReleased { }
+
 - (int) disappearTime {
 	return INT_MAX;
 }

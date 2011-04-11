@@ -19,10 +19,14 @@
 	CCRenderTexture * fadeinTex;
 	CCSprite * slider;
 	CCSprite * ring;
+	
+	CCSprite * dragReaction;
+	
 	id slidesAction;
 }
 
 
 - (CCRenderTexture*) createFadeinTexture;
+
 
 @end

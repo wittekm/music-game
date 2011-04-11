@@ -156,6 +156,11 @@
 		
 		[self setOpacity:0];
 		
+		dragReaction = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
+		dragReaction.visible = false;
+		dragReaction.opacity = 0.75;
+		[self addChild:dragReaction];
+		
 	}
 	return self;
 }
@@ -233,7 +238,7 @@
 
 	
 	[self runAction: [CCSequence actions:actionFadeIn, nil]];
-	[ring runAction: [CCSequence actions:actionScaleHalf, untint, backAndForth, nil]];
+	[ring runAction: [CCEaseIn actionWithAction:[CCSequence actions:actionScaleHalf, untint, backAndForth, nil] rate: 1]];
 	
 	
 	
@@ -247,19 +252,39 @@
 }
 
 - (BOOL) wasHit:(CGPoint)location atTime:(NSTimeInterval)time {
+	
 	if([super wasHit:location atTime:time]) {
 		// spawn a "300!" or whatever
-		[(GameScene*)[self parent] spawnReaction:300 pos:ccp(hitObject->x, hitObject->y)];
+		//[(GameScene*)[self parent] spawnReaction:300 pos:ccp(hitObject->x, hitObject->y)];
 		//[(GameScene*)[self parent] removeHitObjectDisplay:self];
 		
-		return true;
+		return false;
 	} else {
 		return false;
 	}
+	
 }
 
 - (BOOL) wasHeld:(CGPoint)location atTime:(NSTimeInterval)time {
+	double dist = sqrt( pow(ring.position.x - location.x, 2) + pow(ring.position.y - location.y, 2));
 	
+	if(dist > (50. * initialScale)) {
+		
+		dragReaction.visible = false;
+		ring.visible = true;
+		return false;
+	} else {
+		dragReaction.position = ring.position;
+		dragReaction.visible = true;
+		ring.visible = false;
+		
+		return true;
+	}
+}
+
+- (void) wasReleased {
+	dragReaction.visible = false;
+	ring.visible = true;
 }
 
 - (int) disappearTime {
@@ -269,10 +294,6 @@
 		HitSlider* hs = ((HitSlider*)hitObject);
 		double& beatLength = [(GameScene*)[self parent] beatmap]->beatLength;
 		
-		/* thinkin bout slidermultiplier
-		 1.7 = 170 pixels / beatLength
-		 1.7 = 170 pixels 
-		 */
 		
 		double AbsoluteSliderVelocity = (10000. / 100.) * 2.8 / beatLength; // osupixels per second
 		double added = (hs->repeatCount * hs->sliderLengthPixels / AbsoluteSliderVelocity);

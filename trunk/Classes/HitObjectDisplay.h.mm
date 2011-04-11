@@ -30,6 +30,7 @@
 - (int) disappearTime;
 - (BOOL) wasHit: (CGPoint)location atTime: (NSTimeInterval)time;
 - (BOOL) wasHeld: (CGPoint)location atTime: (NSTimeInterval)time;
+- (void) wasReleased;
 
 // shortcut to cast parent as a GameScene
 - (GameScene*) gsParent;

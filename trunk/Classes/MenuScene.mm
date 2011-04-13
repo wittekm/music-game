@@ -36,33 +36,42 @@
 -(id) init
 {
 	if( (self=[super init])) {
+		CCSprite * window = [CCSprite spriteWithFile:@"window.bmp"];
+		window.position = ccp(480/2,120);
+		window.scaleY = 2.2;
+		window.scaleX = 2.5;
+		[self addChild:window];
+		CCLabelTTF * title = [CCLabelTTF labelWithString:@"Beatnik!" fontName:@"hellovetica" fontSize:42];
+		title.position = ccp(480/2,240);
+		[self addChild:title];
+		[CCMenuItemFont setFontName:@"hellovetica"];
+		[CCMenuItemFont setFontSize:12];
 		
-		CCSprite * background = [CCSprite spriteWithFile:@"titlebackground.png"];
-		background.position = ccp(480/2, 320/2);
-		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
-			//iPhone 4
-			[background setScale:0.5];
-		}
-		[self addChild:background];
-		CCSprite * welcome = [CCSprite spriteWithFile:@"welcome.png"];
-		welcome.position = ccp(480/2, 200);
-		[self addChild: welcome];
-		CCSprite* startdemo = [CCSprite spriteWithFile:@"startdemo.png"];
-		CCSprite* startdemo2 = [CCSprite spriteWithFile:@"startdemo.png"];
-		//startdemo.position = ccp(480/2, 100);
-		//startdemo2.position = ccp(480/2, 100);
-		//[CCMenuItemFont setFontSize:30];
-		//[CCMenuItemFont setFontName: @"Courier New"];
-		
-		//CCMenuItem *item1 = [CCMenuItemFont itemFromString: @"Press me to start!!" target: self selector:@selector(menuCallbackStart:)];
-		CCMenuItemSprite * item2 = [CCMenuItemSprite itemFromNormalSprite:startdemo selectedSprite:startdemo2 target: self selector:@selector(menuCallbackStart:)];
+		CCMenuItemFont * play = [CCMenuItemFont itemFromString:@"Play!" target:self selector:@selector(menuCallbackStart:)];
+		CCMenuItemFont * create = [CCMenuItemFont itemFromString:@"Create!" target:self selector:@selector(menuCreate:)];
+		CCMenuItemFont * share = [CCMenuItemFont itemFromString:@"Share!" target:self selector:@selector(menuShare:)];
+		CCMenuItemFont * options = [CCMenuItemFont itemFromString:@"Options" target:self selector:@selector(menuOptions:)];
 		CCMenu *menu = [CCMenu menuWithItems:
-						item2, nil];
-		menu.position = ccp(480/2, 100);
+						play, create, share, options, nil];
+		menu.position = ccp(480/2, 120);
+		[menu alignItemsVerticallyWithPadding:5.0f];
 		[self addChild: menu];
 		
 	}
 	return self;
+}
+
+-(void) menuCreate: (id) sender
+{
+	return;
+}
+-(void) menuShare: (id) sender
+{
+	return;
+}
+-(void) menuOptions: (id) sender
+{
+	return;
 }
 -(void) menuCallbackStart: (id) sender
 {

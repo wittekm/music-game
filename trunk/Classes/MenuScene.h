@@ -13,5 +13,9 @@
 
 }
 -(void) menuCallbackStart:(id) sender;
+-(void) menuCreate: (id) sender;
+-(void) menuShare: (id) sender;
+-(void) menuOptions: (id) sender;
+
 
 @end

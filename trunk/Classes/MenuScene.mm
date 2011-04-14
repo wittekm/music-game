@@ -16,6 +16,7 @@
 #include "SMXMLDocument.h"
 
 #import "SongSelectScreen.h"
+#import "EditLibraryPicker.h"
 
 @implementation MenuScene
 +(id) scene
@@ -33,21 +34,51 @@
 	return scene;
 }
 
+/*
+int color = 0;
+bool increase = true;
+-(void) colorStuff: (ccTime)dt {
+	if(increase)
+		color += 1;
+	else
+		color -= 1;
+	
+	int red = color % 8;
+	int green = (color >> 3) % 8;
+	int blue = (color >> 6) % 8;
+	
+	NSLog(@"%d %d %d", blue, green, red);
+	
+	if(color >= 512)
+		increase = false;
+	else if (color <= 0)
+		increase = true;
+	
+	[play setColor:(ccColor3B){red*8, green*8, blue*8}];
+}
+*/
 
 -(id) init
 {
 	if( (self=[super initWithColor:ccc4(238,232,170,255)])) {
 		//CCLabelTTF * title = [CCLabelTTF labelWithString:@"Beatnik!" fontName:@"04b-19" fontSize:42];
-		id toRed = [CCTintBy actionWithDuration: 0.2 red:255 green: 0 blue: 0];
-		id fromRed = [CCTintBy actionWithDuration:0.2 red:-255 green:0 blue:0];
+		id toRed = [CCTintTo actionWithDuration: 0.5 red:255 green: 0 blue: 0];
+		id fromRed = [CCTintTo actionWithDuration:0.5 red:255 green:255 blue:255];
 		id toBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: 255];
 		id fromBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: -255];
 		id toGreen = [CCTintBy actionWithDuration: 0.8 red: 0 green: 255 blue: 0];
 		id fromGreen = [CCTintBy actionWithDuration:0.8 red:0 green: -255 blue:0];
+		/*
 		id redSequence = [CCSequence actions: toRed, fromBlue, nil];
 		id blueSequence = [CCSequence actions: toBlue, fromGreen, nil];
 		id greenSequence = [CCSequence actions: toGreen, fromRed, nil];
+		 */
+		id redSequence = [CCSequence actions: fromRed, toRed, nil];
+		id blueSequence = [CCSequence actions: fromBlue, toBlue, nil];
+		id greenSequence = [CCSequence actions: fromGreen, toGreen, nil];
+		
 		id colorCraziness = [CCSpawn actions: [CCRepeat actionWithAction: redSequence times: 4], [CCRepeat actionWithAction: blueSequence times: 2], greenSequence, nil];
+		
 		CCSprite * title = [CCSprite spriteWithFile:@"beatniksolo.png"];
 		title.position = ccp(480/2,320/2);
 		//[self addChild:title];
@@ -60,8 +91,10 @@
 		CCSprite * play1 = [CCSprite spriteWithFile:@"play.png"];
 		CCSprite * play2 = [CCSprite spriteWithFile:@"play.png"];
 		
-		CCMenuItemSprite * play = [CCMenuItemSprite itemFromNormalSprite:play1 selectedSprite:play2 target:self selector:@selector(menuCallbackStart:)];
-		[play runAction: [CCRepeatForever actionWithAction: colorCraziness]];
+		play = [CCMenuItemSprite itemFromNormalSprite:play1 selectedSprite:play2 target:self selector:@selector(menuCallbackStart:)];
+		
+		[play runAction: [CCRepeatForever actionWithAction: redSequence]];
+		
 		//play.position =ccp(118,150);
 		CCMenuItemSprite * create = [CCMenuItemSprite itemFromNormalSprite:create1 selectedSprite:create2 target:self selector:@selector(menuCreate:)];
 		CCMenuItemSprite * share = [CCMenuItemSprite itemFromNormalSprite:share1 selectedSprite:share2 target:self selector:@selector(menuShare:)];
@@ -82,12 +115,15 @@
 		[self addChild:title];
 		[self addChild: menu];
 		
+		//[self schedule:@selector(colorStuff:) interval: 0.01];
+		
 	}
 	return self;
 }
 
 -(void) menuCreate: (id) sender
 {
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[EditLibraryPicker scene]]];
 	return;
 }
 -(void) menuShare: (id) sender

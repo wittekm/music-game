@@ -11,6 +11,7 @@
 #import <iostream>
 #import "SqlHandler.h"
 #import "GameScene.h"
+#import "OptionsScene.h"
 #import "osu-import.h.mm"
 #include "SMXMLDocument.h"
 
@@ -61,12 +62,17 @@
 		
 		CCMenuItemSprite * play = [CCMenuItemSprite itemFromNormalSprite:play1 selectedSprite:play2 target:self selector:@selector(menuCallbackStart:)];
 		[play runAction: [CCRepeatForever actionWithAction: colorCraziness]];
+		//play.position =ccp(118,150);
 		CCMenuItemSprite * create = [CCMenuItemSprite itemFromNormalSprite:create1 selectedSprite:create2 target:self selector:@selector(menuCreate:)];
 		CCMenuItemSprite * share = [CCMenuItemSprite itemFromNormalSprite:share1 selectedSprite:share2 target:self selector:@selector(menuShare:)];
 		CCMenuItemSprite * options = [CCMenuItemSprite itemFromNormalSprite:options1 selectedSprite:options2 target:self selector:@selector(menuOptions:)];
 		CCMenu *menu = [CCMenu menuWithItems:
 						play, create, share, options, nil];
 		menu.position = ccp(118,80);
+		create.position = ccp(-325,-65);
+		play.position = ccp(55,145);
+		share.position = ccp(-50,-195);
+		options.position = ccp(280,-200);
 		//[menu alignItemsVerticallyWithPadding:5.0f];
 		//if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
 			//iPhone 4
@@ -90,6 +96,7 @@
 }
 -(void) menuOptions: (id) sender
 {
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[OptionsScene scene]]];
 	return;
 }
 -(void) menuCallbackStart: (id) sender

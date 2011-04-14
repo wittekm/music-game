@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface MenuScene : CCLayer {
+@interface MenuScene : CCLayerColor {
 
 }
 -(void) menuCallbackStart:(id) sender;

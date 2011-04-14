@@ -35,26 +35,45 @@
 
 -(id) init
 {
-	if( (self=[super init])) {
-		CCSprite * window = [CCSprite spriteWithFile:@"window.bmp"];
-		window.position = ccp(480/2,120);
-		window.scaleY = 2.2;
-		window.scaleX = 2.5;
-		[self addChild:window];
-		CCLabelTTF * title = [CCLabelTTF labelWithString:@"Beatnik!" fontName:@"hellovetica" fontSize:42];
-		title.position = ccp(480/2,240);
-		[self addChild:title];
-		[CCMenuItemFont setFontName:@"hellovetica"];
-		[CCMenuItemFont setFontSize:12];
+	if( (self=[super initWithColor:ccc4(238,232,170,255)])) {
+		//CCLabelTTF * title = [CCLabelTTF labelWithString:@"Beatnik!" fontName:@"04b-19" fontSize:42];
+		id toRed = [CCTintBy actionWithDuration: 0.2 red:255 green: 0 blue: 0];
+		id fromRed = [CCTintBy actionWithDuration:0.2 red:-255 green:0 blue:0];
+		id toBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: 255];
+		id fromBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: -255];
+		id toGreen = [CCTintBy actionWithDuration: 0.8 red: 0 green: 255 blue: 0];
+		id fromGreen = [CCTintBy actionWithDuration:0.8 red:0 green: -255 blue:0];
+		id redSequence = [CCSequence actions: toRed, fromBlue, nil];
+		id blueSequence = [CCSequence actions: toBlue, fromGreen, nil];
+		id greenSequence = [CCSequence actions: toGreen, fromRed, nil];
+		id colorCraziness = [CCSpawn actions: [CCRepeat actionWithAction: redSequence times: 4], [CCRepeat actionWithAction: blueSequence times: 2], greenSequence, nil];
+		CCSprite * title = [CCSprite spriteWithFile:@"beatniksolo.png"];
+		title.position = ccp(480/2,320/2);
+		//[self addChild:title];
+		CCSprite * create1 = [CCSprite spriteWithFile:@"create.png"];
+		CCSprite * create2 = [CCSprite spriteWithFile:@"create.png"];
+		CCSprite * share1 = [CCSprite spriteWithFile:@"share.png"];
+		CCSprite * share2 = [CCSprite spriteWithFile:@"share.png"];
+		CCSprite * options1 = [CCSprite spriteWithFile:@"options.png"];
+		CCSprite * options2 = [CCSprite spriteWithFile:@"options.png"];
+		CCSprite * play1 = [CCSprite spriteWithFile:@"play.png"];
+		CCSprite * play2 = [CCSprite spriteWithFile:@"play.png"];
 		
-		CCMenuItemFont * play = [CCMenuItemFont itemFromString:@"Play!" target:self selector:@selector(menuCallbackStart:)];
-		CCMenuItemFont * create = [CCMenuItemFont itemFromString:@"Create!" target:self selector:@selector(menuCreate:)];
-		CCMenuItemFont * share = [CCMenuItemFont itemFromString:@"Share!" target:self selector:@selector(menuShare:)];
-		CCMenuItemFont * options = [CCMenuItemFont itemFromString:@"Options" target:self selector:@selector(menuOptions:)];
+		CCMenuItemSprite * play = [CCMenuItemSprite itemFromNormalSprite:play1 selectedSprite:play2 target:self selector:@selector(menuCallbackStart:)];
+		[play runAction: [CCRepeatForever actionWithAction: colorCraziness]];
+		CCMenuItemSprite * create = [CCMenuItemSprite itemFromNormalSprite:create1 selectedSprite:create2 target:self selector:@selector(menuCreate:)];
+		CCMenuItemSprite * share = [CCMenuItemSprite itemFromNormalSprite:share1 selectedSprite:share2 target:self selector:@selector(menuShare:)];
+		CCMenuItemSprite * options = [CCMenuItemSprite itemFromNormalSprite:options1 selectedSprite:options2 target:self selector:@selector(menuOptions:)];
 		CCMenu *menu = [CCMenu menuWithItems:
 						play, create, share, options, nil];
-		menu.position = ccp(480/2, 120);
-		[menu alignItemsVerticallyWithPadding:5.0f];
+		menu.position = ccp(118,80);
+		//[menu alignItemsVerticallyWithPadding:5.0f];
+		//if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+			//iPhone 4
+			[title setScale:.5];
+			[menu setScale:.5];
+		//}
+		[self addChild:title];
 		[self addChild: menu];
 		
 	}

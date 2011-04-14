@@ -65,6 +65,7 @@
 
 -(void) backToMain:(id)sender
 {
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
 
 }
 @end

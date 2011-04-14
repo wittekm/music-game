@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,7 +278,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>21</integer>
+									<integer>20</integer>
 									<integer>11</integer>
 									<integer>10</integer>
 									<integer>0</integer>
@@ -319,12 +317,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>OptionsScene.mm</string>
+								<string>OptionsScene.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>OptionsScene.mm</string>
+										<string>OptionsScene.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>54AA6B671357B7D90016AC30</string>
+										<string>54AA6B7C1357B8680016AC30</string>
 										<key>history</key>
 										<array>
 											<string>54CDEC7C13332C7900DD6134</string>
@@ -409,12 +409,12 @@
 											<string>54AA6B041357B19D0016AC30</string>
 											<string>54AA6B051357B19D0016AC30</string>
 											<string>54AA6B061357B19D0016AC30</string>
-											<string>54AA6B251357B4B20016AC30</string>
 											<string>54AA6B521357B7C70016AC30</string>
 											<string>54AA6B531357B7C70016AC30</string>
 											<string>54AA6B541357B7C70016AC30</string>
-											<string>54AA6B661357B7D90016AC30</string>
-											<string>54AA6B3B1357B6A00016AC30</string>
+											<string>54AA6B731357B81D0016AC30</string>
+											<string>54AA6B7A1357B8680016AC30</string>
+											<string>54AA6B7B1357B8680016AC30</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -612,6 +612,9 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>54AA6B7E1357B8680016AC30</string>
+		<string>54AA6B7F1357B8680016AC30</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>5442ED941328461B009B5324</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/barrelrolled/Documents/Collective/beatnik/musicGame.xcodeproj</string>
@@ -941,8 +944,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -978,7 +979,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>54AA6AF21357B04A0016AC30</string>
+				<string>54AA6B7D1357B8680016AC30</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -988,7 +989,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>

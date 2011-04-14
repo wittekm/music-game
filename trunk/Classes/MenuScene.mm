@@ -132,20 +132,21 @@ bool increase = true;
 }
 -(void) menuOptions: (id) sender
 {
+	NSLog(@"derp derp");
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[OptionsScene scene]]];
 	return;
 }
 -(void) menuCallbackStart: (id) sender
 {
 
-	NSMutableDictionary * songList = [[NSMutableDictionary alloc] init];
+	//NSMutableDictionary * songList = [[NSMutableDictionary alloc] init];
 	
 	//NSURL * tumblr = [NSURL URLWithString:@"beatnikapp.tumblr.com/api/read"];
 	NSURL * xmlFile = [NSURL URLWithString:@"http://www-personal.umich.edu/~mkolas/uploads/songs.xml"];
 	NSURLRequest *request = [NSURLRequest requestWithURL:xmlFile];
 	NSError *error;
 	NSURLResponse *response;
-	NSData * result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	//NSData * result = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	
 	/*
 	//XmlParser * tumblrfeed = [[XmlParser alloc] init];

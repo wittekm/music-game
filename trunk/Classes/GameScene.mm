@@ -106,7 +106,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		timeAllowanceMs = 150;
 		durationMs = 750;
 		comboIndex = 0;
-
+		
 	}
 	return self;
 }
@@ -114,66 +114,68 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 - (void) startSceneWithBeatmap:(Beatmap*)beatmap_ {
 	
 	beatmap = beatmap_;
-	 if(!beatmap) exit(0); // TODO: make an errmsg
-	 
-	 [self schedule:@selector(nextFrame:)];
-	 
-	 // this shit don't work in the simulator
+	if(!beatmap) exit(0); // TODO: make an errmsg
+	
+	[self schedule:@selector(nextFrame:)];
+	
+	// this shit don't work in the simulator
 #if !TARGET_IPHONE_SIMULATOR
-	 
-	 @try {
-		 // Music Stuff
-		 
-		 MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
-		 [mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
-		 predicateWithValue: @"Talamak"
-		 forProperty: MPMediaItemPropertyTitle]];
-		 
-		 [musicPlayer setQueueWithQuery:mfloQuery];
-		 [musicPlayer play];
-		 
-		 //Letterboxes
-		 
-		 CCSprite  * left_curtain = [CCSprite spriteWithFile:@"left_curtain.png"];
-		 CCSprite  * right_curtain = [CCSprite spriteWithFile:@"right_curtain.png"];
-		 left_curtain.position = ccp(40, 320/2);
-		 right_curtain.position = ccp(440, 320/2);
-
-			 [left_curtain setScale:0.5];
-			 [right_curtain setScale:0.5];
-		 [self addChild:left_curtain];
-		 [self addChild:right_curtain];
-		 // Artwork
-		 MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
-		 MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
-		 UIImage * artworkImage;
-		 artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
-		 CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
-		 albumArt.position = ccp(480/2, 320/2);
-		 if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
-		 //iPhone 4
-		 [albumArt setScale:0.5];
-		 }
-		 [self addChild:albumArt z:0];
-		 
-		 //[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
-		 //[musicPlayer setCurrentPlaybackTime:60];
-		 
-	 
-	 } @catch(NSException *e) {
-	 cout << "no music playing dawg" << endl;
-	 }
+	
+	@try {
+		// Music Stuff
+		
+		MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
+		[mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
+										predicateWithValue: @"Talamak"
+										forProperty: MPMediaItemPropertyTitle]];
+		
+		[musicPlayer setQueueWithQuery:mfloQuery];
+		[musicPlayer play];
+		
+		//Letterboxes
+		
+		CCSprite  * left_curtain = [CCSprite spriteWithFile:@"left_curtain.png"];
+		CCSprite  * right_curtain = [CCSprite spriteWithFile:@"right_curtain.png"];
+		left_curtain.position = ccp(40, 320/2);
+		right_curtain.position = ccp(440, 320/2);
+		
+		[left_curtain setScale:0.5];
+		[right_curtain setScale:0.5];
+		[self addChild:left_curtain];
+		[self addChild:right_curtain];
+		// Artwork
+		MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
+		MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
+		UIImage * artworkImage;
+		artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
+		CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
+		albumArt.position = ccp(480/2, 320/2);
+		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
+			//iPhone 4
+			[albumArt setScale:0.5];
+		}
+		[self addChild:albumArt z:0];
+		
+		//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
+		//[musicPlayer setCurrentPlaybackTime:60];
+		[musicPlayer setCurrentPlaybackTime:30];
+		
+		
+	} @catch(NSException *e) {
+		cout << "no music playing dawg" << endl;
+	}
 #endif
 	
 	// test out slider stuff in the simulator
 #if TARGET_IPHONE_SIMULATOR
-	while(beatmap->hitObjects.front()->objectType & 1 || beatmap->hitObjects.front()->objectType & 2){		beatmap->hitObjects.pop_front();
+	while(beatmap->hitObjects.front()->objectType & 1 || beatmap->hitObjects.front()->objectType & 2)
+		beatmap->hitObjects.pop_front();
 	HitObject* o = beatmap->hitObjects.front();
 	HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 	[self addChild:hod];
 	[hod appearWithDuration:1.5];
 #endif
-	 
+	
 }
 
 
@@ -197,8 +199,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		//exit(0);
 		// wait 3 seconds and then go to another scene
 	}
-	 
-	   
+	
+	
 	while(!beatmap->hitObjects.empty()) {
 		HitObject * o = beatmap->hitObjects.front(); 
 		
@@ -234,7 +236,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			
 			
 			[self spawnReaction: [c pointsAtDisappearTime] pos:ccp([c hitObject]->x, [c hitObject]->y)];
-			 
+			
 			hods.pop_front();
 			[self removeChild:c cleanup:true];
 			// [c release];
@@ -246,12 +248,12 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	
 	if(hods.empty() && beatmap->hitObjects.empty()) {
-	//if(numPopped == 10) {
+		//if(numPopped == 10) {
 		//[self fadeout];
 		[self pauseSchedulerAndActions];
 		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
 	}
- 
+	
 }
 
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -260,9 +262,9 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	if([touches count] > 1) {
 		/*
-		if(!pausedLabel)
-			pausedLabel = [[CCLabelTTF labelWithString:@"PAUSED" fontName:@"Helvetica" fontSize:48] retain];
-		*/
+		 if(!pausedLabel)
+		 pausedLabel = [[CCLabelTTF labelWithString:@"PAUSED" fontName:@"Helvetica" fontSize:48] retain];
+		 */
 		
 		if(!paused) {
 			[musicPlayer pause];
@@ -281,7 +283,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		
 		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
 		milliseconds += 850; // offset for gee norm
-
+		
 		// iterate through everying in "hods"
 		list<HitObjectDisplay*>::iterator hodIter = hods.begin();
 		list<HitObjectDisplay*>::iterator hodsEnd = hods.end();
@@ -307,7 +309,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if(!hods.empty()) {
 		UITouch* touch = [touches anyObject];
 		CGPoint location = [self convertTouchToNodeSpace: touch];
-
+		
 		double milliseconds = [musicPlayer currentPlaybackTime] * 1000.0f;
 		milliseconds += 850; // offset for gee norm
 		
@@ -315,8 +317,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[hod wasHeld:location atTime:milliseconds];
 	}
 	/*
-	CGPoint location = [self convertTouchToNodeSpace: touch];
-	[(HODSlider*)[self getChildByTag:0] slider].position = ccp(location.x, location.y);
+	 CGPoint location = [self convertTouchToNodeSpace: touch];
+	 [(HODSlider*)[self getChildByTag:0] slider].position = ccp(location.x, location.y);
 	 */
 }
 
@@ -334,19 +336,28 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 // type is 300, 100, 0
 - (void) spawnReaction: (int)type pos: (CGPoint)pos {
 	
-	NSLog(@"in spawn reaction, should change score....");
-	[scoreBoard hitWith:type];
-	
+	NSLog(@"in spawn reaction, should change score....");	
 	CCSprite *burst;
 	
 	// change this to fail, blue, and red
-	if(type == 300) {
+	if (type == 1000){
+		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
+		burst.scale = 2;
+	}
+	else if(type == 300) {
 		burst = [CCSprite spriteWithFile:@"starburst-128.png"];
 	} else if(type == 100) {
 		burst = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
 	} else if (type == 0) {
 		burst = [CCSprite spriteWithFile:@"fail-128.png"];
 	}
+	else if (type == -1){
+		burst = [CCSprite spriteWithFile:@"fail-128.png"];
+		burst.scale = 3;
+		type = 0;
+	}
+	[scoreBoard hitWith:type];
+	
 	
 	id removeAction = [CCCallBlock actionWithBlock:^{
 		[self removeChild:burst cleanup:true];

@@ -13,8 +13,18 @@
 @interface HODSpinner : HitObjectDisplay {
 	CCSprite * spinner;
 	CCSprite * ring;
+	CGPoint prevLocation;
+	double absoluteRotation;
+	double lastRotation;
 }
 
+- (BOOL) wasHit: (CGPoint)location atTime: (NSTimeInterval)time;
+- (BOOL) wasHeld: (CGPoint)location atTime: (NSTimeInterval)time;
+- (void) wasReleased;
+
+@property double lastRotation;
+@property double absoluteRotation;
+@property CGPoint prevLocation;
 @property (retain) CCSprite * spinner;
 @property (retain) CCSprite * ring;
 @end

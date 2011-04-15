@@ -26,6 +26,7 @@
 	double timeAllowanceMs;
 	double durationMs;
 	int comboIndex;
+	int numPopped;
 }
 
 // returns a Scene that contains the HelloWorld as the only child

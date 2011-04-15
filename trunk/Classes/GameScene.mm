@@ -93,6 +93,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		self.isTouchEnabled = YES;
 		
 		paused = false;
+		numPopped = 0;
 		beatmap = 0;
 #if !TARGET_IPHONE_SIMULATOR
 		musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
@@ -185,8 +186,6 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		[self performSelector: @selector(fadeout) withObject: nil afterDelay: 0.05 ];
 	} else { [musicPlayer pause]; }
 }
-
-int numPopped = 0;
 
 - (void) nextFrame:(ccTime)dt {
 	

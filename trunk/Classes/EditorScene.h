@@ -13,9 +13,24 @@
 @interface EditorScene : CCLayer {
 	MPMediaItemCollection * mediaItem;
 	MPMusicPlayerController * musicPlayer;
+	double touchBeganAtTime;
+	CGPoint touchBeganAtLoc;
+	CCLabelBMFont * timeLabel;
 }
 
 +(id) sceneWithMediaItem: (MPMediaItemCollection*)item;
 -(void)startSceneWithMediaItem: (MPMediaItemCollection*)item;
+
+- (void)skip;
+- (void)play;
+- (void)back;
+
+-(void) update;
+
+- (void) nextFrame: (ccTime)dt;
+
+
+//- (void) removeHitObjectDisplay: (HitObjectDisplay*)hod;
+
 
 @end

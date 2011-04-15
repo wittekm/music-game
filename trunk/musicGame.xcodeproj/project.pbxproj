@@ -61,7 +61,7 @@
 		5088318A1325845A00C6289B /* Utility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508831891325845A00C6289B /* Utility.mm */; };
 		508831E3132691DD00C6289B /* button.ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 508831E2132691DD00C6289B /* button.ring.png */; };
 		50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */; };
-		50A7E5DB1357CDC40099D7F0 /* EditorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E5DA1357CDC40099D7F0 /* EditorScene.m */; };
+		50A7E5DB1357CDC40099D7F0 /* EditorScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */; };
 		50A7E63B1357DB7C0099D7F0 /* zerofourbee-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */; };
 		50A7E63C1357DB7C0099D7F0 /* zerofourbee-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */; };
 		50A7E6531357DD230099D7F0 /* zerofourbee-48.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */; };
@@ -71,6 +71,9 @@
 		50AF81491347B5730054E8B5 /* starburst-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 50AF81481347B5730054E8B5 /* starburst-128.png */; };
 		50B2C4E61357EB640046176A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4E41357EB640046176A /* Icon.png */; };
 		50B2C4E71357EB640046176A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4E51357EB640046176A /* Icon@2x.png */; };
+		50B2C4F21357F85D0046176A /* PlusFive.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4EF1357F85D0046176A /* PlusFive.png */; };
+		50B2C4F31357F85D0046176A /* PlayPause.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4F01357F85D0046176A /* PlayPause.png */; };
+		50B2C4F41357F85D0046176A /* MinusFive.png in Resources */ = {isa = PBXBuildFile; fileRef = 50B2C4F11357F85D0046176A /* MinusFive.png */; };
 		50B2DEE71340CE22005CEAD7 /* talamak.osu in Resources */ = {isa = PBXBuildFile; fileRef = 50B2DEE61340CE22005CEAD7 /* talamak.osu */; };
 		50B5B87E1352A6E200C4CC1E /* CCUIViewWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50B5B87D1352A6E200C4CC1E /* CCUIViewWrapper.mm */; };
 		50B5B8811352A6EF00C4CC1E /* SongSelectScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50B5B8801352A6EF00C4CC1E /* SongSelectScreen.mm */; };
@@ -401,7 +404,7 @@
 		50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLibraryPicker.h; sourceTree = "<group>"; };
 		50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLibraryPicker.m; sourceTree = "<group>"; };
 		50A7E5D91357CDC40099D7F0 /* EditorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorScene.h; sourceTree = "<group>"; };
-		50A7E5DA1357CDC40099D7F0 /* EditorScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorScene.m; sourceTree = "<group>"; };
+		50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditorScene.mm; sourceTree = "<group>"; };
 		50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-32.fnt"; sourceTree = "<group>"; };
 		50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zerofourbee-32.png"; sourceTree = "<group>"; };
 		50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-48.fnt"; sourceTree = "<group>"; };
@@ -411,6 +414,9 @@
 		50AF81481347B5730054E8B5 /* starburst-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starburst-128.png"; sourceTree = "<group>"; };
 		50B2C4E41357EB640046176A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		50B2C4E51357EB640046176A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		50B2C4EF1357F85D0046176A /* PlusFive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlusFive.png; sourceTree = "<group>"; };
+		50B2C4F01357F85D0046176A /* PlayPause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayPause.png; sourceTree = "<group>"; };
+		50B2C4F11357F85D0046176A /* MinusFive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MinusFive.png; sourceTree = "<group>"; };
 		50B2DEE61340CE22005CEAD7 /* talamak.osu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = talamak.osu; sourceTree = "<group>"; };
 		50B5B87C1352A6E200C4CC1E /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
 		50B5B87D1352A6E200C4CC1E /* CCUIViewWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCUIViewWrapper.mm; sourceTree = "<group>"; };
@@ -884,6 +890,16 @@
 			name = HitObjectDisplays;
 			sourceTree = "<group>";
 		};
+		50B2C4EE1357F85D0046176A /* EditorIcons */ = {
+			isa = PBXGroup;
+			children = (
+				50B2C4EF1357F85D0046176A /* PlusFive.png */,
+				50B2C4F01357F85D0046176A /* PlayPause.png */,
+				50B2C4F11357F85D0046176A /* MinusFive.png */,
+			);
+			path = EditorIcons;
+			sourceTree = "<group>";
+		};
 		50DB85A41337B58A00440FD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,7 +926,7 @@
 				50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */,
 				50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */,
 				50A7E5D91357CDC40099D7F0 /* EditorScene.h */,
-				50A7E5DA1357CDC40099D7F0 /* EditorScene.m */,
+				50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -977,6 +993,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50B2C4EE1357F85D0046176A /* EditorIcons */,
 				50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */,
 				50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */,
 				50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */,
@@ -1506,6 +1523,9 @@
 				50A7E6541357DD230099D7F0 /* zerofourbee-48.png in Resources */,
 				50B2C4E61357EB640046176A /* Icon.png in Resources */,
 				50B2C4E71357EB640046176A /* Icon@2x.png in Resources */,
+				50B2C4F21357F85D0046176A /* PlusFive.png in Resources */,
+				50B2C4F31357F85D0046176A /* PlayPause.png in Resources */,
+				50B2C4F41357F85D0046176A /* MinusFive.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1541,7 +1561,7 @@
 				50B5B8811352A6EF00C4CC1E /* SongSelectScreen.mm in Sources */,
 				5453D17213573EBF0068B8DE /* OptionsScene.mm in Sources */,
 				50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */,
-				50A7E5DB1357CDC40099D7F0 /* EditorScene.m in Sources */,
+				50A7E5DB1357CDC40099D7F0 /* EditorScene.mm in Sources */,
 				54AA6D2C1357E6D10016AC30 /* HODSpinner.mm in Sources */,
 				54AA6D461357E7F80016AC30 /* Globals.m in Sources */,
 				54AA6D4D1357E8550016AC30 /* HelpScene.mm in Sources */,

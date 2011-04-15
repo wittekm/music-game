@@ -33,7 +33,7 @@
 - (void) appearWithDuration: (double)duration
 {
 	HitSpinner * s = (HitSpinner*)hitObject;
-	double scaleDuration = (s->endTimeMs - s->startTimeMs) / 1000;
+	double scaleDuration = ((double)s->endTimeMs - s->startTimeMs) / 1000.;
 	NSLog(@"scale duration is %d",scaleDuration);
 	self.visible = true;
 	ring.visible = true;

@@ -17,6 +17,7 @@
 	CCLabelTTF * scoreDisplay;
 	CCLabelTTF * comboDisplay;
 	CCSprite * scoreBackground;
+	CCSprite * comboBackground;
 }
 
 - (void)hitWith: (int) points;
@@ -29,6 +30,7 @@
 @property NSInteger miss;
 @property (retain) CCLabelTTF * scoreDisplay;
 @property (retain) CCSprite * scoreBackground;
+@property (retain) CCSprite * comboBackground;
 @property (retain) CCLabelTTF * comboDisplay;
 
 

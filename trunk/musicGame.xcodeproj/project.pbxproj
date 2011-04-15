@@ -145,8 +145,9 @@
 		54AA6D461357E7F80016AC30 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 54AA6D441357E7F80016AC30 /* Globals.m */; };
 		54AA6D4D1357E8550016AC30 /* HelpScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 54AA6D4C1357E8550016AC30 /* HelpScene.mm */; };
 		54BBDC67133AC77200A03995 /* MenuScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 54BBDC66133AC77200A03995 /* MenuScene.mm */; };
-		54D26FCA1349275D00E0AAA4 /* newScoreHud.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D26FC91349275D00E0AAA4 /* newScoreHud.png */; };
 		54D26FD71349290F00E0AAA4 /* newScoreHud-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 54D26FD61349290F00E0AAA4 /* newScoreHud-small.png */; };
+		54E82A8913582178006D8BAB /* newcombohud.png in Resources */ = {isa = PBXBuildFile; fileRef = 54E82A8713582178006D8BAB /* newcombohud.png */; };
+		54E82A8A13582178006D8BAB /* ihateyouscorehud.png in Resources */ = {isa = PBXBuildFile; fileRef = 54E82A8813582178006D8BAB /* ihateyouscorehud.png */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -504,8 +505,9 @@
 		54AA6D4C1357E8550016AC30 /* HelpScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpScene.mm; sourceTree = "<group>"; };
 		54BBDC65133AC77200A03995 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
 		54BBDC66133AC77200A03995 /* MenuScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MenuScene.mm; sourceTree = "<group>"; };
-		54D26FC91349275D00E0AAA4 /* newScoreHud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newScoreHud.png; sourceTree = "<group>"; };
 		54D26FD61349290F00E0AAA4 /* newScoreHud-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newScoreHud-small.png"; sourceTree = "<group>"; };
+		54E82A8713582178006D8BAB /* newcombohud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newcombohud.png; sourceTree = "<group>"; };
+		54E82A8813582178006D8BAB /* ihateyouscorehud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ihateyouscorehud.png; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -985,6 +987,8 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54E82A8713582178006D8BAB /* newcombohud.png */,
+				54E82A8813582178006D8BAB /* ihateyouscorehud.png */,
 				540BB87E13581A280068A8DA /* twirl.png */,
 				50AE409F13581941000191D9 /* MinusFive.png */,
 				50AE40A013581941000191D9 /* PlayPause.png */,
@@ -1021,7 +1025,6 @@
 				5455468D134A2AF60001E35D /* startdemo.png */,
 				5455468E134A2AF60001E35D /* welcome.png */,
 				54D26FD61349290F00E0AAA4 /* newScoreHud-small.png */,
-				54D26FC91349275D00E0AAA4 /* newScoreHud.png */,
 				541F744A134910760010BB86 /* scoreFont.png */,
 				541F744713490FF40010BB86 /* scoreFont.fnt */,
 				5447EE6C1345558600CFEFC8 /* fail ginormous.png */,
@@ -1484,7 +1487,6 @@
 				50AF81491347B5730054E8B5 /* starburst-128.png in Resources */,
 				541F744913490FF40010BB86 /* scoreFont.fnt in Resources */,
 				541F744B134910760010BB86 /* scoreFont.png in Resources */,
-				54D26FCA1349275D00E0AAA4 /* newScoreHud.png in Resources */,
 				54D26FD71349290F00E0AAA4 /* newScoreHud-small.png in Resources */,
 				5455468F134A2AF70001E35D /* titlebackground.png in Resources */,
 				54554690134A2AF70001E35D /* startdemo.png in Resources */,
@@ -1522,6 +1524,8 @@
 				50AE40A313581941000191D9 /* PlayPause.png in Resources */,
 				50AE40A413581941000191D9 /* PlusFive.png in Resources */,
 				540BB87F13581A280068A8DA /* twirl.png in Resources */,
+				54E82A8913582178006D8BAB /* newcombohud.png in Resources */,
+				54E82A8A13582178006D8BAB /* ihateyouscorehud.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

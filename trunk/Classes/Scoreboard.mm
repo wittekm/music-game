@@ -15,6 +15,7 @@
 @synthesize scoreDisplay;
 @synthesize comboDisplay;
 @synthesize scoreBackground;
+@synthesize comboBackground;
 @synthesize hit;
 @synthesize miss;
 
@@ -28,11 +29,17 @@
 		scoreDisplay.position =  ccp(430,300);
 		[self setComboDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
 		comboDisplay.position = ccp (443,267);
-		[self setScoreBackground:[CCSprite spriteWithFile:@"newScoreHud-small.png"]];
-		scoreBackground.position = ccp(400, 280);
-		scoreBackground.scale = 0.35
-		;
+		//[self setScoreBackground:[CCSprite spriteWithFile:@"newscorehud.png"]];
+		
+		//scoreBackground = [CCSprite spriteWithFile:@"newscorehud.png"];
+		[self setScoreBackground:[CCSprite spriteWithFile:@"ihateyouscorehud.png"]];
+		[self setComboBackground:[CCSprite spriteWithFile:@"newcombohud.png"]];
+		scoreBackground.scale = .35;
+		comboBackground.scale = .35;
+		scoreBackground.position = ccp(415, 295);
+		comboBackground.position = ccp(435, 250);
 		[self addChild:scoreBackground];
+		[self addChild:comboBackground];
 		[self addChild:scoreDisplay];
 		[self addChild:comboDisplay];
 	}

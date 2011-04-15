@@ -158,7 +158,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		
 		//[musicPlayer setCurrentPlaybackTime:100]; // skip intro, usually 18
 		//[musicPlayer setCurrentPlaybackTime:60];
-		[musicPlayer setCurrentPlaybackTime:30];
+		//[musicPlayer setCurrentPlaybackTime:30];
 		
 		
 	} @catch(NSException *e) {

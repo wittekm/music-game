@@ -15,6 +15,7 @@
 #import "HODCircle.h"
 #import "osu-import.h.mm"
 #import "HODSlider.h"
+#import "HODSpinner.h"
 #import "HitObjectDisplay.h.mm"
 #import "SqlHandler.h"
 #import "Scoreboard.h"
@@ -50,8 +51,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	}
 	
 	else {
-		// this is just a "unknown type" circle, we haven't done spinner yet
-		return [[[HODCircle alloc] initWithHitObject:hitObject red:150 green:0 blue:0] retain];
+		NSLog(@"so, like, should be spawning an HODspinner. da fuk?");
+		return [[[HODSpinner alloc] initWithHitObject:hitObject red:150 green:0 blue:0] retain];
 	}
 	return 0;
 }
@@ -136,11 +137,9 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		 CCSprite  * right_curtain = [CCSprite spriteWithFile:@"right_curtain.png"];
 		 left_curtain.position = ccp(40, 320/2);
 		 right_curtain.position = ccp(440, 320/2);
-		 if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
-			 //iPhone 4
+
 			 [left_curtain setScale:0.5];
 			 [right_curtain setScale:0.5];
-		 }
 		 [self addChild:left_curtain];
 		 [self addChild:right_curtain];
 		 // Artwork
@@ -167,8 +166,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	// test out slider stuff in the simulator
 #if TARGET_IPHONE_SIMULATOR
-	while(beatmap->hitObjects.front()->startTimeMs < 61234)
-		beatmap->hitObjects.pop_front();
+	while(beatmap->hitObjects.front()->objectType & 1 || beatmap->hitObjects.front()->objectType & 2){		beatmap->hitObjects.pop_front();
 	HitObject* o = beatmap->hitObjects.front();
 	HitObjectDisplay * hod = HODFactory(o, 0, 120, 0);
 	[self addChild:hod];

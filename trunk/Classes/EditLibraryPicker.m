@@ -6,34 +6,30 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "BeatnikDelegate.h"
 #import "EditLibraryPicker.h"
 #import "MusicPlayerDemoViewController.h"
+#import "EditorScene.h"
 
 @implementation EditLibraryPicker
-
 -(id) init {
 	if( (self = [super init]) ) {
-				
-		CGRect cgRct = CGRectMake(0.0, 100, 360, 320);
-
-		UIView * view = [[UIView alloc] initWithFrame:cgRct];
 		
-		MusicPlayerDemoViewController * cont = [[MusicPlayerDemoViewController alloc] init];
+		mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
+		mediaPicker.delegate = [[EditLibraryDelegate alloc] initWithPickerScene: self];
 		
-		[view addSubview:cont.view];
-		/*
-		mediaPicker.delegate = self;
-		mediaPicker.allowsPickingMultipleItems = YES; // this is the default   
-		[self presentModalViewController:mediaPicker animated:YES];
-		[mediaPicker release];
-		*/
+		[[(BeatnikDelegate*)[[UIApplication sharedApplication] delegate] window] addSubview:mediaPicker.view];
 		
-		wrapper = [CCUIViewWrapper wrapperForUIView:view];
-		
-		[self addChild:wrapper];
 	}
 	return self;
 }
+
+- (void) selectedItem: (MPMediaItemCollection *) item {
+	[self removeMediaPicker];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[EditorScene sceneWithMediaItem:item]]];
+
+}
+
 
 + (id) scene {
 	// 'scene' is an autorelease object.
@@ -49,4 +45,40 @@
 	return scene;
 }
 
+- (void) removeMediaPicker {
+	[mediaPicker.view removeFromSuperview];
+	[mediaPicker release]; // needed?
+}
+
 @end
+
+
+@implementation EditLibraryDelegate
+
+- (id) initWithPickerScene: (EditLibraryPicker*)elp {
+	if ( (self = [super init]) ) {
+		pickerScene = elp;
+	}
+	return self;
+}
+
+- (void) mediaPickerDidCancel: (MPMediaPickerController *) mediaPicker {
+	[pickerScene removeMediaPicker];
+	//[[(BeatnikDelegate*)[[UIApplication sharedApplication] delegate] window] ];
+	//[self dismissModalViewControllerAnimated: YES];
+}
+
+
+- (void) mediaPicker: (MPMediaPickerController *) mediaPicker
+   didPickMediaItems: (MPMediaItemCollection *) collection {
+	
+	//MPMediaItem * item = [[collection items] objectAtIndex:0];
+	
+	[pickerScene selectedItem:collection];
+	
+    //[self dismissModalViewControllerAnimated: YES];
+    //[self updatePlayerQueueWithMediaCollection: collection];
+}
+
+@end
+

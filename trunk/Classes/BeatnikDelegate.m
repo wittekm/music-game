@@ -1,5 +1,5 @@
 //
-//  Cocos2dLesson1AppDelegate.m
+//  BeatnikDelegate.m
 //  Cocos2dLesson1
 //
 //  Created by Max Wittek on 3/4/11.
@@ -7,13 +7,13 @@
 //
 
 #import "cocos2d.h"
-#import "Cocos2dLesson1AppDelegate.h"
+#import "BeatnikDelegate.h"
 #import "GameConfig.h"
 #import "MenuScene.h"
 #import "RootViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@implementation Cocos2dLesson1AppDelegate
+@implementation BeatnikDelegate
 
 @synthesize window;
 
@@ -101,6 +101,7 @@
 	
 	// make the View Controller a child of the main window
 	[window addSubview: viewController.view];
+	
 	
 	[window makeKeyAndVisible];
 	

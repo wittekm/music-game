@@ -234,7 +234,9 @@ int numPopped = 0;
 		//HitObject * o = hods.front().hitObject;
 		if(milliseconds > [hods.front() disappearTime]) {
 			HitObjectDisplay * c = hods.front();
-			[self spawnReaction:0 pos:ccp([c hitObject]->x, [c hitObject]->y)];
+			
+			
+			[self spawnReaction: [c pointsAtDisappearTime] pos:ccp([c hitObject]->x, [c hitObject]->y)];
 			 
 			hods.pop_front();
 			[self removeChild:c cleanup:true];
@@ -354,7 +356,7 @@ int numPopped = 0;
 	}];
 	
 	burst.position = pos;
-	burst.scale = 0.75;
+	//burst.scale = 0.75;
 	[burst runAction: [CCFadeOut actionWithDuration:0.1]];
 	[burst runAction: [CCSequence actions:[CCRotateBy actionWithDuration:0.1 angle:0], removeAction, nil] ];
 	[self addChild:burst z: INT_MAX];

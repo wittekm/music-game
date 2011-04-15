@@ -110,13 +110,21 @@
 		} 
 		else if(hitObject->number == -1) {
 			numberDisplay = 
-			[CCLabelTTF labelWithString:[NSString stringWithFormat:@""] 
-							   fontName:@"Helvetica Neue" fontSize:48];
+			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@""] 
+							   fntFile:@"zerofourbee-48.fnt"];
+			//numberDisplay.scale = 2;
 		} else {
+			/*
 			numberDisplay = 
 			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
 							   fontName:@"Helvetica Neue" fontSize:48];
+			 */
+			numberDisplay = 
+			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
+								  fntFile:@"zerofourbee-48.fnt"];
+			//numberDisplay.scale = 2;
 		}
+		
 		numberDisplay.position = ccp(size.width/2,size.height/2);
 		[numberDisplay visit];
 	}
@@ -132,7 +140,7 @@
 	//self.position = CGPointMake(hitObject.x, hitObject.y);
 	
 	self.visible = true;
-	ring.visible = true;
+	ring.visible = true ;
 	[ring setScale:initialScale];
 	
 	id actionFadeIn = [CCFadeIn actionWithDuration:duration];

@@ -303,7 +303,12 @@
 	return disappearTimeMs;
 }
 
-
+- (int) pointsAtDisappearTime {
+	if(dragReaction.visible)
+		return 300;
+	else
+		return 0;
+}
 
 
 @end

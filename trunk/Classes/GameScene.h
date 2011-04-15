@@ -12,9 +12,9 @@
 #import "osu-import.h.mm"
 #import "HitObjectDisplay.h.mm"
 #import "Scoreboard.h"
+#import <MediaPlayer/MediaPlayer.h>
 
  // fwd decl
-class MPMusicPlayerController;
 
 // HelloWorld Layer
 @interface GameScene : CCLayer

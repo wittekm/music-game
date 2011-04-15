@@ -115,7 +115,6 @@ bool increase = true;
 		[self addChild:title];
 		[self addChild: menu];
 		
-		//[self schedule:@selector(colorStuff:) interval: 0.01];
 		
 	}
 	return self;

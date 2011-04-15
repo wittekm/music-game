@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1F3B9A2D0EF2145700286867 /* Cocos2dLesson1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B9A2B0EF2145700286867 /* Cocos2dLesson1AppDelegate.m */; };
+		1F3B9A2D0EF2145700286867 /* BeatnikDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B9A2B0EF2145700286867 /* BeatnikDelegate.m */; };
 		5004717A133138D100454BF4 /* HitObjectDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50047179133138D100454BF4 /* HitObjectDisplay.mm */; };
 		5004723B13314F0300454BF4 /* HODSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5004723A13314F0300454BF4 /* HODSlider.mm */; };
 		5014FE7C13349DAB0073730C /* button.underlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5014FE7B13349DAB0073730C /* button.underlay.png */; };
@@ -62,7 +62,11 @@
 		5088318A1325845A00C6289B /* Utility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508831891325845A00C6289B /* Utility.mm */; };
 		508831E3132691DD00C6289B /* button.ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 508831E2132691DD00C6289B /* button.ring.png */; };
 		50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */; };
-		50A7E4AC1357AF090099D7F0 /* MusicPlayerDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E4AB1357AF090099D7F0 /* MusicPlayerDemoViewController.m */; };
+		50A7E5DB1357CDC40099D7F0 /* EditorScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E5DA1357CDC40099D7F0 /* EditorScene.m */; };
+		50A7E63B1357DB7C0099D7F0 /* zerofourbee-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */; };
+		50A7E63C1357DB7C0099D7F0 /* zerofourbee-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */; };
+		50A7E6531357DD230099D7F0 /* zerofourbee-48.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */; };
+		50A7E6541357DD230099D7F0 /* zerofourbee-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6521357DD230099D7F0 /* zerofourbee-48.png */; };
 		50AF80961347A5310054E8B5 /* fail-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 50AF80951347A5310054E8B5 /* fail-128.png */; };
 		50AF81421347B5260054E8B5 /* starburst-blue-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 50AF81411347B5260054E8B5 /* starburst-blue-128.png */; };
 		50AF81491347B5730054E8B5 /* starburst-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 50AF81481347B5730054E8B5 /* starburst-128.png */; };
@@ -111,7 +115,6 @@
 		54287D20134D96CE008B4FC6 /* right_curtain.png in Resources */ = {isa = PBXBuildFile; fileRef = 54287D1E134D96CD008B4FC6 /* right_curtain.png */; };
 		54287D21134D96CE008B4FC6 /* left_curtain.png in Resources */ = {isa = PBXBuildFile; fileRef = 54287D1F134D96CE008B4FC6 /* left_curtain.png */; };
 		5438F9A9135550BA0032B639 /* hellovetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5438F9A8135550BA0032B639 /* hellovetica.ttf */; };
-		5438F9CE13555A1E0032B639 /* window.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 5438F9CD13555A1E0032B639 /* window.bmp */; };
 		5447EE5513454E1E00CFEFC8 /* dymaxion.png in Resources */ = {isa = PBXBuildFile; fileRef = 5447EE5013454E1E00CFEFC8 /* dymaxion.png */; };
 		5447EE5613454E1E00CFEFC8 /* dymaxion.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5447EE5113454E1E00CFEFC8 /* dymaxion.fnt */; };
 		5447EE5713454E1E00CFEFC8 /* scorehud.png in Resources */ = {isa = PBXBuildFile; fileRef = 5447EE5213454E1E00CFEFC8 /* scorehud.png */; };
@@ -330,8 +333,8 @@
 
 /* Begin PBXFileReference section */
 		1D6058910D05DD3D006BFB54 /* Cocos2dLesson1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocos2dLesson1.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F3B9A2B0EF2145700286867 /* Cocos2dLesson1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cocos2dLesson1AppDelegate.m; path = Classes/Cocos2dLesson1AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		1F3B9A2C0EF2145700286867 /* Cocos2dLesson1AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cocos2dLesson1AppDelegate.h; path = Classes/Cocos2dLesson1AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		1F3B9A2B0EF2145700286867 /* BeatnikDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeatnikDelegate.m; sourceTree = "<group>"; };
+		1F3B9A2C0EF2145700286867 /* BeatnikDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatnikDelegate.h; sourceTree = "<group>"; };
 		1F3B9A820EF2151B00286867 /* Cocos2dLesson1_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cocos2dLesson1_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50047178133138D100454BF4 /* HitObjectDisplay.h.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HitObjectDisplay.h.mm; sourceTree = "<group>"; };
@@ -395,8 +398,12 @@
 		508831E2132691DD00C6289B /* button.ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.ring.png; sourceTree = "<group>"; };
 		50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLibraryPicker.h; sourceTree = "<group>"; };
 		50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLibraryPicker.m; sourceTree = "<group>"; };
-		50A7E4AA1357AF090099D7F0 /* MusicPlayerDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayerDemoViewController.h; sourceTree = "<group>"; };
-		50A7E4AB1357AF090099D7F0 /* MusicPlayerDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayerDemoViewController.m; sourceTree = "<group>"; };
+		50A7E5D91357CDC40099D7F0 /* EditorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorScene.h; sourceTree = "<group>"; };
+		50A7E5DA1357CDC40099D7F0 /* EditorScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorScene.m; sourceTree = "<group>"; };
+		50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-32.fnt"; sourceTree = "<group>"; };
+		50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zerofourbee-32.png"; sourceTree = "<group>"; };
+		50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-48.fnt"; sourceTree = "<group>"; };
+		50A7E6521357DD230099D7F0 /* zerofourbee-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zerofourbee-48.png"; sourceTree = "<group>"; };
 		50AF80951347A5310054E8B5 /* fail-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fail-128.png"; sourceTree = "<group>"; };
 		50AF81411347B5260054E8B5 /* starburst-blue-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starburst-blue-128.png"; sourceTree = "<group>"; };
 		50AF81481347B5730054E8B5 /* starburst-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starburst-128.png"; sourceTree = "<group>"; };
@@ -453,7 +460,6 @@
 		54287D1E134D96CD008B4FC6 /* right_curtain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_curtain.png; sourceTree = "<group>"; };
 		54287D1F134D96CE008B4FC6 /* left_curtain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_curtain.png; sourceTree = "<group>"; };
 		5438F9A8135550BA0032B639 /* hellovetica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hellovetica.ttf; sourceTree = "<group>"; };
-		5438F9CD13555A1E0032B639 /* window.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = window.bmp; sourceTree = "<group>"; };
 		5447EE5013454E1E00CFEFC8 /* dymaxion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dymaxion.png; sourceTree = "<group>"; };
 		5447EE5113454E1E00CFEFC8 /* dymaxion.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dymaxion.fnt; sourceTree = "<group>"; };
 		5447EE5213454E1E00CFEFC8 /* scorehud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorehud.png; sourceTree = "<group>"; };
@@ -769,8 +775,8 @@
 				E0F80F5D120A0182005866B8 /* GameConfig.h */,
 				E0F80F5E120A0182005866B8 /* RootViewController.h */,
 				E0F80F5F120A0182005866B8 /* RootViewController.m */,
-				1F3B9A2C0EF2145700286867 /* Cocos2dLesson1AppDelegate.h */,
-				1F3B9A2B0EF2145700286867 /* Cocos2dLesson1AppDelegate.m */,
+				1F3B9A2C0EF2145700286867 /* BeatnikDelegate.h */,
+				1F3B9A2B0EF2145700286867 /* BeatnikDelegate.m */,
 				50E109DF13443EAD007D067E /* SqlHandler.h */,
 				50E109E013443EAD007D067E /* SqlHandler.mm */,
 				507FCF7213330477005D2A6F /* helpers */,
@@ -888,8 +894,8 @@
 				5453D17113573EBF0068B8DE /* OptionsScene.mm */,
 				50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */,
 				50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */,
-				50A7E4AA1357AF090099D7F0 /* MusicPlayerDemoViewController.h */,
-				50A7E4AB1357AF090099D7F0 /* MusicPlayerDemoViewController.m */,
+				50A7E5D91357CDC40099D7F0 /* EditorScene.h */,
+				50A7E5DA1357CDC40099D7F0 /* EditorScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -956,6 +962,10 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */,
+				50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */,
+				50A7E6511357DD230099D7F0 /* zerofourbee-48.fnt */,
+				50A7E6521357DD230099D7F0 /* zerofourbee-48.png */,
 				54AA6B3F1357B6DA0016AC30 /* back.png */,
 				54AA6B401357B6DA0016AC30 /* help.png */,
 				54AA6B411357B6DA0016AC30 /* failred.png */,
@@ -967,7 +977,6 @@
 				5492079A1357AD730046FA12 /* beatniksolo.png */,
 				549207981357AD610046FA12 /* options.png */,
 				549207801357AD0C0046FA12 /* start.png */,
-				5438F9CD13555A1E0032B639 /* window.bmp */,
 				5438F9A8135550BA0032B639 /* hellovetica.ttf */,
 				5054F7591353916B00B8CEB8 /* return.png */,
 				54287D1E134D96CD008B4FC6 /* right_curtain.png */,
@@ -1468,7 +1477,6 @@
 				54287D21134D96CE008B4FC6 /* left_curtain.png in Resources */,
 				5054F75A1353916B00B8CEB8 /* return.png in Resources */,
 				5438F9A9135550BA0032B639 /* hellovetica.ttf in Resources */,
-				5438F9CE13555A1E0032B639 /* window.bmp in Resources */,
 				549207991357AD610046FA12 /* options.png in Resources */,
 				5492079B1357AD730046FA12 /* beatniksolo.png in Resources */,
 				5492079D1357AD7C0046FA12 /* share.png in Resources */,
@@ -1479,6 +1487,10 @@
 				54AA6B441357B6DA0016AC30 /* help.png in Resources */,
 				54AA6B451357B6DA0016AC30 /* failred.png in Resources */,
 				54AA6B461357B6DA0016AC30 /* failgreen.png in Resources */,
+				50A7E63B1357DB7C0099D7F0 /* zerofourbee-32.fnt in Resources */,
+				50A7E63C1357DB7C0099D7F0 /* zerofourbee-32.png in Resources */,
+				50A7E6531357DD230099D7F0 /* zerofourbee-48.fnt in Resources */,
+				50A7E6541357DD230099D7F0 /* zerofourbee-48.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1490,7 +1502,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1F3B9A2D0EF2145700286867 /* Cocos2dLesson1AppDelegate.m in Sources */,
+				1F3B9A2D0EF2145700286867 /* BeatnikDelegate.m in Sources */,
 				506EDC31102F528A00A389B3 /* GameScene.mm in Sources */,
 				E0F80F60120A0182005866B8 /* RootViewController.m in Sources */,
 				50882F91132541F400C6289B /* HODCircle.mm in Sources */,
@@ -1514,7 +1526,7 @@
 				50B5B8811352A6EF00C4CC1E /* SongSelectScreen.mm in Sources */,
 				5453D17213573EBF0068B8DE /* OptionsScene.mm in Sources */,
 				50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */,
-				50A7E4AC1357AF090099D7F0 /* MusicPlayerDemoViewController.m in Sources */,
+				50A7E5DB1357CDC40099D7F0 /* EditorScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

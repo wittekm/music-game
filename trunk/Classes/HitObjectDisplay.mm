@@ -70,6 +70,10 @@
 - (int) disappearTime {
 	return INT_MAX;
 }
+- (int) pointsAtDisappearTime {
+	return 0;
+}
+
 
 - (GameScene*) gsParent {
 	return (GameScene*)[self parent];

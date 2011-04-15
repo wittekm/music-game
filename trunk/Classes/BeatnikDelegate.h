@@ -1,5 +1,5 @@
 //
-//  Cocos2dLesson1AppDelegate.h
+//  BeatnikDelegate.h
 //  Cocos2dLesson1
 //
 //  Created by Max Wittek on 3/4/11.
@@ -10,7 +10,7 @@
 
 @class RootViewController;
 
-@interface Cocos2dLesson1AppDelegate : NSObject <UIApplicationDelegate> {
+@interface BeatnikDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
 }

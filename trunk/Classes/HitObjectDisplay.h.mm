@@ -28,6 +28,7 @@
 
 
 - (int) disappearTime;
+- (int) pointsAtDisappearTime;
 - (BOOL) wasHit: (CGPoint)location atTime: (NSTimeInterval)time;
 - (BOOL) wasHeld: (CGPoint)location atTime: (NSTimeInterval)time;
 - (void) wasReleased;

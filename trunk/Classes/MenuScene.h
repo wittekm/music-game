@@ -12,6 +12,7 @@
 @interface MenuScene : CCLayerColor {
 	CCMenuItemSprite * play;
 }
++(id) scene;
 -(void) menuCallbackStart:(id) sender;
 -(void) menuCreate: (id) sender;
 -(void) menuShare: (id) sender;

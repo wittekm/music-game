@@ -41,9 +41,9 @@
 -(void)addUIViewItem
 {
 	// create item programatically
-	CGRect cgRct = CGRectMake(0.0, 100, 360, 320);
+	CGRect cgRct = CGRectMake(15, 100, 300, 200);
 	
-	table = [[UITableView alloc] initWithFrame:cgRct style:UITableViewStyleGrouped];
+	table = [[UITableView alloc] initWithFrame:cgRct style:UITableViewStylePlain];
 	//[button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchDown];
 	//[button setTitle:@"Touch Me" forState:UIControlStateNormal];
 	//table.delegate = self;
@@ -55,11 +55,14 @@
 	controller.title = @"Select a song!";
 	// put a wrappar around it
 	wrapper = [CCUIViewWrapper wrapperForUIView:table];
+	wrapper.visible = false;
 	[self addChild:wrapper];
+	//[wrapper setOpacity:0];
+	//[wrapper runAction:[CCFadeIn actionWithDuration:1]];
 }
 
 -(id) init {
-	if ( (self = [super init])){
+	if( (self=[super initWithColor:ccc4(238,232,170,255)])){
 		//handler = [[SqlHandler alloc] init];
 	/*	CCSprite * bg = [CCSprite spriteWithFile:@"dan.png"];
 		bg.position = ccp(480/2, 320/2);
@@ -72,26 +75,49 @@
 		[self addChild:bg];
 		[self addChild:select];
 	 */
-		[self addUIViewItem];
-		//wrapper.position = ccp(480/2,320/2);
-		CCSprite * go1 = [CCSprite spriteWithFile:@"starburst-128.png"];
-		CCSprite * go2 = [CCSprite spriteWithFile:@"starburst-blue-128.png"];
-		go1.position = ccp(420, 60);
-		go2.position = ccp(420,60);
-		//[self addChild:go];
-		CCMenuItemSprite * gobutton = [CCMenuItemSprite itemFromNormalSprite:go1 selectedSprite:go2 target: self selector:@selector(menuCallbackStart:)];
-		CCMenu *menu = [CCMenu menuWithItems:
-						gobutton, nil];
-		menu.position = ccp(420,60);
+		CCSprite * play = [CCSprite spriteWithFile:@"playmenu.png"];
+		CCSprite * back1 = [CCSprite spriteWithFile:@"back.png"];
+		CCSprite * back2 = [CCSprite spriteWithFile:@"back.png"];
+		play.scale = .5;
+		CCMenuItemSprite * back = [CCMenuItemSprite itemFromNormalSprite:back1 selectedSprite:back2 target:self selector:@selector(backToMain:)];
+		play.position = ccp(65, 275);
+		[self addChild:play];
+		CCMenu * menu = [CCMenu menuWithItems:back,nil];
+		menu.position = ccp(480/2,320/2);
+		back.scale = .5;
+		back.position = ccp(185,-120);
 		[self addChild:menu];
+		//wrapper.position = ccp(480/2,320/2);
+		//CCMenuItemSprite * gobutton = [CCMenuItemSprite itemFromNormalSprite:go1 selectedSprite:go2 target: self selector:@selector(menuCallbackStart:)];
+		//CCMenu *menu = [CCMenu menuWithItems:
+		//				gobutton, nil];
+		//menu.position = ccp(420,60);
+		//[self addChild:menu];
+		[self addUIViewItem];
+		wrapper.visible = false;
+		
+		id makeVisible = [CCCallBlock actionWithBlock:^{
+			wrapper.visible = true;
+		}];
+		
+		[self runAction:[CCSequence actions: [CCDelayTime actionWithDuration:.4], makeVisible, nil ]];
+		
 	}
 	return self;
+
 }
+
 
 -(void) menuCallbackStart: (id) sender
 {
-
+	[self removeChild:wrapper cleanup: true];
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap: currentBeatmap ]]];
+}
+-(void) backToMain:(id)sender
+{
+	[self removeChild:wrapper cleanup: true];
+	
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
 }
 
 @end
@@ -130,7 +156,7 @@
 		//GasData * data = [[Globals sharedInstance].purchases objectAtIndex:indexPath.row];
 		//NSLog(@"%@", date); 
 		SqlRow * row = [[handler beatmaps] objectAtIndex:indexPath.row];
-		cell.textLabel.text = [row artist]; //[NSString stringWithFormat:@"%@", [row artist]];
+		cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[row title],[row artist]]; //[NSString stringWithFormat:@"%@", [row artist]];
 		/*
 		 for(SqlRow * row in [handler beatmaps]) {
 		 NSLog(@"%@ - %@", [row artist], [row title]);

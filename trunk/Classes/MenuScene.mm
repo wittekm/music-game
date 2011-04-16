@@ -13,8 +13,8 @@
 #import "GameScene.h"
 #import "OptionsScene.h"
 #import "osu-import.h.mm"
-#include "SMXMLDocument.h"
-
+#import "SMXMLDocument.h"
+#import "ShareScene.h"
 #import "SongSelectScreen.h"
 #import "EditLibraryPicker.h"
 
@@ -127,6 +127,7 @@ bool increase = true;
 }
 -(void) menuShare: (id) sender
 {
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[ShareScene scene]]];
 	return;
 }
 -(void) menuOptions: (id) sender

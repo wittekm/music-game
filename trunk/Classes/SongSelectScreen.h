@@ -11,9 +11,10 @@
 #import "Scoreboard.h"
 #import "CCUIViewWrapper.h"
 #import "SqlHandler.h"
+#import "MenuScene.h"
 
 
-@interface SongSelectScreen : CCLayer {
+@interface SongSelectScreen : CCLayerColor {
 	SqlHandler * songList;
 	UITableView * table;
 	CCUIViewWrapper * wrapper;

@@ -25,19 +25,23 @@
 	{
 		[self setScore:0];
 		[self setCombo:0];
-		[self setScoreDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
-		scoreDisplay.position =  ccp(430,300);
-		[self setComboDisplay: [CCLabelTTF labelWithString:@"0" fontName:@"Helvetica" fontSize:24.0]];
-		comboDisplay.position = ccp (443,267);
+		[self setScoreDisplay: [CCLabelBMFont labelWithString:@"0" fntFile:@"zerofourbee-48.fnt"]];
+		scoreDisplay.position =  ccp(465,280);
+		[scoreDisplay setAnchorPoint:ccp(1,1)];
+		scoreDisplay.scale = .5;
+		 [self setComboDisplay: [CCLabelBMFont labelWithString:@"0" fntFile:@"zerofourbee-48.fnt"]];
+		comboDisplay.position = ccp(465,215);
+		 [comboDisplay setAnchorPoint:ccp(1,1)];
+		comboDisplay.scale = .5;
 		//[self setScoreBackground:[CCSprite spriteWithFile:@"newscorehud.png"]];
 		
 		//scoreBackground = [CCSprite spriteWithFile:@"newscorehud.png"];
-		[self setScoreBackground:[CCSprite spriteWithFile:@"ihateyouscorehud.png"]];
-		[self setComboBackground:[CCSprite spriteWithFile:@"newcombohud.png"]];
-		scoreBackground.scale = .35;
-		comboBackground.scale = .35;
-		scoreBackground.position = ccp(415, 295);
-		comboBackground.position = ccp(435, 250);
+		[self setScoreBackground:[CCSprite spriteWithFile:@"finalscorehud.png"]];
+		[self setComboBackground:[CCSprite spriteWithFile:@"finalcombohud.png"]];
+		scoreBackground.scale = .40;
+		comboBackground.scale = .40;
+		scoreBackground.position = ccp(415, 275);
+		comboBackground.position = ccp(435, 210);
 		[self addChild:scoreBackground];
 		[self addChild:comboBackground];
 		[self addChild:scoreDisplay];
@@ -65,7 +69,7 @@
 	//here we'll use clever bitmasking tricks to get each digit individually
 	//nah
 	//[self setScoreDisplay: [[
-	[scoreDisplay setString: [NSString stringWithFormat:@"%d", score]];
+	[scoreDisplay setString: [NSString stringWithFormat:@"%d", score/10]];
 	[comboDisplay setString: [NSString stringWithFormat:@"%d", combo]];
 }
 

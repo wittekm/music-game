@@ -14,8 +14,8 @@
 	NSInteger combo;
 	NSInteger hit;
 	NSInteger miss;
-	CCLabelTTF * scoreDisplay;
-	CCLabelTTF * comboDisplay;
+	CCLabelBMFont * scoreDisplay;
+	CCLabelBMFont * comboDisplay;
 	CCSprite * scoreBackground;
 	CCSprite * comboBackground;
 }
@@ -28,10 +28,10 @@
 @property NSInteger combo;
 @property NSInteger hit;
 @property NSInteger miss;
-@property (retain) CCLabelTTF * scoreDisplay;
+@property (retain) CCLabelBMFont * scoreDisplay;
 @property (retain) CCSprite * scoreBackground;
 @property (retain) CCSprite * comboBackground;
-@property (retain) CCLabelTTF * comboDisplay;
+@property (retain) CCLabelBMFont * comboDisplay;
 
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ResultsScreen.h"
+#import "MenuScene.h"
 
 
 @implementation ResultsScreen
@@ -36,6 +37,7 @@
 -(id) init {
 
 	if( (self = [super init]) ) {
+		self.isTouchEnabled = YES;
 		beatnik = [CCSprite spriteWithFile:@"beatnik.png"];
 		speechBubble = [CCSprite spriteWithFile:@"speechbubble.png"];
 		beatnik.position = ccp(480.*.75, 320/2);
@@ -74,7 +76,22 @@
 		[response1 setColor:ccRED];
 		[self addChild: response1];
 	}
+	else {
+		CCLabelBMFont * response1 = 
+		[CCLabelBMFont labelWithString:@"GROOVY!" fntFile:@"pkmn.fnt"];
+		response1.scaleY = 3.0;
+		response1.scaleX = 1.5;
+		[response1 setAnchorPoint:ccp(0,1)];
+		[response1 setPosition:ccp(30, 320-130)];
+		[response1 setColor:ccRED];
+		[self addChild: response1];
+	}
+
+	
 }
 	 
+- (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
+}
 	 
 @end

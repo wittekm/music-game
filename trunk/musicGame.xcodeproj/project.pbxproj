@@ -133,6 +133,10 @@
 		54554691134A2AF70001E35D /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 5455468E134A2AF60001E35D /* welcome.png */; };
 		545749B41359335C00FA2983 /* finalcombohud.png in Resources */ = {isa = PBXBuildFile; fileRef = 545749B21359335C00FA2983 /* finalcombohud.png */; };
 		545749B51359335C00FA2983 /* finalscorehud.png in Resources */ = {isa = PBXBuildFile; fileRef = 545749B31359335C00FA2983 /* finalscorehud.png */; };
+		54574A0413593C9900FA2983 /* ShareScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 54574A0313593C9900FA2983 /* ShareScene.mm */; };
+		54574A2E1359414C00FA2983 /* sharemenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 54574A2B1359414C00FA2983 /* sharemenu.png */; };
+		54574A2F1359414C00FA2983 /* playmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 54574A2C1359414C00FA2983 /* playmenu.png */; };
+		54574A301359414C00FA2983 /* createmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 54574A2D1359414C00FA2983 /* createmenu.png */; };
 		549207991357AD610046FA12 /* options.png in Resources */ = {isa = PBXBuildFile; fileRef = 549207981357AD610046FA12 /* options.png */; };
 		5492079B1357AD730046FA12 /* beatniksolo.png in Resources */ = {isa = PBXBuildFile; fileRef = 5492079A1357AD730046FA12 /* beatniksolo.png */; };
 		5492079D1357AD7C0046FA12 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 5492079C1357AD7C0046FA12 /* share.png */; };
@@ -488,6 +492,11 @@
 		5455468E134A2AF60001E35D /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome.png; sourceTree = "<group>"; };
 		545749B21359335C00FA2983 /* finalcombohud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finalcombohud.png; sourceTree = "<group>"; };
 		545749B31359335C00FA2983 /* finalscorehud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finalscorehud.png; sourceTree = "<group>"; };
+		54574A0213593C9900FA2983 /* ShareScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareScene.h; sourceTree = "<group>"; };
+		54574A0313593C9900FA2983 /* ShareScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareScene.mm; sourceTree = "<group>"; };
+		54574A2B1359414C00FA2983 /* sharemenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharemenu.png; sourceTree = "<group>"; };
+		54574A2C1359414C00FA2983 /* playmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playmenu.png; sourceTree = "<group>"; };
+		54574A2D1359414C00FA2983 /* createmenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = createmenu.png; sourceTree = "<group>"; };
 		549207801357AD0C0046FA12 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		549207981357AD610046FA12 /* options.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = options.png; sourceTree = "<group>"; };
 		5492079A1357AD730046FA12 /* beatniksolo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beatniksolo.png; sourceTree = "<group>"; };
@@ -921,6 +930,8 @@
 				50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */,
 				50A7E5D91357CDC40099D7F0 /* EditorScene.h */,
 				50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */,
+				54574A0213593C9900FA2983 /* ShareScene.h */,
+				54574A0313593C9900FA2983 /* ShareScene.mm */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -987,6 +998,9 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54574A2B1359414C00FA2983 /* sharemenu.png */,
+				54574A2C1359414C00FA2983 /* playmenu.png */,
+				54574A2D1359414C00FA2983 /* createmenu.png */,
 				545749B21359335C00FA2983 /* finalcombohud.png */,
 				545749B31359335C00FA2983 /* finalscorehud.png */,
 				540BB87E13581A280068A8DA /* twirl.png */,
@@ -1526,6 +1540,9 @@
 				540BB87F13581A280068A8DA /* twirl.png in Resources */,
 				545749B41359335C00FA2983 /* finalcombohud.png in Resources */,
 				545749B51359335C00FA2983 /* finalscorehud.png in Resources */,
+				54574A2E1359414C00FA2983 /* sharemenu.png in Resources */,
+				54574A2F1359414C00FA2983 /* playmenu.png in Resources */,
+				54574A301359414C00FA2983 /* createmenu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1565,6 +1582,7 @@
 				54AA6D2C1357E6D10016AC30 /* HODSpinner.mm in Sources */,
 				54AA6D461357E7F80016AC30 /* Globals.m in Sources */,
 				54AA6D4D1357E8550016AC30 /* HelpScene.mm in Sources */,
+				54574A0413593C9900FA2983 /* ShareScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

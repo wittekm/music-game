@@ -231,3 +231,8 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 	comboColors.push_back(yellow);
 }
 
+bool CompareHitObjects(const HitObject* a, const HitObject* b)
+{
+    return a->startTimeMs < b->startTimeMs;
+}
+

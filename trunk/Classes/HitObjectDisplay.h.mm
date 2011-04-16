@@ -33,6 +33,9 @@
 - (BOOL) wasHeld: (CGPoint)location atTime: (NSTimeInterval)time;
 - (void) wasReleased;
 
+// for editor
+- (void) regenTexture;
+
 // shortcut to cast parent as a GameScene
 - (GameScene*) gsParent;
 

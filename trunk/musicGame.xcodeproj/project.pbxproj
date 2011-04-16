@@ -11,6 +11,10 @@
 		1F3B9A2D0EF2145700286867 /* BeatnikDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3B9A2B0EF2145700286867 /* BeatnikDelegate.m */; };
 		5004717A133138D100454BF4 /* HitObjectDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50047179133138D100454BF4 /* HitObjectDisplay.mm */; };
 		5004723B13314F0300454BF4 /* HODSlider.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5004723A13314F0300454BF4 /* HODSlider.mm */; };
+		500909B01359492500E55E06 /* EditLibraryPicker.mm in Sources */ = {isa = PBXBuildFile; fileRef = 500909AE1359492500E55E06 /* EditLibraryPicker.mm */; };
+		500909C51359494200E55E06 /* CCNodeExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 500909C41359494200E55E06 /* CCNodeExtension.m */; };
+		500909CA1359495D00E55E06 /* hellovetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 500909C91359495D00E55E06 /* hellovetica.ttf */; };
+		500909CC1359497400E55E06 /* grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 500909CB1359497400E55E06 /* grid.png */; };
 		5014FE7C13349DAB0073730C /* button.underlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 5014FE7B13349DAB0073730C /* button.underlay.png */; };
 		5017DB6E134D3063005B073A /* ResultsScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */; };
 		5017DB79134D34BA005B073A /* beatnik.png in Resources */ = {isa = PBXBuildFile; fileRef = 5017DB77134D34BA005B073A /* beatnik.png */; };
@@ -60,7 +64,6 @@
 		508831731325835700C6289B /* mflo.osu in Resources */ = {isa = PBXBuildFile; fileRef = 508831721325835700C6289B /* mflo.osu */; };
 		5088318A1325845A00C6289B /* Utility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508831891325845A00C6289B /* Utility.mm */; };
 		508831E3132691DD00C6289B /* button.ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 508831E2132691DD00C6289B /* button.ring.png */; };
-		50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */; };
 		50A7E5DB1357CDC40099D7F0 /* EditorScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */; };
 		50A7E63B1357DB7C0099D7F0 /* zerofourbee-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */; };
 		50A7E63C1357DB7C0099D7F0 /* zerofourbee-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */; };
@@ -353,6 +356,12 @@
 		50047179133138D100454BF4 /* HitObjectDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HitObjectDisplay.mm; sourceTree = "<group>"; };
 		5004723913314F0300454BF4 /* HODSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HODSlider.h; sourceTree = "<group>"; };
 		5004723A13314F0300454BF4 /* HODSlider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HODSlider.mm; sourceTree = "<group>"; };
+		500909AE1359492500E55E06 /* EditLibraryPicker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditLibraryPicker.mm; sourceTree = "<group>"; };
+		500909AF1359492500E55E06 /* EditorScene.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EditorScene.hh; sourceTree = "<group>"; };
+		500909C31359494200E55E06 /* CCNodeExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNodeExtension.h; sourceTree = "<group>"; };
+		500909C41359494200E55E06 /* CCNodeExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNodeExtension.m; sourceTree = "<group>"; };
+		500909C91359495D00E55E06 /* hellovetica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hellovetica.ttf; sourceTree = "<group>"; };
+		500909CB1359497400E55E06 /* grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid.png; sourceTree = "<group>"; };
 		5014FE7B13349DAB0073730C /* button.underlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.underlay.png; sourceTree = "<group>"; };
 		5017DB6C134D3063005B073A /* ResultsScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsScreen.h; sourceTree = "<group>"; };
 		5017DB6D134D3063005B073A /* ResultsScreen.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResultsScreen.mm; sourceTree = "<group>"; };
@@ -408,8 +417,6 @@
 		508831891325845A00C6289B /* Utility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utility.mm; sourceTree = "<group>"; };
 		508831E2132691DD00C6289B /* button.ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.ring.png; sourceTree = "<group>"; };
 		50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLibraryPicker.h; sourceTree = "<group>"; };
-		50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLibraryPicker.m; sourceTree = "<group>"; };
-		50A7E5D91357CDC40099D7F0 /* EditorScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorScene.h; sourceTree = "<group>"; };
 		50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditorScene.mm; sourceTree = "<group>"; };
 		50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-32.fnt"; sourceTree = "<group>"; };
 		50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zerofourbee-32.png"; sourceTree = "<group>"; };
@@ -874,6 +881,8 @@
 		507FCF7213330477005D2A6F /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				500909C31359494200E55E06 /* CCNodeExtension.h */,
+				500909C41359494200E55E06 /* CCNodeExtension.m */,
 				50B5B87C1352A6E200C4CC1E /* CCUIViewWrapper.h */,
 				50B5B87D1352A6E200C4CC1E /* CCUIViewWrapper.mm */,
 				50B72358134D591500B016E5 /* SMXMLDocument.h */,
@@ -927,8 +936,8 @@
 				5453D17013573EBF0068B8DE /* OptionsScene.h */,
 				5453D17113573EBF0068B8DE /* OptionsScene.mm */,
 				50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */,
-				50A7E4A61357AEF50099D7F0 /* EditLibraryPicker.m */,
-				50A7E5D91357CDC40099D7F0 /* EditorScene.h */,
+				500909AE1359492500E55E06 /* EditLibraryPicker.mm */,
+				500909AF1359492500E55E06 /* EditorScene.hh */,
 				50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */,
 				54574A0213593C9900FA2983 /* ShareScene.h */,
 				54574A0313593C9900FA2983 /* ShareScene.mm */,
@@ -998,6 +1007,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				500909C91359495D00E55E06 /* hellovetica.ttf */,
 				54574A2B1359414C00FA2983 /* sharemenu.png */,
 				54574A2C1359414C00FA2983 /* playmenu.png */,
 				54574A2D1359414C00FA2983 /* createmenu.png */,
@@ -1067,6 +1077,7 @@
 				5044DFD5132C9C5200FCC0FF /* gee_norm.osu */,
 				50B2C4E41357EB640046176A /* Icon.png */,
 				50B2C4E51357EB640046176A /* Icon@2x.png */,
+				500909CB1359497400E55E06 /* grid.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1543,6 +1554,8 @@
 				54574A2E1359414C00FA2983 /* sharemenu.png in Resources */,
 				54574A2F1359414C00FA2983 /* playmenu.png in Resources */,
 				54574A301359414C00FA2983 /* createmenu.png in Resources */,
+				500909CA1359495D00E55E06 /* hellovetica.ttf in Resources */,
+				500909CC1359497400E55E06 /* grid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1577,12 +1590,13 @@
 				50B5B87E1352A6E200C4CC1E /* CCUIViewWrapper.mm in Sources */,
 				50B5B8811352A6EF00C4CC1E /* SongSelectScreen.mm in Sources */,
 				5453D17213573EBF0068B8DE /* OptionsScene.mm in Sources */,
-				50A7E4A71357AEF50099D7F0 /* EditLibraryPicker.m in Sources */,
 				50A7E5DB1357CDC40099D7F0 /* EditorScene.mm in Sources */,
 				54AA6D2C1357E6D10016AC30 /* HODSpinner.mm in Sources */,
 				54AA6D461357E7F80016AC30 /* Globals.m in Sources */,
 				54AA6D4D1357E8550016AC30 /* HelpScene.mm in Sources */,
 				54574A0413593C9900FA2983 /* ShareScene.mm in Sources */,
+				500909B01359492500E55E06 /* EditLibraryPicker.mm in Sources */,
+				500909C51359494200E55E06 /* CCNodeExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

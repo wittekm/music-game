@@ -37,6 +37,7 @@
 - (void) spawnReaction: (int)type pos: (CGPoint)pos;
 - (void) modifyScore: (int)delta;
 
+
 @property Beatmap * beatmap;
 @property (retain) Scoreboard * scoreBoard;
 @property double timeAllowanceMs;

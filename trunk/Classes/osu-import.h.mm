@@ -96,7 +96,7 @@ public:
 	std::list<HitObject *> hitObjects;
 };
  
-
+bool CompareHitObjects(const HitObject* a, const HitObject* b);
 
 
 

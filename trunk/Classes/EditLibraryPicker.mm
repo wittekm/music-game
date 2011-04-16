@@ -9,7 +9,7 @@
 #import "BeatnikDelegate.h"
 #import "EditLibraryPicker.h"
 #import "MusicPlayerDemoViewController.h"
-#import "EditorScene.h"
+#import "EditorScene.hh"
 
 @implementation EditLibraryPicker
 -(id) init {

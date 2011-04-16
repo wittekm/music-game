@@ -146,8 +146,8 @@
 	id actionFadeIn = [CCFadeIn actionWithDuration:duration];
 	id actionScaleHalf = [CCEaseIn actionWithAction:[CCScaleBy actionWithDuration:duration scale: 0.5] rate: 2];
 	
-	[self runAction: [CCSequence actions:actionFadeIn, nil]];
-	[ring runAction: [CCSequence actions:actionScaleHalf,  nil]];
+	[self runAction:actionFadeIn];
+	[ring runAction: actionScaleHalf];
 }
 
 - (void) justDisplay {
@@ -185,6 +185,20 @@
 	if(disappearTimeMs == -1)
 		disappearTimeMs = hitObject->startTimeMs + [[self gsParent] timeAllowanceMs] + [[self gsParent] durationMs];
 	return disappearTimeMs;
+}
+
+- (void) regenTexture {
+	NSLog(@"I am being regenerated.");
+	CCRenderTexture * buttonTex = [self createHODCircleTexture:red :green :blue];
+	[self removeChild:buttonTex cleanup:true];
+	button = [CCSprite spriteWithTexture: [[buttonTex sprite] texture]];
+	button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
+	button.flipY = YES;
+	[self addChild:button];
+	
+	//button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
+	//button.flipY = YES;
+	
 }
 
 

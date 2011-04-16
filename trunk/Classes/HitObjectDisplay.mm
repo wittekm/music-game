@@ -74,6 +74,8 @@
 	return 0;
 }
 
+- (void) regenTexture { }
+
 
 - (GameScene*) gsParent {
 	return (GameScene*)[self parent];

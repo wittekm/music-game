@@ -378,23 +378,23 @@
 	};
 	5004723A13314F0300454BF4 /* HODSlider.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {962, 4316}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{2277, 808}";
+			sepNavIntBoundsRect = "{{0, 0}, {1398, 3913}}";
+			sepNavSelRange = "{3690, 0}";
+			sepNavVisRange = "{5713, 2308}";
 		};
 	};
 	5017DB6C134D3063005B073A /* ResultsScreen.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {962, 364}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 474}";
+			sepNavIntBoundsRect = "{{0, 0}, {962, 622}}";
+			sepNavSelRange = "{278, 0}";
+			sepNavVisRange = "{0, 589}";
 		};
 	};
 	5017DB6D134D3063005B073A /* ResultsScreen.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {908, 1261}}";
-			sepNavSelRange = "{1643, 94}";
-			sepNavVisRange = "{1412, 728}";
+			sepNavIntBoundsRect = "{{0, 0}, {962, 1443}}";
+			sepNavSelRange = "{408, 0}";
+			sepNavVisRange = "{0, 1040}";
 		};
 	};
 	5017DBE1134D48DA005B073A /* pkmn.fnt */ = {
@@ -414,16 +414,16 @@
 	506EDC2F102F528A00A389B3 /* GameScene.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {962, 676}}";
-			sepNavSelRange = "{983, 0}";
-			sepNavVisRange = "{47, 1149}";
+			sepNavSelRange = "{336, 36}";
+			sepNavVisRange = "{25, 1166}";
 			sepNavWindowFrame = "{{38, 294}, {750, 558}}";
 		};
 	};
 	506EDC30102F528A00A389B3 /* GameScene.mm */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1181, 5343}}";
-			sepNavSelRange = "{8847, 0}";
-			sepNavVisRange = "{7884, 1580}";
+			sepNavIntBoundsRect = "{{0, 0}, {1181, 5603}}";
+			sepNavSelRange = "{2224, 59}";
+			sepNavVisRange = "{1669, 1082}";
 			sepNavWindowFrame = "{{690, 291}, {750, 558}}";
 		};
 	};
@@ -838,7 +838,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 131;
-		modificationTime = 324628284.076291;
+		modificationTime = 324628735.741803;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -855,7 +855,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		lineNumber = 118;
-		modificationTime = 324628284.076383;
+		modificationTime = 324628735.741859;
 		originalNumberOfMultipleMatches = 0;
 		state = 2;
 	};
@@ -873,7 +873,7 @@
 		ignoreCount = 0;
 		lineNumber = 59;
 		location = Cocos2dLesson1;
-		modificationTime = 324628284.076413;
+		modificationTime = 324628735.741879;
 		originalNumberOfMultipleMatches = 1;
 		state = 2;
 	};
@@ -1172,7 +1172,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 10";
 		rLen = 0;
-		rLoc = 187;
+		rLoc = 188;
 		rType = 0;
 		vrLen = 614;
 		vrLoc = 2202;
@@ -1182,7 +1182,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 40";
 		rLen = 0;
-		rLoc = 762;
+		rLoc = 763;
 		rType = 0;
 		vrLen = 764;
 		vrLoc = 648;
@@ -1220,7 +1220,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 40";
 		rLen = 0;
-		rLoc = 762;
+		rLoc = 763;
 		rType = 0;
 		vrLen = 764;
 		vrLoc = 648;
@@ -2225,7 +2225,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 40";
 		rLen = 0;
-		rLoc = 762;
+		rLoc = 763;
 		rType = 0;
 		vrLen = 642;
 		vrLoc = 648;
@@ -2334,7 +2334,7 @@
 		isa = PBXTextBookmark;
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		rLen = 13;
-		rLoc = 1644;
+		rLoc = 1645;
 		rType = 0;
 	};
 	54574B3913595C9B00FA2983 /* PBXTextBookmark */ = {
@@ -2342,7 +2342,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 60";
 		rLen = 94;
-		rLoc = 1643;
+		rLoc = 1644;
 		rType = 0;
 		vrLen = 629;
 		vrLoc = 1412;
@@ -2352,7 +2352,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 60";
 		rLen = 13;
-		rLoc = 1644;
+		rLoc = 1645;
 		rType = 0;
 		vrLen = 1047;
 		vrLoc = 1291;
@@ -2466,7 +2466,7 @@
 		fRef = 5017DB6D134D3063005B073A /* ResultsScreen.mm */;
 		name = "ResultsScreen.mm: 60";
 		rLen = 94;
-		rLoc = 1643;
+		rLoc = 1644;
 		rType = 0;
 		vrLen = 728;
 		vrLoc = 1412;

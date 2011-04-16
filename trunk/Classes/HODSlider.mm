@@ -126,7 +126,7 @@
 		curve = [[FRCurve curveFromType:kFRCurveBezier order:kFRCurveQuadratic segments:50] retain]; // MAY NEED RETAIN
 		// 74 is the default size of the inner part.
 		[curve setWidth: 70.0f * s];
-		[curve setShowControlPoints:true];
+		//[curve setShowControlPoints:true];
 		ccColor3B curveColor = { r, g, b};
 		[curve setColor:curveColor];
 		[self addPoints];

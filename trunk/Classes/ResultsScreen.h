@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 #import "osu-import.h.mm"
 #import "Scoreboard.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ResultsScreen : CCLayer {
 	Beatmap * beatmap;

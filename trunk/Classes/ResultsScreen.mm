@@ -10,6 +10,7 @@
 #import "MenuScene.h"
 
 
+
 @implementation ResultsScreen
 @synthesize beatmap;
 @synthesize scoreboard;
@@ -91,6 +92,8 @@
 }
 	 
 - (void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	MPMusicPlayerController * musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
+	[musicPlayer pause];
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
 }
 	 

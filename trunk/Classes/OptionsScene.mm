@@ -87,12 +87,10 @@
 -(void) viewHelp: (id) sender
 {
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[HelpScene scene]]];
-	return;
 }
 
 -(void) backToMain:(id)sender
 {
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
-	return;
 }
 @end

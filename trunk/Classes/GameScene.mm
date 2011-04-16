@@ -20,7 +20,7 @@
 #import "SqlHandler.h"
 #import "Scoreboard.h"
 #import "FRCurve.h"
-
+#import "CCNodeExtension.h"
 #import "ResultsScreen.h"
 
 #include "TargetConditionals.h"
@@ -38,7 +38,7 @@ int score;
 
 list<HitObjectDisplay*> hods;
 
-int zOrder = INT_MAX;
+int zOrder = INT_MAX-5;
 
 
 HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
@@ -64,6 +64,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 @synthesize timeAllowanceMs;
 @synthesize durationMs;
 @synthesize scoreBoard;
+@synthesize black;
 
 +(id) sceneWithBeatmap: (Beatmap*)beatmap_;
 {
@@ -107,6 +108,12 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		durationMs = 750;
 		comboIndex = 0;
 		
+		//CCSprite * blackbox = [CCSprite spriteWithFile:@"wehavetogoblack.png"];
+		//blackbox.position=ccp(480/2,320/2);
+		//blackbox.opacity = 200;
+		//[self addChild:blackbox z: INT_MAX];
+		
+		
 	}
 	return self;
 }
@@ -148,7 +155,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
 		UIImage * artworkImage;
 		artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
-		CCSprite * albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
+		albumArt = [CCSprite spriteWithCGImage:[artworkImage CGImage]];
 		albumArt.position = ccp(480/2, 320/2);
 		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] && [[UIScreen mainScreen] scale] == 2){
 			//iPhone 4
@@ -226,7 +233,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	
 	
 	if(hods.empty()) {
-		zOrder = INT_MAX;
+		zOrder = INT_MAX - 5;
 	} // reset z-order to topmost. cuz we can.
 	
 	while(!hods.empty()) {
@@ -250,7 +257,8 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	if(hods.empty() && beatmap->hitObjects.empty()) {
 		//if(numPopped == 10) {
 		//[self fadeout];
-		[self pauseSchedulerAndActions];
+		//[self pauseSchedulerAndActions];
+		[self pauseTimersForHierarchy];
 		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
 	}
 	
@@ -270,11 +278,29 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 			[musicPlayer pause];
 			paused = true;
 			
-			[[CCDirector sharedDirector] stopAnimation];
+			black = [CCSprite spriteWithFile:@"wehavetogoblack.png"];
+			black.position = ccp(480/2,320/2);
+			black.scale = 2.0;
+			black.opacity = 0;
+			[self addChild:black z:INT_MAX-1];
+			CCSprite * cont1 = [CCSprite spriteWithFile:@"continue.png"];
+			CCSprite * quit1 = [CCSprite spriteWithFile:@"quit.png"];
+			CCMenuItemSprite * cont = [CCMenuItemSprite itemFromNormalSprite:cont1 selectedSprite:nil target:self selector:@selector(continueGame:)];
+			CCMenuItemSprite * quit = [CCMenuItemSprite itemFromNormalSprite:quit1 selectedSprite:nil target:self selector:@selector(backToMain:)];
+			menu = [CCMenu menuWithItems:cont,quit,nil];
+			[menu setPosition:ccp(480/2,320/2)];
+			cont.scale = .5;
+			quit.scale = .5;
+			cont.position = ccp(-100,25);
+			quit.position = ccp(75,0);
+			[self addChild:menu z:INT_MAX];
+			
+			[self pauseTimersForHierarchy];
+			
+			[black runAction:[CCFadeTo actionWithDuration:0.2 opacity:255*.5]];
+			
 		} else {
-			[[CCDirector sharedDirector] startAnimation];
-			[musicPlayer play];
-			paused = false;
+			
 		}
 	}
 	
@@ -372,6 +398,22 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 
 
 // on "dealloc" you need to release all your retained objects
+
+-(void) continueGame:(id) sender
+{
+	[self removeChild:black cleanup:true];
+	[self removeChild:menu cleanup:true];
+	[self resumeTimersForHierarchy];
+	[albumArt runAction:[CCFadeTo actionWithDuration:0.01 opacity:255]];
+
+	[musicPlayer play];
+	paused = false;
+}
+-(void) backToMain:(id)sender
+{
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
+}
+
 - (void) dealloc
 {
 	// in case you have something to dealloc, do it in this method

@@ -12,6 +12,7 @@
 #import "osu-import.h.mm"
 #import "HitObjectDisplay.h.mm"
 #import "Scoreboard.h"
+#import "MenuScene.h"
 #import <MediaPlayer/MediaPlayer.h>
 
  // fwd decl
@@ -22,11 +23,14 @@
 	BOOL paused;
 	Beatmap * beatmap;
 	MPMusicPlayerController * musicPlayer;
+	CCMenu * menu;
 	Scoreboard * scoreBoard;
 	double timeAllowanceMs;
 	double durationMs;
 	int comboIndex;
 	int numPopped;
+	CCSprite * black;
+	CCSprite * albumArt;
 }
 
 // returns a Scene that contains the HelloWorld as the only child
@@ -37,7 +41,8 @@
 - (void) spawnReaction: (int)type pos: (CGPoint)pos;
 - (void) modifyScore: (int)delta;
 
-
+@property (retain) CCSprite * black;
+@property (retain) CCMenu * menu;
 @property Beatmap * beatmap;
 @property (retain) Scoreboard * scoreBoard;
 @property double timeAllowanceMs;

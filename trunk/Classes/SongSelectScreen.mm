@@ -41,8 +41,10 @@
 -(void)addUIViewItem
 {
 	// create item programatically
-	CGRect cgRct = CGRectMake(15, 100, 300, 200);
-	
+	CGRect cgRct = CGRectMake(15, 85, 300, 200);
+	CCSprite * blackbox = [CCSprite spriteWithFile:@"wehavetogoblack.png"];
+	blackbox.position = ccp(155,145);
+	[self addChild:blackbox];
 	table = [[UITableView alloc] initWithFrame:cgRct style:UITableViewStylePlain];
 	//[button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchDown];
 	//[button setTitle:@"Touch Me" forState:UIControlStateNormal];
@@ -75,15 +77,23 @@
 		[self addChild:bg];
 		[self addChild:select];
 	 */
-		CCSprite * play = [CCSprite spriteWithFile:@"playmenu.png"];
+		//CCSprite * play = [CCSprite spriteWithFile:@"playmenu.png"];
+		CCLabelBMFont * selectasong = [CCLabelBMFont labelWithString:@"SELECT A SONG!" fntFile:@"zerofourbee-32.fnt"];
+		selectasong.position = ccp(480/2,280);
+		selectasong.color = (ccColor3B){0,0,0};
+		CCSprite * start1 = [CCSprite spriteWithFile:@"startmenu.png"];
+		CCSprite * start2 = [CCSprite spriteWithFile:@"startmenu.png"];
 		CCSprite * back1 = [CCSprite spriteWithFile:@"back.png"];
 		CCSprite * back2 = [CCSprite spriteWithFile:@"back.png"];
-		play.scale = .5;
+		//play.scale = .5;
 		CCMenuItemSprite * back = [CCMenuItemSprite itemFromNormalSprite:back1 selectedSprite:back2 target:self selector:@selector(backToMain:)];
-		play.position = ccp(65, 275);
-		[self addChild:play];
-		CCMenu * menu = [CCMenu menuWithItems:back,nil];
+		CCMenuItemSprite * start= [CCMenuItemSprite itemFromNormalSprite:start1 selectedSprite:start2 target:self selector:@selector(menuCallbackStart:)];
+		//play.position = ccp(65, 275);
+		[self addChild:selectasong];
+		CCMenu * menu = [CCMenu menuWithItems:start,back,nil];
 		menu.position = ccp(480/2,320/2);
+		start.position = ccp(160,0);
+		start.scale = .65;
 		back.scale = .5;
 		back.position = ccp(185,-120);
 		[self addChild:menu];

@@ -131,12 +131,21 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 	@try {
 		// Music Stuff
 		
-		MPMediaQuery * mfloQuery = [[MPMediaQuery alloc] init];
-		[mfloQuery addFilterPredicate: [MPMediaPropertyPredicate
-										predicateWithValue: @"Talamak"
+		MPMediaQuery * query = [[MPMediaQuery alloc] init];
+		[query addFilterPredicate: [MPMediaPropertyPredicate
+										predicateWithValue: [NSString stringWithUTF8String:(beatmap->Title).c_str()]
 										forProperty: MPMediaItemPropertyTitle]];
 		
-		[musicPlayer setQueueWithQuery:mfloQuery];
+		[query addFilterPredicate: [MPMediaPropertyPredicate
+									predicateWithValue: [NSString stringWithUTF8String:(beatmap->Artist).c_str()]
+									forProperty: MPMediaItemPropertyArtist]];
+		
+		if([[query items] count] == 0) {
+			NSLog(@"CANT PALY THIS SONG OH SHIIIIIII");
+		}
+		
+		[musicPlayer setQueueWithQuery:query];
+		
 		[musicPlayer play];
 		
 		//Letterboxes

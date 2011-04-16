@@ -37,6 +37,7 @@ class HitObject;
 	CCMenuItemLabel * newCombo;
 	CCMenuItemLabel * deleter;
 	CCMenuItemLabel * back;
+	CCMenuItemLabel * save;
 
 }
 
@@ -56,15 +57,20 @@ class HitObject;
 
 - (double) time;
 
-- (void) informChange;
 
+- (void) informChange;
 - (void)handleNewCombo: (CGPoint)location;
 - (void)handleDelete:(CGPoint)location;
+- (void) backToMain;
+- (void)handleSave;
+
 
 - (BOOL) paused;
 
 - (void) removeHitObjectDisplay: (HitObjectDisplay*)hod;
 
--(void) backToMain;
+
+- (CGPoint) normalizeLocation: (CGPoint) location;
+
 
 @end

@@ -135,7 +135,8 @@ HitObject * readHitObject(string line) {
 }
 
 std::ostream& operator<<(std::ostream& os, const HitObject& o) {
-	cout << o.x << "\t" << o.y << "\t" << o.startTimeMs;
+	//cout << o.x << "\t" << o.y << "\t" << o.startTimeMs;
+	os << o.x << "," << o.y << "," << o.startTimeMs << "," << o.objectType << "," << o.soundType << "\n";
 	return os;
 }
 
@@ -183,6 +184,7 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 	int state;
 	string TimingPointsString("[TimingPoints]");
 	string HitObjectsString("[HitObjects]");
+	string MetadataString("[Metadata]");
 	
 	while(getline(is, line)) {
 		
@@ -197,6 +199,30 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 			HitObject * h = readHitObject(line);
 			hitObjects.push_back(h);
 		}
+		
+		/*
+		 [Metadata]
+		 Title:Talamak
+		 Artist:Toro y Moi
+		 */
+		
+		if(line.substr(0,10) == MetadataString) {
+			getline(is, line);
+			stringstream lineStream(line);
+			string word;
+			getline(lineStream, word, ':');
+			getline(lineStream, word, '\n');
+			Title = word;
+			
+			getline(is, line);
+			stringstream lineStream2(line);
+			getline(lineStream2, word, ':');
+			getline(lineStream2, word, '\n');
+			Artist = word;
+			
+			cout << Title << " " << Artist << endl;
+		}
+		 
 		
 		// read in the TimingPoints
 		if(line.substr(0,14) == TimingPointsString) {

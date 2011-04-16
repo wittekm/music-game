@@ -71,7 +71,7 @@ public:
 	std::vector<int> EditorBookmarks;
 	
 	// [Metadata]
-	OSUString Title, Artist, Creator, Version, Source, Tags;
+	std::string Title, Artist, Creator, Version, Source, Tags;
 	
 	// [Difficulty]
 	int HPDrainRate;

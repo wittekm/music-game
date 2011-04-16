@@ -11,7 +11,13 @@
 #import "osu-import.h.mm"
 #import "CCNodeExtension.h"
 #import "MenuScene.h"
+#import "GameScene.h"
 
+#include <sstream>
+#include <iostream>
+using std::ostringstream;
+using std::cout;
+using std::endl;
 
 @implementation EditorScene
 
@@ -50,18 +56,22 @@
 		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
 		deleter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DEL" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(deleterMode)];		
 		back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
+		save = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"SAVE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(handleSave)];
+
 		
 		skipFive.scale = 2;
 		playPause.scale = 2;
 		backFive.scale = 2;
 		newCombo.scale = 0.6;
 		
-		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, nil];
+		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, save, nil];
 		menu.position = ccp(32, 220);
 		skipFive.position = ccp(0, -48);
 		newCombo.position = ccp(0, -96);
 		deleter.position = ccp(0, -128);
 		back.position = ccp(0, -160);
+		save.position = ccp(0, -192);
+
 		
 		backFive.position = ccp(0, 48);
 		[self addChild:menu];
@@ -153,25 +163,11 @@
 		if(touchEndedAtTime - touchBeganAtTime < 100) {
 			if(location.x < 64)
 				return; // don't intercept the ccmenu stuff!!
-			if(location.x > 416)
-				location.x = 416;
-			if(location.y < 64)
-				location.y = 64;
-			if(location.y > 256)
-				location.y = 256;
-			int x, y;
-			if((int)location.x % 32 < 16)
-				x = location.x - ((int)location.x % 32);
-			else
-				x = location.x + (32 - ((int)location.x % 32));
 			
-			if((int)location.y % 32 < 16)
-				y = location.y - ((int)location.y % 32);
-			else
-				y = location.y + (32 - ((int)location.y % 32));
+			location = [self normalizeLocation: location];
 
 			
-			ho = new HitObject(x, y, touchEndedAtTime, 1, 0);
+			ho = new HitObject(location.x, location.y, touchEndedAtTime, 1, 0);
 			
 			if(hoIndex == 0)
 				ho->number = 1;
@@ -226,7 +222,7 @@
 
 - (void) nextFrame: (ccTime)dt {
 	double time = [self time] + 100;
-	while( (hoIndex != hitObjects.size() ) &&
+	while( (hoIndex < hitObjects.size() ) &&
 		  ( time > hitObjects[hoIndex]->startTimeMs)//[[hitObjectDisplays objectAtIndex: hoIndex] hitObject]->startTimeMs)
 	) {
 		if(time <= hitObjects[hoIndex]->startTimeMs + disappearDurationMs) {
@@ -369,24 +365,78 @@
 		HitObject * hitObject = [hod hitObject];
 		double dist = sqrt( pow(hitObject->x - location.x, 2) + pow(hitObject->y - location.y, 2));
 		if(dist < 46) {
-			HitObject * ho = [hod hitObject];
 			/*
 			for(int i = 0; i < hitObjects.size(); i++) {
 				if(hitObjects[i] == ho)
 			}
 			 */
-			[self removeHitObjectDisplay: hod];
 			hitObjects.erase(find(hitObjects.begin(), hitObjects.end(), hitObject));
+			NSLog(@"about to delete");
+			[self removeHitObjectDisplay: hod];
+			NSLog(@"deleted");
 			[self informChange];
 			return;
 		}
 	}
 }
 
+/*
+ [Metadata]
+ Title:Talamak
+ Artist:Toro y Moi
+ */
+- (void) handleSave {
+	ostringstream os;
+	NSString* title = [[[mediaItem items] objectAtIndex:0] valueForProperty:MPMediaItemPropertyTitle];
+	NSString* artist = [[[mediaItem items] objectAtIndex:0] valueForProperty:MPMediaItemPropertyArtist];
+	os << "[Metadata]\n" << "Title:" << [title UTF8String] <<"\nArtist:" << [artist UTF8String] <<"\n[TimingPoints]\n" << "5140.06340758736,606.428138265616,4,2,0,100,1,0\n"
+	<< "[HitObjects]\n";
+	for(int i = 0; i < hitObjects.size(); i++) {
+		hitObjects[i]->x -= 64;
+		hitObjects[i]->y -= 64;
+
+		// Put them into iphone space
+		hitObjects[i]->x /= (480.-128.)/480.;
+		hitObjects[i]->y /= (320.-128.)/320.;
+		
+		hitObjects[i]->startTimeMs += 800; //wtf???
+		
+		//cout << "STRAIGHT TO COUT: " << *(hitObjects[i]);
+		os << *(hitObjects[i]);
+	}
+	
+	cout << "PRINTING OUT:\n" << os.str() << " HERP DERP DERP.";
+	
+	Beatmap * lol = new Beatmap([NSString stringWithUTF8String:os.str().c_str()]);
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap: lol]]];
+
+}
+
+- (CGPoint) normalizeLocation: (CGPoint) location {
+
+	if(location.x > 416)
+		location.x = 416;
+	if(location.y < 64)
+		location.y = 64;
+	if(location.y > 256)
+		location.y = 256;
+	int x, y;
+	if((int)location.x % 32 < 16)
+		x = location.x - ((int)location.x % 32);
+	else
+		x = location.x + (32 - ((int)location.x % 32));
+	
+	if((int)location.y % 32 < 16)
+		y = location.y - ((int)location.y % 32);
+	else
+		y = location.y + (32 - ((int)location.y % 32));
+	return CGPointMake(x, y);
+}
+
 
 // this is generally caleld by one of the HitObjectDisplays.
 - (void) removeHitObjectDisplay: (HitObjectDisplay*)hod {
-	//hods.remove(hod);
+	[hitObjectDisplays removeObject:hod];
 	[self removeChild:hod cleanup:true];
 }
 

@@ -62,22 +62,25 @@ bool increase = true;
 {
 	if( (self=[super initWithColor:ccc4(238,232,170,255)])) {
 		//CCLabelTTF * title = [CCLabelTTF labelWithString:@"Beatnik!" fontName:@"04b-19" fontSize:42];
+		
+		/*
+		ccColor3B red = {140, 0, 0};
+		ccColor3B green = {0, 120, 0};
+		ccColor3B blue = {0, 0, 120};
+		ccColor3B yellow = {160, 160, 0};
+		 */
+		
 		id toRed = [CCTintTo actionWithDuration: 0.5 red:255 green: 0 blue: 0];
 		id fromRed = [CCTintTo actionWithDuration:0.5 red:255 green:255 blue:255];
-		id toBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: 255];
-		id fromBlue = [CCTintBy actionWithDuration: 0.4 red: 0 green: 0 blue: -255];
-		id toGreen = [CCTintBy actionWithDuration: 0.8 red: 0 green: 255 blue: 0];
-		id fromGreen = [CCTintBy actionWithDuration:0.8 red:0 green: -255 blue:0];
+		id toBlue = [CCTintTo actionWithDuration: 0.4 red: 0 green: 0 blue: 255];
+		id toGreen = [CCTintTo actionWithDuration: 0.8 red: 0 green: 255 blue: 0];
 		/*
 		id redSequence = [CCSequence actions: toRed, fromBlue, nil];
 		id blueSequence = [CCSequence actions: toBlue, fromGreen, nil];
 		id greenSequence = [CCSequence actions: toGreen, fromRed, nil];
 		 */
-		id redSequence = [CCSequence actions: fromRed, toRed, nil];
-		id blueSequence = [CCSequence actions: fromBlue, toBlue, nil];
-		id greenSequence = [CCSequence actions: fromGreen, toGreen, nil];
+		id redSequence = [CCSequence actions: fromRed, toRed, fromRed, toBlue, fromRed, toGreen, nil];
 		
-		id colorCraziness = [CCSpawn actions: [CCRepeat actionWithAction: redSequence times: 4], [CCRepeat actionWithAction: blueSequence times: 2], greenSequence, nil];
 		
 		CCSprite * title = [CCSprite spriteWithFile:@"beatniksolo.png"];
 		title.position = ccp(480/2,320/2);

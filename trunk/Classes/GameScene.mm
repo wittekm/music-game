@@ -262,6 +262,12 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		}
 	}
 	
+	if(beatmap->hitObjects.size() == 1)
+		cout << **(beatmap->hitObjects.begin()) << endl;
+	
+	if(beatmap->hitObjects.size() == 1)
+		if( abs((*(beatmap->hitObjects.begin()))->x) > 500)
+			beatmap->hitObjects.clear();
 	
 	if(hods.empty() && beatmap->hitObjects.empty()) {
 		//if(numPopped == 10) {
@@ -270,10 +276,11 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		//[self pauseTimersForHierarchy];
 		
 		id finishAction = [CCCallBlock actionWithBlock:^{
-			[self pauseTimersForHierarchy];
+			[self pauseSchedulerAndActions];
 			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
+			
 		}];
-		[self runAction: [CCSequence actions:[CCDelayTime actionWithDuration:0.5], finishAction, nil]];
+		[self runAction: [CCSequence actions:[CCDelayTime actionWithDuration:1.0], finishAction, nil]];
 	}
 	
 }

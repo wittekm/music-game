@@ -416,6 +416,8 @@ using std::endl;
 		hitObjects[i]->x /= (480.-128.)/480.;
 		hitObjects[i]->y /= (320.-128.)/320.;
 		
+		hitObjects[i]->y = 320 - hitObjects[i]->y;
+		
 		//hitObjects[i]->startTimeMs += 400; //wtf???
 		
 		//cout << "STRAIGHT TO COUT: " << *(hitObjects[i]);

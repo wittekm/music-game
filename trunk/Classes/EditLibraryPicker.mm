@@ -10,15 +10,42 @@
 #import "EditLibraryPicker.h"
 #import "MusicPlayerDemoViewController.h"
 #import "EditorScene.hh"
+#include "MenuScene.h"
 
 @implementation EditLibraryPicker
 -(id) init {
-	if( (self = [super init]) ) {
+	if( (self=[super initWithColor:ccc4(238,232,170,255)])) {
 		
 		mediaPicker = [[MPMediaPickerController alloc] initWithMediaTypes:MPMediaTypeMusic];
 		mediaPicker.delegate = [[EditLibraryDelegate alloc] initWithPickerScene: self];
+		/*
 		
-		[[(BeatnikDelegate*)[[UIApplication sharedApplication] delegate] window] addSubview:mediaPicker.view];
+		CCMenuItemFont * create = [CCMenuItemFont itemFromString:@"DERP DERP."];
+		//CCMenuItemLabel * create = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CREATE" fntFile:@"zerofourbee-48.fnt"] target: self selector:@selector(chooseCreate)] ;
+		CCLabelBMFont * eLabel = [CCLabelBMFont labelWithString:@"EDIT" fntFile:@"zerofourbee-48.fnt"];
+		CCMenuItemLabel * edit = [CCMenuItemLabel itemWithLabel:eLabel target: self selector:@selector(chooseEdit)];		
+		//[create setScale:1.5];
+		//[edit setScale:1.5];
+		
+		menu = [CCMenu menuWithItems:create, edit, nil];
+		
+		//[menu alignItemsHorizontallyWithPadding:20];
+		
+		menu.position = ccp(480/2, 320/2);
+		[self addChild:menu];
+		 */
+		
+		CCMenuItemLabel * create = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CREATE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)] ;
+		CCMenuItemLabel * edit = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"EDIT" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)];		
+		CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
+		
+		
+		menu = [CCMenu menuWithItems: create, edit, back, nil];
+		menu.position = ccp(480/2, 160);
+		[menu alignItemsHorizontallyWithPadding:20];
+		
+		
+		[self addChild:menu];
 		
 	}
 	return self;
@@ -28,6 +55,18 @@
 	[self removeMediaPicker];
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[EditorScene sceneWithMediaItem:item]]];
 
+}
+
+- (void) chooseCreate {
+	[[(BeatnikDelegate*)[[UIApplication sharedApplication] delegate] window] addSubview:mediaPicker.view];
+}
+- (void) chooseEdit {
+	
+}
+-(void) backToMain
+{
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
+	return;
 }
 
 
@@ -47,7 +86,7 @@
 
 - (void) removeMediaPicker {
 	[mediaPicker.view removeFromSuperview];
-	[mediaPicker release]; // needed?
+	//[mediaPicker release]; // needed?
 }
 
 @end

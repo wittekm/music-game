@@ -169,13 +169,6 @@ bool increase = true;
 	
 	
 	SqlHandler * handler = [[SqlHandler alloc] init];
-	/*
-	// lists all the beatmaps
-	for(SqlRow * row in [handler beatmaps]) {
-		NSLog(@"%@ - %@", [row artist], [row title]);
-	}
-	Beatmap * beatmap = [[[handler beatmaps] objectAtIndex:1] getBeatmap];
-	*/
 	 
 	//[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap:beatmap]]];
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[SongSelectScreen sceneWithSongList:handler]]];

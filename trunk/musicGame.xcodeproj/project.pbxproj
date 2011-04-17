@@ -64,6 +64,9 @@
 		508831731325835700C6289B /* mflo.osu in Resources */ = {isa = PBXBuildFile; fileRef = 508831721325835700C6289B /* mflo.osu */; };
 		5088318A1325845A00C6289B /* Utility.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508831891325845A00C6289B /* Utility.mm */; };
 		508831E3132691DD00C6289B /* button.ring.png in Resources */ = {isa = PBXBuildFile; fileRef = 508831E2132691DD00C6289B /* button.ring.png */; };
+		508A4F68135A9A54008C447A /* ShareDownloadScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508A4F67135A9A54008C447A /* ShareDownloadScene.mm */; };
+		508A4FCF135AA274008C447A /* BeatnikAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 508A4FCE135AA274008C447A /* BeatnikAlert.m */; };
+		508A5028135AAA2A008C447A /* ShareUploadScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 508A5027135AAA2A008C447A /* ShareUploadScene.mm */; };
 		50A7E5DB1357CDC40099D7F0 /* EditorScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = 50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */; };
 		50A7E63B1357DB7C0099D7F0 /* zerofourbee-32.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */; };
 		50A7E63C1357DB7C0099D7F0 /* zerofourbee-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 50A7E63A1357DB7C0099D7F0 /* zerofourbee-32.png */; };
@@ -417,6 +420,12 @@
 		508831881325845A00C6289B /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		508831891325845A00C6289B /* Utility.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utility.mm; sourceTree = "<group>"; };
 		508831E2132691DD00C6289B /* button.ring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.ring.png; sourceTree = "<group>"; };
+		508A4F66135A9A54008C447A /* ShareDownloadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDownloadScene.h; sourceTree = "<group>"; };
+		508A4F67135A9A54008C447A /* ShareDownloadScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareDownloadScene.mm; sourceTree = "<group>"; };
+		508A4FCD135AA274008C447A /* BeatnikAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeatnikAlert.h; sourceTree = "<group>"; };
+		508A4FCE135AA274008C447A /* BeatnikAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeatnikAlert.m; sourceTree = "<group>"; };
+		508A5026135AAA2A008C447A /* ShareUploadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareUploadScene.h; sourceTree = "<group>"; };
+		508A5027135AAA2A008C447A /* ShareUploadScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShareUploadScene.mm; sourceTree = "<group>"; };
 		50A7E4A51357AEF50099D7F0 /* EditLibraryPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLibraryPicker.h; sourceTree = "<group>"; };
 		50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditorScene.mm; sourceTree = "<group>"; };
 		50A7E6391357DB7C0099D7F0 /* zerofourbee-32.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "zerofourbee-32.fnt"; sourceTree = "<group>"; };
@@ -943,6 +952,12 @@
 				50A7E5DA1357CDC40099D7F0 /* EditorScene.mm */,
 				54574A0213593C9900FA2983 /* ShareScene.h */,
 				54574A0313593C9900FA2983 /* ShareScene.mm */,
+				508A4F66135A9A54008C447A /* ShareDownloadScene.h */,
+				508A4F67135A9A54008C447A /* ShareDownloadScene.mm */,
+				508A5026135AAA2A008C447A /* ShareUploadScene.h */,
+				508A5027135AAA2A008C447A /* ShareUploadScene.mm */,
+				508A4FCD135AA274008C447A /* BeatnikAlert.h */,
+				508A4FCE135AA274008C447A /* BeatnikAlert.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1601,6 +1616,9 @@
 				54574A0413593C9900FA2983 /* ShareScene.mm in Sources */,
 				500909B01359492500E55E06 /* EditLibraryPicker.mm in Sources */,
 				500909C51359494200E55E06 /* CCNodeExtension.m in Sources */,
+				508A4F68135A9A54008C447A /* ShareDownloadScene.mm in Sources */,
+				508A4FCF135AA274008C447A /* BeatnikAlert.m in Sources */,
+				508A5028135AAA2A008C447A /* ShareUploadScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1731,6 +1749,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Cocos2dLesson1_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = 4.2;
 				INFOPLIST_FILE = Resources/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -1795,7 +1814,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1809,11 +1828,13 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};

@@ -12,6 +12,7 @@
 #import "CCNodeExtension.h"
 #import "MenuScene.h"
 #import "GameScene.h"
+#import "SqlHandler.h"
 
 #include <sstream>
 #include <iostream>
@@ -44,7 +45,7 @@ using std::endl;
 - (id) init {
 	if ( (self = [super init]) ) {
 		
-		disappearDurationMs = 500;
+		disappearDurationMs = 1000;
 		self.isTouchEnabled = YES;
 		touchBeganAtTime = INT_MAX;
 		CCSprite * skipFiveSprite = [CCSprite spriteWithFile:@"PlusFive.png"];
@@ -53,7 +54,7 @@ using std::endl;
 		CCMenuItemSprite *skipFive = [CCMenuItemSprite itemFromNormalSprite:skipFiveSprite selectedSprite:nil target:self selector:@selector(skip)];
 		CCMenuItemSprite *playPause = [CCMenuItemSprite itemFromNormalSprite:playPauseSprite selectedSprite:nil target:self selector:@selector(play)];
 		CCMenuItemSprite *backFive = [CCMenuItemSprite itemFromNormalSprite:backFiveSprite selectedSprite:nil target:self selector:@selector(back)];
-		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
+		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
 		deleter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DEL" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(deleterMode)];		
 		back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
 		save = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"SAVE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(handleSave)];
@@ -62,7 +63,7 @@ using std::endl;
 		skipFive.scale = 2;
 		playPause.scale = 2;
 		backFive.scale = 2;
-		newCombo.scale = 0.6;
+		//newCombo.scale = 0.6;
 		
 		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, save, nil];
 		menu.position = ccp(32, 220);
@@ -143,7 +144,7 @@ using std::endl;
 		touchBeganAtTime = [self time];
 	}
 	
-	if(mode == NEWCOMBO && hitObjects.size() != 0) {
+	if(mode == NEWCOMBO && hitObjects.size() != 0 && [self paused]) {
 		[self handleNewCombo: location];
 	}
 	else if(mode == DELETE && hitObjects.size() != 0) {
@@ -155,10 +156,11 @@ using std::endl;
 	UITouch * touch = [touches anyObject];	
 	CGPoint location = [self convertTouchToNodeSpace: touch];
 
+	HitObject * ho = 0;
+	HODCircle * hod = nil;
 	
-	if(mode == NORMAL) {
+	if( (![self paused] && mode == NEWCOMBO) || mode == NORMAL) {
 		double touchEndedAtTime = [self time];
-		HitObject * ho;
 		
 		if(touchEndedAtTime - touchBeganAtTime < 100) {
 			if(location.x < 64)
@@ -177,12 +179,14 @@ using std::endl;
 				
 			hitObjects.insert( (hitObjects.begin() + hoIndex++), ho);
 			
-			HODCircle * hod = [[HODCircle alloc] initWithHitObject:ho red:200 green:0 blue:0];
+			hod = [[[HODCircle alloc] initWithHitObject:ho red:200 green:0 blue:0] retain];
 			[self addChild:hod];
 			[hod justDisplay];
 			[hitObjectDisplays addObject:hod];
+			[hod release];
 			
-			[self informChange];
+			if(hoIndex != hitObjects.size()-1)
+				[self informChange];
 			
 			id removeAction = [CCCallBlock actionWithBlock:^{
 				[hitObjectDisplays removeObject:hod];
@@ -194,6 +198,12 @@ using std::endl;
 				[hod pauseTimersForHierarchy];
 			// circle
 		}
+	}
+	
+	if(mode == NEWCOMBO && ho) {
+		ho->number = 1;
+		ho->objectType = 5;
+		[self newComboMode]; //untoggle newCombo
 	}
 	
 	
@@ -353,6 +363,8 @@ using std::endl;
 			
 			[self informChange];
 			
+			[self newComboMode];
+			
 			return;
 		}
 	}
@@ -374,6 +386,7 @@ using std::endl;
 			NSLog(@"about to delete");
 			[self removeHitObjectDisplay: hod];
 			NSLog(@"deleted");
+			hoIndex = 0;
 			[self informChange];
 			return;
 		}
@@ -389,6 +402,10 @@ using std::endl;
 	ostringstream os;
 	NSString* title = [[[mediaItem items] objectAtIndex:0] valueForProperty:MPMediaItemPropertyTitle];
 	NSString* artist = [[[mediaItem items] objectAtIndex:0] valueForProperty:MPMediaItemPropertyArtist];
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd-yyyy' T 'HH:mm";
+	
+	os << "beatnik file format 04/2011\n" << [[dateFormatter stringFromDate:[NSDate date]] UTF8String] << "\n";
 	os << "[Metadata]\n" << "Title:" << [title UTF8String] <<"\nArtist:" << [artist UTF8String] <<"\n[TimingPoints]\n" << "5140.06340758736,606.428138265616,4,2,0,100,1,0\n"
 	<< "[HitObjects]\n";
 	for(int i = 0; i < hitObjects.size(); i++) {
@@ -399,7 +416,7 @@ using std::endl;
 		hitObjects[i]->x /= (480.-128.)/480.;
 		hitObjects[i]->y /= (320.-128.)/320.;
 		
-		hitObjects[i]->startTimeMs += 800; //wtf???
+		//hitObjects[i]->startTimeMs += 400; //wtf???
 		
 		//cout << "STRAIGHT TO COUT: " << *(hitObjects[i]);
 		os << *(hitObjects[i]);
@@ -407,9 +424,11 @@ using std::endl;
 	
 	cout << "PRINTING OUT:\n" << os.str() << " HERP DERP DERP.";
 	
-	Beatmap * lol = new Beatmap([NSString stringWithUTF8String:os.str().c_str()]);
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap: lol]]];
-
+	//Beatmap * lol = new Beatmap([NSString stringWithUTF8String:os.str().c_str()]);
+	//[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[GameScene sceneWithBeatmap: lol]]];
+	NSString* beatmapStr = [NSString stringWithUTF8String:os.str().c_str()];
+	[[[SqlHandler alloc] init] insertNewBeatmap:beatmapStr artist:artist title:title];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionMoveInL transitionWithDuration:0.5f scene:[MenuScene scene]]];
 }
 
 - (CGPoint) normalizeLocation: (CGPoint) location {

@@ -30,19 +30,55 @@
 
 		
 		ring = [CCSprite spriteWithFile:@"button.ring.png"];		 
-		ring.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
+		ring.position = ccp(hitObject->x, hitObject->y);
 		ccColor3B color = {r, g, b};
 		ring.color = color;
 		
 		button = [CCSprite spriteWithTexture: [[buttonTex sprite] texture]];
-		button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
+		button.position = ccp(hitObject->x, hitObject->y);
 		button.flipY = YES;
+		
+		///////// Number thang
+		
+		// 0 = repeat
+		if(hitObject->number == 0) { 
+			/*
+			 // Do something special if the number is 0.
+			 numberDisplay = 
+			 [CCLabelTTF labelWithString:[NSString stringWithFormat:@"*"] 
+			 fontName:@"Helvetica Neue" fontSize:48];
+			 */
+			numberDisplay = 
+			[CCSprite spriteWithFile:@"return.png"];
+		} 
+		else if(hitObject->number == -1) {
+			numberDisplay = 
+			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@""] 
+								   fntFile:@"zerofourbee-48.fnt"];
+			//numberDisplay.scale = 2;
+		} else {
+			/*
+			 numberDisplay = 
+			 [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
+			 fontName:@"Helvetica Neue" fontSize:48];
+			 */
+			numberDisplay = 
+			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
+								   fntFile:@"zerofourbee-48.fnt"];
+			//numberDisplay.scale = 2;
+		}
+		
+		numberDisplay.position = ccp(hitObject->x, hitObject->y);
+		
+		/////// end number thang
 		
 		[self addChild: button];
 		[self addChild:ring];
+		[self addChild: numberDisplay];
 		
 		button.scale = initialScale;
 		ring.scale = initialScale;
+		numberDisplay.scale = initialScale;
 		
 		[self setOpacity:0];
 		
@@ -94,40 +130,6 @@
 	[underlayTex visit];
 	[buttonTex visit];
 	[overlayTex visit];
-	
-	if(doNumber) {
-		CCNode * numberDisplay;
-		// 0 = repeat
-		if(hitObject->number == 0) { 
-			/*
-			// Do something special if the number is 0.
-			numberDisplay = 
-			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"*"] 
-							   fontName:@"Helvetica Neue" fontSize:48];
-			 */
-			numberDisplay = 
-			[CCSprite spriteWithFile:@"return.png"];
-		} 
-		else if(hitObject->number == -1) {
-			numberDisplay = 
-			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@""] 
-							   fntFile:@"zerofourbee-48.fnt"];
-			//numberDisplay.scale = 2;
-		} else {
-			/*
-			numberDisplay = 
-			[CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
-							   fontName:@"Helvetica Neue" fontSize:48];
-			 */
-			numberDisplay = 
-			[CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", hitObject->number] 
-								  fntFile:@"zerofourbee-48.fnt"];
-			//numberDisplay.scale = 2;
-		}
-		
-		numberDisplay.position = ccp(size.width/2,size.height/2);
-		[numberDisplay visit];
-	}
 	
 	[target end];
 	
@@ -188,17 +190,8 @@
 }
 
 - (void) regenTexture {
-	NSLog(@"I am being regenerated.");
-	CCRenderTexture * buttonTex = [self createHODCircleTexture:red :green :blue];
-	[self removeChild:buttonTex cleanup:true];
-	button = [CCSprite spriteWithTexture: [[buttonTex sprite] texture]];
-	button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
-	button.flipY = YES;
-	[self addChild:button];
-	
-	//button.position = ccp(hitObject->x * 1.0, hitObject->y * 1.0);
-	//button.flipY = YES;
-	
+	//NSLog(@"I am being regenerated.");
+	[numberDisplay setString:[NSString stringWithFormat:@"%d", hitObject->number] ];
 }
 
 

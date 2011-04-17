@@ -13,6 +13,7 @@
 	CGSize size;
 	CCSprite * button;
 	CCSprite * ring;
+	CCLabelBMFont * numberDisplay;
 }
 
 - (CCRenderTexture*) createHODCircleTexture: (int)red :(int)green :(int)blue;

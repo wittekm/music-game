@@ -11,28 +11,24 @@
 #import "Scoreboard.h"
 #import "CCUIViewWrapper.h"
 #import "SqlHandler.h"
-#import "MenuScene.h"
 
 
-@interface SongSelectScreen : CCLayerColor {
-	SqlHandler * songList;
+@interface ShareUploadScene : CCLayerColor {
 	UITableView * table;
 	CCUIViewWrapper * wrapper;
-	SqlHandler * handler;
-	Beatmap * currentBeatmap;
+	SqlRow * currentBeatmap;
 }
 
-+(id) sceneWithSongList: (SqlHandler*)songList;
++(id) scene;
 
-@property (retain) SqlHandler * songList;
-@property Beatmap * currentBeatmap;
+@property (retain) SqlRow * currentBeatmap;
 @end
 
 
-@interface SongSelectViewController : UITableViewController {
-	SongSelectScreen * parent;
+@interface ShareUploadSceneController : UITableViewController {
+	ShareUploadScene * parent;
 	SqlHandler * handler;
 }
-- (id) initWithParent:(SongSelectScreen *)parent_;
+- (id) initWithParent:(ShareUploadScene *)parent_;
 @property (retain) SqlHandler * handler;
 @end

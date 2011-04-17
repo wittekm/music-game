@@ -25,18 +25,18 @@ using namespace std;
 using namespace std::tr1;
 using namespace std::tr1::placeholders;
 
+int Beatmap::numberCounter = 1;
+
 enum HitObjectType {
 	Normal = 1, Slider = 2, NewCombo = 4, NormalNewCombo = 5, SliderNewCombo = 6, Spinner = 8
 };
 
-int numberCounter = 1; // ughhhh globals suckkkk
-
 HitObject::HitObject(int x_, int y_, int startTimeMs_, int objectType_, int soundType_) 
 : x(x_), y(y_), startTimeMs(startTimeMs_), objectType(objectType_), soundType(soundType_) {
 	if(objectType & 4) // new combo
-		numberCounter = 1;
+		Beatmap::numberCounter = 1;
 	
-	number = numberCounter++;
+	number = Beatmap::numberCounter++;
 }
 
 HitSlider::HitSlider(int x_, int y_, int startTimeMs_, int objectType_, int soundType_, stringstream& ss) 
@@ -175,7 +175,9 @@ std::ostream& operator<<(std::ostream& os, const HitObject& o) {
  }
 
 Beatmap::Beatmap(NSString * beatmapFromSql) {
+	numberCounter = 1;
 	/* This is a bunch of code to get an ifstream from a cstr path to a resource*/
+	NSLog(beatmapFromSql);
 	const char * cstr = [beatmapFromSql UTF8String];
 	string str = string(cstr);
 	istringstream is(str);

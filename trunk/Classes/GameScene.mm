@@ -267,8 +267,13 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 		//if(numPopped == 10) {
 		//[self fadeout];
 		//[self pauseSchedulerAndActions];
-		[self pauseTimersForHierarchy];
-		[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
+		//[self pauseTimersForHierarchy];
+		
+		id finishAction = [CCCallBlock actionWithBlock:^{
+			[self pauseTimersForHierarchy];
+			[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.5f scene:[ResultsScreen sceneWithBeatmap:beatmap scoreboard:scoreBoard]]];
+		}];
+		[self runAction: [CCSequence actions:[CCDelayTime actionWithDuration:0.5], finishAction, nil]];
 	}
 	
 }

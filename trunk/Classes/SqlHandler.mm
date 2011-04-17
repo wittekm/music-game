@@ -32,7 +32,10 @@ static sqlite3_stmt *sql_handler_init_stmt=nil;
 			artist = [NSString stringWithUTF8String:(char*) sqlite3_column_text(sql_handler_init_stmt, 0)];
 			title = [NSString stringWithUTF8String:(char*) sqlite3_column_text(sql_handler_init_stmt, 1)];
 			beatmap = [NSString stringWithUTF8String:(char*) sqlite3_column_text(sql_handler_init_stmt, 2)];
+			NSLog(@"YES I GOT ALL OF THEM FOR FUCKS SAKE %@ %@", artist, title);
+			//NSLog(@"%@ |||| %@ |||| %@", artist, title, beatmap);
 		} else {
+			NSLog(@"NOTHING. NADA.");
 			artist = @"Nothing. Nada.";
 		}
 		
@@ -90,6 +93,35 @@ static sqlite3_stmt *sql_handler_init_stmt=nil;
 		[beatmaps sortUsingSelector:@selector(compare:)];
 	}
 	return self;
+}
+
+- (BOOL) insertNewBeatmap: (NSString*)beatmapStr artist: (NSString*)artist title: (NSString*)title{
+	NSString *path = [[[NSBundle mainBundle] resourcePath] 
+					  stringByAppendingPathComponent:@"musicgame.sqlite"];
+	
+	if(sqlite3_open([path UTF8String], &database) == SQLITE_OK) {
+		NSString * sqlNS = [NSString stringWithFormat:@"INSERT INTO beatmaps (artist, title, beatmap) VALUES ('%@', '%@', '%@')", artist, title, beatmapStr];
+		const char * sql = [sqlNS UTF8String];
+		//"SELECT pk FROM beatmaps";
+
+		sqlite3_stmt *statement;
+		
+		if(sqlite3_prepare_v2(database, sql, -1, &statement, NULL) != SQLITE_OK) {
+			NSAssert1(0, @"Failed to open db w message %s", sqlite3_errmsg(database));
+		}
+		
+		int success = sqlite3_step(statement);
+		sqlite3_reset(statement);
+		
+		if(success != SQLITE_ERROR)
+			return 1;
+		else
+			return 0;
+		
+	} else {
+		sqlite3_close(database);
+		NSAssert1(0, @"Failed to open db w message %s", sqlite3_errmsg(database));
+	}
 }
 
 @end

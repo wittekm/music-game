@@ -94,6 +94,8 @@ public:
 	
 	// [HitObjects]
 	std::list<HitObject *> hitObjects;
+	
+	static int numberCounter;
 };
  
 bool CompareHitObjects(const HitObject* a, const HitObject* b);

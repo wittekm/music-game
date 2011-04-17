@@ -11,15 +11,19 @@
 #import "CCUIViewWrapper.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface EditLibraryPicker : CCLayer  {
+@interface EditLibraryPicker : CCLayerColor  {
 	CCUIViewWrapper * wrapper;
 	MPMediaPickerController *mediaPicker;
+	CCMenu *menu;
 }
 
 +(id) scene;
 - (void) removeMediaPicker;
 - (void) selectedItem: (MPMediaItemCollection *) m;
 
+- (void) chooseCreate;
+- (void) chooseEdit;
+-(void) backToMain;
 
 @end
 

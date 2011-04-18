@@ -432,6 +432,7 @@ HitObjectDisplay* HODFactory(HitObject* hitObject, int r, int g, int b) {
 }
 -(void) backToMain:(id)sender
 {
+	
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
 }
 

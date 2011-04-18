@@ -35,14 +35,25 @@
 		[self addChild:menu];
 		 */
 		
-		CCMenuItemLabel * create = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CREATE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)] ;
-		CCMenuItemLabel * edit = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"EDIT" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)];		
-		CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
+		//CCMenuItemLabel * create = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CREATE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)] ;
+		//CCMenuItemLabel * edit = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"EDIT" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)];		
+		//CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
+		CCSprite * create = [CCSprite spriteWithFile:@"createmenu.png"];
+		CCSprite * edit = [CCSprite spriteWithFile:@"edit.png"];
+		CCSprite * back = [CCSprite spriteWithFile:@"back.png"];
+		CCMenuItemSprite * menucreate = [CCMenuItemSprite itemFromNormalSprite:create selectedSprite:nil target:self selector:@selector(chooseCreate)];
+		CCMenuItemSprite * menuedit = [CCMenuItemSprite itemFromNormalSprite:edit selectedSprite:nil target:self selector:@selector(chooseCreate)];
+		CCMenuItemSprite * menuback = [CCMenuItemSprite itemFromNormalSprite:back selectedSprite:nil target:self selector:@selector(backToMain)];
+		menu = [CCMenu menuWithItems: menucreate, menuedit, menuback, nil];
+		menu.position = ccp(480/2, 320/2);
+		menuback.position = ccp(185,-120);
+		menuback.scale = .5;
+		menucreate.position = ccp(-100,0);
+		menucreate.scale = .5;
+		menuedit.position = ccp(0,0);
+		menuedit.scale = .5;
+		//[menu alignItemsHorizontallyWithPadding:20];
 		
-		
-		menu = [CCMenu menuWithItems: create, edit, back, nil];
-		menu.position = ccp(480/2, 160);
-		[menu alignItemsHorizontallyWithPadding:20];
 		
 		
 		[self addChild:menu];

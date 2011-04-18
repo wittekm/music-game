@@ -229,6 +229,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -278,14 +280,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>17</integer>
-									<integer>13</integer>
-									<integer>10</integer>
+									<integer>64</integer>
+									<integer>63</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 169}, {290, 641}}</string>
+							<string>{{0, 0}, {290, 641}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -317,14 +318,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string>download.png</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +331,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GameScene.mm</string>
+										<string>download.png</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>54574BD413596EDC00FA2983</string>
+										<string>54B0DDD6135BD52100DF3955</string>
 										<key>history</key>
 										<array>
 											<string>54CDEC7C13332C7900DD6134</string>
@@ -427,13 +426,16 @@
 											<string>54574B5B135964A200FA2983</string>
 											<string>54574B5C135964A200FA2983</string>
 											<string>54574B5D135964A200FA2983</string>
-											<string>54574B98135969F300FA2983</string>
 											<string>54574B9A135969F300FA2983</string>
-											<string>54574B9B135969F300FA2983</string>
 											<string>54574BC513596D6F00FA2983</string>
 											<string>54574BC613596D6F00FA2983</string>
 											<string>54574BC713596D6F00FA2983</string>
-											<string>54574BC813596D6F00FA2983</string>
+											<string>54592FCB135BD512006AC3A2</string>
+											<string>54592FCC135BD512006AC3A2</string>
+											<string>54592FCD135BD512006AC3A2</string>
+											<string>54592FCE135BD512006AC3A2</string>
+											<string>54592FCF135BD512006AC3A2</string>
+											<string>54B0DDD5135BD52100DF3955</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -491,9 +493,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>54574AD813594A3800FA2983</string>
+				<string>54B0DDD7135BD52100DF3955</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>54574AD913594A3800FA2983</string>
+				<string>54B0DDD8135BD52100DF3955</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -631,14 +633,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>54574BD513596EDC00FA2983</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>54574B14135954DF00FA2983</string>
-		<string>54574B15135954DF00FA2983</string>
-		<string>1C78EAAD065D492600B07095</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>5442ED941328461B009B5324</string>
-		<string>/Users/barrelrolled/Documents/musicGameAgainAgain/musicGame.xcodeproj</string>
+		<string>/Users/barrelrolled/Documents/BeatnikFinal/music-game/musicGame.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>81 164 1335 700 0 0 1440 878 </string>
@@ -657,14 +653,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameScene.mm</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -720,7 +714,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>5442ED941328461B009B5324</string>
-				<string>54574ADA13594A3800FA2983</string>
+				<string>54B0DDD9135BD52100DF3955</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -733,7 +727,7 @@
 			<key>WindowToolGUID</key>
 			<string>5442ED941328461B009B5324</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

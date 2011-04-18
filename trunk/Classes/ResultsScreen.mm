@@ -62,7 +62,7 @@
 	[percentage setAnchorPoint:ccp(0,0)];
 	[percentage setColor:(ccColor3B){0, 0, 0}];
 	[percentage setScale: 1.0];
-	[percentage setPosition:ccp(30, 320-90)];
+	[percentage setPosition:ccp(10, 320-90)];
 	[self addChild: percentage];
 		
 	double pct = double(scoreboard.hit) / (scoreboard.hit + scoreboard.miss);
@@ -73,7 +73,7 @@
 		response1.scaleY = 3.0;
 		response1.scaleX = 1.5;
 		[response1 setAnchorPoint:ccp(0,1)];
-		[response1 setPosition:ccp(30, 320-130)];
+		[response1 setPosition:ccp(10, 320-130)];
 		[response1 setColor:ccRED];
 		[self addChild: response1];
 	}

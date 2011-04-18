@@ -125,7 +125,7 @@
 {
 	[self removeChild:wrapper cleanup: true];
 	
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionMoveInR transitionWithDuration:0.5f scene:[ShareScene scene]]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[ShareScene scene]]];
 }
 
 @end

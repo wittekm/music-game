@@ -183,7 +183,7 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 	istringstream is(str);
 	
 	string line;
-	int state;
+	int state = 0;
 	string TimingPointsString("[TimingPoints]");
 	string HitObjectsString("[HitObjects]");
 	string MetadataString("[Metadata]");
@@ -202,11 +202,7 @@ Beatmap::Beatmap(NSString * beatmapFromSql) {
 			hitObjects.push_back(h);
 		}
 		
-		/*
-		 [Metadata]
-		 Title:Talamak
-		 Artist:Toro y Moi
-		 */
+		
 		
 		if(line.substr(0,10) == MetadataString) {
 			getline(is, line);

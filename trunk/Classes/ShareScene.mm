@@ -47,11 +47,11 @@
 }
 
 - (void) goToDownload {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionMoveInR transitionWithDuration:0.5f scene:[ShareDownloadScene scene]]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[ShareDownloadScene scene]]];
 }
 
 - (void) goToUpload {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionMoveInR transitionWithDuration:0.5f scene:[ShareUploadScene scene]]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[ShareUploadScene scene]]];
 
 }
 

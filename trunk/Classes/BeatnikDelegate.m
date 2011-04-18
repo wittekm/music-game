@@ -117,16 +117,18 @@
 	// Multitouch enabled
 	[glView setMultipleTouchEnabled:YES];
 	
+	[[CCDirector sharedDirector] setDisplayFPS:NO]; 
+	
 	// Run the intro Scene
 	[[CCDirector sharedDirector] runWithScene: [MenuScene scene]];		
 }
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-	[[CCDirector sharedDirector] pause];
-	
 	MPMusicPlayerController * musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-	[musicPlayer stop];
+	[musicPlayer pause];
+	
+	[[CCDirector sharedDirector] pause];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -143,7 +145,7 @@
 #if !(TARGET_IPHONE_SIMULATOR)
 	
 	MPMusicPlayerController * musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-	[musicPlayer stop];
+	[musicPlayer pause];
 	
 #endif
 	
@@ -156,7 +158,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
 	
 	MPMusicPlayerController * musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
-	[musicPlayer stop];
+	[musicPlayer pause];
 	
 	
 	CCDirector *director = [CCDirector sharedDirector];

@@ -54,7 +54,7 @@ using std::endl;
 		CCMenuItemSprite *skipFive = [CCMenuItemSprite itemFromNormalSprite:skipFiveSprite selectedSprite:nil target:self selector:@selector(skip)];
 		CCMenuItemSprite *playPause = [CCMenuItemSprite itemFromNormalSprite:playPauseSprite selectedSprite:nil target:self selector:@selector(play)];
 		CCMenuItemSprite *backFive = [CCMenuItemSprite itemFromNormalSprite:backFiveSprite selectedSprite:nil target:self selector:@selector(back)];
-		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
+		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
 		deleter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DEL" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(deleterMode)];		
 		back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
 		save = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"SAVE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(handleSave)];
@@ -63,7 +63,7 @@ using std::endl;
 		skipFive.scale = 2;
 		playPause.scale = 2;
 		backFive.scale = 2;
-		//newCombo.scale = 0.6;
+		newCombo.scaleX = 0.6;
 		
 		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, save, nil];
 		menu.position = ccp(32, 220);
@@ -159,7 +159,7 @@ using std::endl;
 	HitObject * ho = 0;
 	HODCircle * hod = nil;
 	
-	if( (![self paused] && mode == NEWCOMBO) || mode == NORMAL) {
+	if( (![self paused] && (mode == NEWCOMBO) || mode == NORMAL)) {
 		double touchEndedAtTime = [self time];
 		
 		if(touchEndedAtTime - touchBeganAtTime < 100) {
@@ -169,12 +169,18 @@ using std::endl;
 			location = [self normalizeLocation: location];
 
 			
-			ho = new HitObject(location.x, location.y, touchEndedAtTime, 1, 0);
+			ho = new HitObject(location.x, location.y, touchBeganAtTime, 1, 0);
 			
 			if(hoIndex == 0)
 				ho->number = 1;
 			else {
 				ho->number = hitObjects[hoIndex-1]->number + 1;
+			}
+			
+			if(mode == NEWCOMBO) {
+				ho->number = 1;
+				ho->objectType = 5;
+				[self newComboMode]; //untoggle newCombo
 			}
 				
 			hitObjects.insert( (hitObjects.begin() + hoIndex++), ho);
@@ -199,13 +205,6 @@ using std::endl;
 			// circle
 		}
 	}
-	
-	if(mode == NEWCOMBO && ho) {
-		ho->number = 1;
-		ho->objectType = 5;
-		[self newComboMode]; //untoggle newCombo
-	}
-	
 	
 }
 
@@ -254,13 +253,20 @@ using std::endl;
 				[self removeChild:hod cleanup:true];
 			}];
 			NSLog(@"running a nextgram action for some reason XFD");
+			
+			double percentDone = (time - hitObjects[hoIndex]->startTimeMs) / (disappearDurationMs);
+			[hod setOpacity: 255 * (1-percentDone)];
+			
 			[hod runAction: [CCSequence actions: [CCFadeOut actionWithDuration:disappearDurationMs/1000.], removeAction, nil]];
-		
+			
 			if([self paused]) {
+				/*
 				id pauseHodAction = [CCCallBlock actionWithBlock:^{
 					[hod pauseTimersForHierarchy];
 				}];
 				[self runAction:[CCSequence actions: [CCDelayTime actionWithDuration:(hitObjects[hoIndex]->startTimeMs + disappearDurationMs - time)], pauseHodAction, nil]];
+				 */
+				[hod pauseTimersForHierarchy];
 			}
 		}
 		hoIndex++;

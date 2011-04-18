@@ -197,7 +197,7 @@
 	}
 	if([row artist])
 		NSLog(@"artist");
-	cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[row title],[row artist]];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@",[row artist],[row title]];
 	//[NSString stringWithFormat:@"%@", [row artist]];
 	
 	NSLog(@"now u dont.");

@@ -100,7 +100,7 @@ using std::endl;
 		musicPlayer = [MPMusicPlayerController iPodMusicPlayer];
 		
 		[musicPlayer setQueueWithItemCollection:item];
-		[musicPlayer play];
+		//[musicPlayer play];
 		
 		// Artwork
 		MPMediaItem * currentItem = musicPlayer.nowPlayingItem;

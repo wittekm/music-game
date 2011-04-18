@@ -37,9 +37,11 @@
 	NSMutableArray * beatmaps;
 }
 
-- (id) initDatabase;
 - (BOOL) insertNewBeatmap: (NSString*)beatmapStr artist:(NSString*)artist title:(NSString*)title;
+- (void) createEditableCopy;
+- (void) deleteSongWithArtist: (NSString*)artist title: (NSString*)title;
 
-@property (nonatomic, retain) NSMutableArray * beatmaps;
+
+@property (retain) NSMutableArray * beatmaps;
 
 @end

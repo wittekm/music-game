@@ -70,6 +70,8 @@ bool increase = true;
 		ccColor3B yellow = {160, 160, 0};
 		 */
 		
+		[[MPMusicPlayerController iPodMusicPlayer] pause];
+		
 		id toRed = [CCTintTo actionWithDuration: 0.5 red:255 green: 0 blue: 0];
 		id fromRed = [CCTintTo actionWithDuration:0.5 red:255 green:255 blue:255];
 		id toBlue = [CCTintTo actionWithDuration: 0.4 red: 0 green: 0 blue: 255];

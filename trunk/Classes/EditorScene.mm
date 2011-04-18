@@ -337,6 +337,7 @@ using std::endl;
 
 -(void) backToMain
 {
+	
 	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:[MenuScene scene]]];
 	return;
 }

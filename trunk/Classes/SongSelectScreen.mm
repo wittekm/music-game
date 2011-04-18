@@ -153,8 +153,12 @@
 	// If row is deleted, remove it from the list.
 	if (editingStyle == UITableViewCellEditingStyleDelete)
 	{
+		SqlHandler * handler = [[SqlHandler alloc] init];
 		// delete your data item here
 		// Animate the deletion from the table.
+		SqlRow * row = [[handler beatmaps] objectAtIndex:[indexPath row]];
+		[handler deleteSongWithArtist:[row artist] title:[row title]];
+		
 		[[handler beatmaps] removeObjectAtIndex:[indexPath row]];
 		[self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 	}
@@ -165,6 +169,7 @@
 }
 	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 		NSLog(@"do i get called");
+		SqlHandler * handler = [[SqlHandler alloc] init];
 		return [[handler beatmaps] count];
 	}
 	

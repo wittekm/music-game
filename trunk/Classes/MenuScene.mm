@@ -17,6 +17,7 @@
 #import "ShareScene.h"
 #import "SongSelectScreen.h"
 #import "EditLibraryPicker.h"
+#import "BeatnikAlert.h"
 
 @implementation MenuScene
 +(id) scene
@@ -57,6 +58,8 @@ bool increase = true;
 	[play setColor:(ccColor3B){red*8, green*8, blue*8}];
 }
 */
+
+bool firstVisitToMenuScene = true;
 
 -(id) init
 {
@@ -120,7 +123,16 @@ bool increase = true;
 		[self addChild:title];
 		[self addChild: menu];
 		
-		
+		if(firstVisitToMenuScene) {
+			BeatnikAlert * welcome = [[BeatnikAlert alloc] initWithParent:self text:@"WELCOME!" otherside:true];
+			
+			firstVisitToMenuScene = false;
+			//welcome.message.scaleX *= 0.5;
+		} else {
+			BeatnikAlert * beatPlay = [[BeatnikAlert alloc] initWithParent:self text:@"Play some\n songs!" otherside:true];
+			beatPlay.message.scaleX *= 0.9;
+			//welcome.message.scaleY 
+		}
 	}
 	return self;
 }

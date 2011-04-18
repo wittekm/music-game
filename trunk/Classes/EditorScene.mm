@@ -54,7 +54,7 @@ using std::endl;
 		CCMenuItemSprite *skipFive = [CCMenuItemSprite itemFromNormalSprite:skipFiveSprite selectedSprite:nil target:self selector:@selector(skip)];
 		CCMenuItemSprite *playPause = [CCMenuItemSprite itemFromNormalSprite:playPauseSprite selectedSprite:nil target:self selector:@selector(play)];
 		CCMenuItemSprite *backFive = [CCMenuItemSprite itemFromNormalSprite:backFiveSprite selectedSprite:nil target:self selector:@selector(back)];
-		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COM" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
+		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
 		deleter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DEL" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(deleterMode)];		
 		back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
 		save = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"SAVE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(handleSave)];
@@ -68,14 +68,14 @@ using std::endl;
 		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, save, nil];
 		menu.position = ccp(32, 220);
 		skipFive.position = ccp(0, -48);
-		newCombo.position = ccp(0, -96);
+		newCombo.position = ccp(380, -200);
 		deleter.position = ccp(0, -128);
 		back.position = ccp(0, -160);
 		save.position = ccp(0, -192);
 
 		
 		backFive.position = ccp(0, 48);
-		[self addChild:menu];
+		[self addChild:menu z:1];
 		
 		
 		timeLabel = [CCLabelBMFont labelWithString:@"00:00" fntFile:@"zerofourbee-32.fnt"];

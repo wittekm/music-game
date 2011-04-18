@@ -15,6 +15,9 @@
 }
 - (id) initWithParent: (CCNode*)parent_ text: (NSString*)text;
 
+- (id) initWithParent: (CCNode*)parent_ text: (NSString*)text otherside:(BOOL)left;
+
+
 @property (retain) 	CCLabelBMFont * message;
 
 @end

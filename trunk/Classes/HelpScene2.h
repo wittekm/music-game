@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "MenuScene.h"
-
+#import "HODCircle.h"
 
 @interface HelpScene2 : CCLayerColor {
-
+	HODCircle * circle;
 }
 +(id) scene;
 @end

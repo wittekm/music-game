@@ -103,8 +103,9 @@ using std::endl;
 		//[musicPlayer play];
 		
 		// Artwork
-		MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
-		MPMediaItemArtwork *artwork = [currentItem valueForProperty:MPMediaItemPropertyArtwork];
+		//MPMediaItem * currentItem = musicPlayer.nowPlayingItem;
+		
+		MPMediaItemArtwork *artwork = [[[item items] objectAtIndex:0] valueForProperty:MPMediaItemPropertyArtwork];
 		UIImage * artworkImage;
 		artworkImage = [artwork imageWithSize:CGSizeMake(320, 320)];
 		if([artworkImage CGImage]) {

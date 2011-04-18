@@ -62,7 +62,7 @@
 	[percentage setAnchorPoint:ccp(0,0)];
 	[percentage setColor:(ccColor3B){0, 0, 0}];
 	[percentage setScale: 1.0];
-	[percentage setPosition:ccp(10, 320-90)];
+	[percentage setPosition:ccp(20, 320-90)];
 	[self addChild: percentage];
 		
 	double pct = double(scoreboard.hit) / (scoreboard.hit + scoreboard.miss);

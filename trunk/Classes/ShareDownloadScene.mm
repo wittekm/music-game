@@ -69,14 +69,16 @@
 		selectasong.position = ccp(480/2,280);
 		selectasong.color = (ccColor3B){0,0,0};
 		CCSprite * back1 = [CCSprite spriteWithFile:@"back.png"];
+		CCSprite * download1 = [CCSprite spriteWithFile:@"download.png"];
 		//play.scale = .5;
 		CCMenuItemSprite * back = [CCMenuItemSprite itemFromNormalSprite:back1 selectedSprite:nil target:self selector:@selector(backToMain:)];
-		CCMenuItemLabel * download= [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DOWNLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(insert)];
-
+		//CCMenuItemLabel * download= [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DOWNLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(insert)];
+		CCMenuItemSprite * download = [CCMenuItemSprite itemFromNormalSprite:download1 selectedSprite:nil target:self selector:@selector(insert)];
 		[self addChild:selectasong];
 		CCMenu * menu = [CCMenu menuWithItems:download,back,nil];
 		menu.position = ccp(480/2,320/2);
 		download.position = ccp(160,0);
+		download.scale = .3;
 		back.scale = .5;
 		back.position = ccp(185,-120);
 		[self addChild:menu];

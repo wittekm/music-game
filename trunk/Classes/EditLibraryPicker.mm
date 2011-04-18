@@ -38,20 +38,25 @@
 		//CCMenuItemLabel * create = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"CREATE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)] ;
 		//CCMenuItemLabel * edit = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"EDIT" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(chooseCreate)];		
 		//CCMenuItemLabel *back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
-		CCSprite * create = [CCSprite spriteWithFile:@"createmenu.png"];
+		CCSprite * newsprite = [CCSprite spriteWithFile:@"new.png"];
 		CCSprite * edit = [CCSprite spriteWithFile:@"edit.png"];
 		CCSprite * back = [CCSprite spriteWithFile:@"back.png"];
-		CCMenuItemSprite * menucreate = [CCMenuItemSprite itemFromNormalSprite:create selectedSprite:nil target:self selector:@selector(chooseCreate)];
+		CCSprite * create = [CCSprite spriteWithFile:@"createmenu.png"];
+		create.scale = .5;
+		create.position = ccp(75,270);
+		[self addChild:create];
+		CCMenuItemSprite * menunew = [CCMenuItemSprite itemFromNormalSprite:newsprite selectedSprite:nil target:self selector:@selector(chooseCreate)];
 		CCMenuItemSprite * menuedit = [CCMenuItemSprite itemFromNormalSprite:edit selectedSprite:nil target:self selector:@selector(chooseCreate)];
 		CCMenuItemSprite * menuback = [CCMenuItemSprite itemFromNormalSprite:back selectedSprite:nil target:self selector:@selector(backToMain)];
-		menu = [CCMenu menuWithItems: menucreate, menuedit, menuback, nil];
+		menu = [CCMenu menuWithItems: menunew, menuedit, menuback, nil];
 		menu.position = ccp(480/2, 320/2);
+		//[menu alignItemsVerticallyWithPadding:5];
+		menunew.position = ccp(0,50);
+		menuedit.position = ccp(0,-50);
 		menuback.position = ccp(185,-120);
 		menuback.scale = .5;
-		menucreate.position = ccp(-100,0);
-		menucreate.scale = .5;
-		menuedit.position = ccp(0,0);
-		menuedit.scale = .5;
+		//menunew.scale = .5;
+		//menuedit.scale = .5;
 		//[menu alignItemsHorizontallyWithPadding:20];
 		
 		

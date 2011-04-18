@@ -24,19 +24,26 @@
 {
 	if( (self=[super initWithColor:ccc4(238,232,170,255)])) {
 		CCSprite * share = [CCSprite spriteWithFile:@"sharemenu.png"];
+		CCSprite * download = [CCSprite spriteWithFile:@"download.png"];
+		CCSprite * upload = [CCSprite spriteWithFile:@"upload.png"];
 		CCSprite * back1 = [CCSprite spriteWithFile:@"back.png"];
 		share.scale = .5;
 		
 		CCMenuItemSprite * back = [CCMenuItemSprite itemFromNormalSprite:back1 selectedSprite:nil target:self selector:@selector(backToMain:)];
-		CCMenuItemLabel * download = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DOWNLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(goToDownload)];
-		CCMenuItemLabel * upload = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"UPLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(goToUpload)];
-				
+		//CCMenuItemLabel * download = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DOWNLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(goToDownload)];
+		CCMenuItemSprite * menudownload = [CCMenuItemSprite itemFromNormalSprite:download selectedSprite:nil target:self selector:@selector(goToDownload)];
+		//CCMenuItemLabel * upload = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"UPLOAD" fntFile:@"zerofourbee-32.fnt"] target:self selector:@selector(goToUpload)];
+		CCMenuItemSprite * menuupload = [CCMenuItemSprite itemFromNormalSprite:upload selectedSprite:nil target:self selector:@selector(goToUpload)];		
 		share.position = ccp(65, 275);
 		[self addChild:share];
 		
-		CCMenu * menu = [CCMenu menuWithItems:download, upload, back,nil];
-		[menu alignItemsHorizontallyWithPadding:20];
+		CCMenu * menu = [CCMenu menuWithItems:menuupload, menudownload, back,nil];
+		//[menu alignItemsHorizontallyWithPadding:20];
 		menu.position = ccp(480/2,320/2);
+		menuupload.position = ccp(0,50);
+		menudownload.position = ccp(0,-50);
+		menuupload.scale = .5;
+		menudownload.scale = .5;
 		back.scale = .5;
 		back.position = ccp(185,-120);
 		[self addChild:menu];

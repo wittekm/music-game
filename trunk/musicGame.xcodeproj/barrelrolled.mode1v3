@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -280,13 +278,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>64</integer>
-									<integer>63</integer>
+									<integer>27</integer>
+									<integer>13</integer>
+									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 915}, {290, 641}}</string>
+							<string>{{0, 337}, {290, 641}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -318,12 +317,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>new.png</string>
+								<string>EditLibraryPicker.mm</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -331,11 +332,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>new.png</string>
+										<string>EditLibraryPicker.mm</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>54B9D26D135BDA9300AB93A0</string>
+										<string>54B9D28A135BDC3E00AB93A0</string>
 										<key>history</key>
 										<array>
 											<string>54CDEC7C13332C7900DD6134</string>
@@ -423,7 +424,6 @@
 											<string>54574B5A135964A200FA2983</string>
 											<string>54574B5B135964A200FA2983</string>
 											<string>54574B5C135964A200FA2983</string>
-											<string>54574B5D135964A200FA2983</string>
 											<string>54574B9A135969F300FA2983</string>
 											<string>54574BC613596D6F00FA2983</string>
 											<string>54574BC713596D6F00FA2983</string>
@@ -437,8 +437,9 @@
 											<string>54B0DDF2135BDA6700DF3955</string>
 											<string>54B0DDF3135BDA6700DF3955</string>
 											<string>54B0DDF4135BDA6700DF3955</string>
-											<string>54B9D26B135BDA9300AB93A0</string>
-											<string>54B9D26C135BDA9300AB93A0</string>
+											<string>54B9D287135BDC3E00AB93A0</string>
+											<string>54B9D288135BDC3E00AB93A0</string>
+											<string>54B9D289135BDC3E00AB93A0</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -636,6 +637,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>54B9D28C135BDC3E00AB93A0</string>
+		<string>54B9D28D135BDC3E00AB93A0</string>
+		<string>54B9D28E135BDC3E00AB93A0</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>5442ED941328461B009B5324</string>
 		<string>/Users/barrelrolled/Documents/BeatnikFinal/music-game/musicGame.xcodeproj</string>
@@ -1000,7 +1005,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>54B0DDFD135BDA6700DF3955</string>
+				<string>54B9D28B135BDC3E00AB93A0</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

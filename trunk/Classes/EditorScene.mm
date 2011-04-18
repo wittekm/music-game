@@ -130,6 +130,7 @@ using std::endl;
 	//grid.opacity = 0.5;
 	grid.position = ccp(480/2, 320/2);
 	
+	[musicPlayer setCurrentPlaybackTime:0];
 	[self schedule:@selector(updateTime:) interval: 1];
 	[self schedule:@selector(nextFrame:)];
 

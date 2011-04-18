@@ -54,7 +54,7 @@ using std::endl;
 		CCMenuItemSprite *skipFive = [CCMenuItemSprite itemFromNormalSprite:skipFiveSprite selectedSprite:nil target:self selector:@selector(skip)];
 		CCMenuItemSprite *playPause = [CCMenuItemSprite itemFromNormalSprite:playPauseSprite selectedSprite:nil target:self selector:@selector(play)];
 		CCMenuItemSprite *backFive = [CCMenuItemSprite itemFromNormalSprite:backFiveSprite selectedSprite:nil target:self selector:@selector(back)];
-		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COMBO" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
+		newCombo = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"COM" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(newComboMode)] ;
 		deleter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"DEL" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(deleterMode)];		
 		back = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"BACK" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(backToMain)];
 		save = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"SAVE" fntFile:@"zerofourbee-32.fnt"] target: self selector:@selector(handleSave)];
@@ -63,7 +63,7 @@ using std::endl;
 		skipFive.scale = 2;
 		playPause.scale = 2;
 		backFive.scale = 2;
-		newCombo.scaleX = 0.6;
+		//newCombo.scaleX = 0.6;
 		
 		CCMenu * menu = [CCMenu menuWithItems:skipFive, playPause, backFive, newCombo, deleter, back, save, nil];
 		menu.position = ccp(32, 220);
